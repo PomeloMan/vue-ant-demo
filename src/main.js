@@ -5,11 +5,19 @@ import router from './configs/router'
 import store from './configs/store'
 import http from './configs/http'
 
+// 引入 Ant Design，https://www.antdv.com/docs/vue/getting-started-cn/
 // 完整引入 ant design 库
 // import Antd from 'ant-design-vue'
 // import 'ant-design-vue/dist/antd.css'
 // Vue.use(Antd)
-// 按需引入 ant design 库
+
+// 按需引入 ant design 库，需要配置 babel.config.js
+// plugins: [
+//   [
+//     "import",
+//     { libraryName: "ant-design-vue", libraryDirectory: "es", style: true }
+//   ]
+// ]
 import { Icon } from 'ant-design-vue'
 Vue.component(Icon.name, Icon)
 
