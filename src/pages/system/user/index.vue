@@ -4,16 +4,21 @@
       <div slot="action-group">
         <a-button type="link">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
-        <a-popconfirm
-          :title="$t('common.confirm_delete')"
-          :okText="$t('common.confirm_ok')"
-          :cancelText="$t('common.confirm_cancel')"
-          @confirm="onDeleteConfirmOk()"
-        >
+        <template v-if="selectedRowKeys.length !== 0">
+          <a-popconfirm
+            :title="$t('common.confirm_delete')"
+            :okText="$t('common.confirm_ok')"
+            :cancelText="$t('common.confirm_cancel')"
+            @confirm="onDeleteConfirmOk()"
+          >
+            <a-button type="link">{{ $t('common.delete') }}</a-button>
+          </a-popconfirm>
+        </template>
+        <template v-else>
           <a-button type="link" :disabled="selectedRowKeys.length === 0">{{
             $t('common.delete')
           }}</a-button>
-        </a-popconfirm>
+        </template>
         <a-divider type="vertical" />
       </div>
     </app-header>
@@ -31,7 +36,7 @@
         :scroll="{ y: tableScrollY }"
       >
         <template
-          v-for="prop in ['name']"
+          v-for="prop in ['displayName']"
           :slot="prop"
           slot-scope="text, record"
         >
@@ -153,7 +158,8 @@ const columns = [
     title: '昵称',
     dataIndex: 'displayName',
     width: '15%',
-    align: 'center'
+    align: 'center',
+    scopedSlots: { customRender: 'displayName' }
   },
   {
     title: '角色',
@@ -199,6 +205,7 @@ export default {
   },
   data() {
     return {
+      key: 'username',
       columns
     }
   },
@@ -215,6 +222,7 @@ export default {
           .then(({ data }) => {
             this.loading = false
             this.data = data
+            this.cacheData = this.data.map(item => ({ ...item }))
           })
           .catch(() => {
             this.loading = false
