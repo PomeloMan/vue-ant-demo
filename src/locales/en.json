@@ -1,6 +1,30 @@
 {
   "message": "hello i18n !!",
   "common": {
-    "new": "New"
+    "new": "New",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "import": "Upload",
+    "export": "Download",
+    "export_template": "Download template",
+    "export_data": "Download data",
+    "confirm_delete": "Are you sure to delete this data?",
+    "confirm_ok": "Ok",
+    "confirm_cancel": "Cancel",
+    "confirm_save_cancel": "Are you sure to cancel saving?",
+    "file_upload_success": "Uploaded file successfully",
+    "file_upload_failure": "Upload file failed",
+    "save_success": "Saved successfully",
+    "save_failure": "Save failed"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "system": "System Management",
+    "user": "User Management",
+    "role": "Role Management",
+    "auth": "Auth Management",
+    "menu": "Menu Management"
   }
 }

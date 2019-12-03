@@ -7,6 +7,7 @@
       size="small"
       @change="onPageChange"
       @showSizeChange="onPageSizeChange"
+      :current="current"
       :total="50"
       showSizeChanger
       showQuickJumper
@@ -23,6 +24,7 @@ export default {
   },
   props: {
     total: Number,
+    current: Number,
     showSizeChanger: Boolean,
     showQuickJumper: Boolean,
     pageSizeOptions: {

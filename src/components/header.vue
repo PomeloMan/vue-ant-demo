@@ -12,12 +12,12 @@
             <router-link
               v-if="item.url === '/'"
               :to="{ path: item.url, query: { t: Date.now() } }"
-              >{{ item.name }}</router-link
+              >{{ $t(item.name) }}</router-link
             >
-            <router-link v-else :to="item.url">{{ item.name }}</router-link>
+            <router-link v-else :to="item.url">{{ $t(item.name) }}</router-link>
           </template>
           <template v-else>
-            {{ item.name }}
+            {{ $t(item.name) }}
           </template>
         </a-breadcrumb-item>
       </template>

@@ -10,6 +10,9 @@ const http = axios.create({
   }
 })
 
+// 添加 URL字段，用于 this.$http.baseURL 取值
+http.baseURL = process.env.VUE_APP_BASE_URL;
+
 /**
  * 请求拦截
  */

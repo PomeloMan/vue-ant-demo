@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import API from '../configs/api_mock'
 import { Menu } from 'ant-design-vue'
 
 export default {
@@ -52,7 +51,7 @@ export default {
   },
   methods: {
     getMenus() {
-      return this.$http.get(API.MENU_LIST).then(({ data }) => {
+      return this.$http.get(this.$api.MENU_LIST).then(({ data }) => {
         console.log(data)
         this.menus = data
       })
