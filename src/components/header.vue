@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="app-header"
-    :style="{
-      height: breadcrumbs && breadcrumbs.length > 0 ? '40px' : '24px'
-    }"
-  >
+  <div class="app-header">
     <a-breadcrumb>
       <template v-for="item in breadcrumbs">
         <a-breadcrumb-item :key="item.name">
@@ -91,7 +86,7 @@ export default {
   },
   methods: {
     onSearch() {
-      this.$emit('onSearch', this.keyword)
+      this.$emit('onSimpleSearch', this.keyword)
     },
     onAdvancedSearch() {}
   }
@@ -105,6 +100,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
+  height: 40px;
 
   > *:nth-child(1),
   > *:nth-child(3) {

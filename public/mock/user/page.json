@@ -1,7 +1,9 @@
-[{
-  "username": "admin",
-  "displayName": "管理员",
-  "role": "管理员",
-  "status": "已生效",
-  "email": "908697502@qq.com"
-}]
+[
+  {
+    "username": "admin",
+    "displayName": "管理员",
+    "role": "管理员",
+    "status": "已生效",
+    "email": "908697502@qq.com"
+  }
+]

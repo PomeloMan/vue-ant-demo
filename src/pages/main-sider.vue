@@ -9,7 +9,7 @@
         >
           <router-link :to="menu.url">
             <a-icon :type="menu.icon" />
-            <span>{{ menu.name }}</span>
+            <span>{{ mapOfDict[menu.name] || menu.name }}</span>
           </router-link>
         </a-menu-item>
         <a-sub-menu
@@ -18,11 +18,13 @@
         >
           <span slot="title">
             <a-icon :type="menu.icon" />
-            <span>{{ menu.name }}</span>
+            <span>{{ mapOfDict[menu.name] || menu.name }}</span>
           </span>
           <template v-for="child in menu.children">
             <a-menu-item :key="child.id">
-              <router-link :to="child.url">{{ child.name }}</router-link>
+              <router-link :to="child.url">{{
+                mapOfDict[child.name] || child.name
+              }}</router-link>
             </a-menu-item>
           </template>
         </a-sub-menu>
@@ -32,10 +34,12 @@
 </template>
 
 <script>
+import StoreComponent from '@/components/store.component'
 import { Menu } from 'ant-design-vue'
 
 export default {
   name: 'main-sider',
+  extends: StoreComponent,
   components: {
     AMenu: Menu,
     AMenuItem: Menu.Item,
@@ -52,7 +56,6 @@ export default {
   methods: {
     getMenus() {
       return this.$http.get(this.$api.MENU_LIST).then(({ data }) => {
-        console.log(data)
         this.menus = data
       })
     }

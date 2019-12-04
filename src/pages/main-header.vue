@@ -22,11 +22,13 @@
 </template>
 
 <script>
+import StoreComponent from '@/components/store.component'
 import { Menu, Dropdown } from 'ant-design-vue'
 import i18n from '@/constants/i18n'
 
 export default {
   name: 'main-header',
+  extends: StoreComponent,
   components: {
     AMenu: Menu,
     AMenuItem: Menu.Item,
@@ -37,22 +39,14 @@ export default {
       locales: i18n.locales
     }
   },
-  computed: {
-    collapsed: {
-      get() {
-        return this.$store.state.common.collapsed
-      },
-      set(val) {
-        this.$store.dispatch('common/updateCollapsed', val)
-      }
-    }
-  },
   methods: {
     collapse() {
       this.collapsed = !this.collapsed
     },
     i18n(locale) {
       this.$i18n.locale = locale
+      // this.dicts = this.$store.state.common.dicts
+      this.mapOfDict = this.$i18n.locale
     }
   },
   created() {

@@ -17,7 +17,14 @@
     "file_upload_success": "Uploaded file successfully",
     "file_upload_failure": "Upload file failed",
     "save_success": "Saved successfully",
-    "save_failure": "Save failed"
+    "save_failure": "Save failed",
+    "table": {
+      "status": "Status",
+      "modifier": "Modifier",
+      "modifyDate": "Modify date",
+      "operation": "Operation",
+      "dictCode": "Dictionary code"
+    }
   },
   "breadcrumb": {
     "home": "Home",
@@ -26,5 +33,24 @@
     "role": "Role Management",
     "auth": "Auth Management",
     "menu": "Menu Management"
+  },
+  "user": {
+    "table": {
+      "username": "Username",
+      "displayName": "Display name",
+      "role": "Role",
+      "email": "E-mail"
+    }
+  },
+  "role": {
+    "table": {
+      "number": "Num",
+      "name": "Role name"
+    }
+  },
+  "menu": {
+    "table": {
+      "name": "Menu name"
+    }
   }
 }

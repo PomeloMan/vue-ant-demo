@@ -4,8 +4,7 @@
       <div slot="action-group">
         <a-button type="link">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
-        <a-button type="link">Link</a-button>
-        <a-divider type="vertical" />
+        <a-button type="link">{{ $t('common.delete') }}</a-button>
       </div>
     </app-header>
     <div class="scroll-wrapper no-footer">

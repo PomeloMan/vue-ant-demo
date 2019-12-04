@@ -19,7 +19,6 @@
             $t('common.delete')
           }}</a-button>
         </template>
-        <a-divider type="vertical" />
       </div>
     </app-header>
     <div class="table-content-wrapper">
@@ -98,8 +97,9 @@
     >
       <div slot="action-group">
         <a-menu mode="horizontal">
-          <a-menu-item>
+          <a-menu-item class="upload-menu-item">
             <a-upload
+              ref="aupload"
               name="file"
               :multiple="false"
               :showUploadList="false"
@@ -147,48 +147,8 @@ import {
   Input
 } from 'ant-design-vue'
 
-const columns = [
-  {
-    title: '用户名',
-    dataIndex: 'username',
-    width: '15%',
-    align: 'center'
-  },
-  {
-    title: '昵称',
-    dataIndex: 'displayName',
-    width: '15%',
-    align: 'center',
-    scopedSlots: { customRender: 'displayName' }
-  },
-  {
-    title: '角色',
-    dataIndex: 'role',
-    width: '15%',
-    align: 'center'
-  },
-  {
-    title: '邮箱',
-    dataIndex: 'email',
-    width: '15%',
-    align: 'center'
-  },
-  {
-    title: '状态',
-    dataIndex: 'status',
-    width: '10%',
-    align: 'center'
-  },
-  {
-    title: '操作',
-    width: '20%',
-    align: 'center',
-    scopedSlots: { customRender: 'operation' }
-  }
-]
-
 export default {
-  name: 'user',
+  name: 'sys_user',
   extends: BaseComponent,
   components: {
     ATable: Table,
@@ -205,8 +165,52 @@ export default {
   },
   data() {
     return {
-      key: 'username',
-      columns
+      key: 'username'
+    }
+  },
+  computed: {
+    columns: {
+      get() {
+        return [
+          {
+            title: this.$i18n.t('user.table.username'),
+            dataIndex: 'username',
+            width: '15%',
+            align: 'center'
+          },
+          {
+            title: this.$i18n.t('user.table.displayName'),
+            dataIndex: 'displayName',
+            width: '15%',
+            align: 'center',
+            scopedSlots: { customRender: 'displayName' }
+          },
+          {
+            title: this.$i18n.t('user.table.role'),
+            dataIndex: 'role',
+            width: '10%',
+            align: 'center'
+          },
+          {
+            title: this.$i18n.t('user.table.email'),
+            dataIndex: 'email',
+            width: '25%',
+            align: 'center'
+          },
+          {
+            title: this.$i18n.t('common.table.status'),
+            dataIndex: 'status',
+            width: '10%',
+            align: 'center'
+          },
+          {
+            title: this.$i18n.t('common.table.operation'),
+            width: '20%',
+            align: 'center',
+            scopedSlots: { customRender: 'operation' }
+          }
+        ]
+      }
     }
   },
   created() {

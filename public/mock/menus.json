@@ -4,8 +4,11 @@
     "pid": 0,
     "type": 0,
     "url": "/main/dashboard",
-    "name": "Dashboard",
+    "name": "DICT_MENU_DASHBOARD",
     "icon": "dashboard",
+    "modifier": "admin",
+    "modifiedDate": "1990-01-01T00:00:00.000Z",
+    "status": "Valid",
     "children": [
       {
         "id": 11,
@@ -13,7 +16,10 @@
         "type": 0,
         "url": "/main/dashboard/antv-g2",
         "name": "Antv-G2",
-        "icon": "line-chart"
+        "icon": "line-chart",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
       },
       {
         "id": 12,
@@ -21,7 +27,10 @@
         "type": 0,
         "url": "/main/dashboard/echarts",
         "name": "Echarts",
-        "icon": "line-chart"
+        "icon": "line-chart",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
       }
     ]
   },
@@ -30,23 +39,32 @@
     "pid": 0,
     "type": 0,
     "url": "/main/project",
-    "name": "Project Management",
-    "icon": "project"
+    "name": "DICT_MENU_PROJECT",
+    "icon": "project",
+    "modifier": "admin",
+    "modifiedDate": "1990-01-01T00:00:00.000Z",
+    "status": "Valid"
   },
   {
     "id": 1000,
     "pid": 0,
     "type": 0,
-    "name": "System Management",
+    "name": "DICT_MENU_SYSTEM",
     "icon": "setting",
+    "modifier": "admin",
+    "modifiedDate": "1990-01-01T00:00:00.000Z",
+    "status": "Valid",
     "children": [
       {
         "id": 1010,
         "pid": 1000,
         "type": 0,
         "url": "/main/system/user",
-        "name": "User Management",
+        "name": "DICT_MENU_USER",
         "icon": "user",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid",
         "children": [
           {
             "id": 1011,
@@ -63,8 +81,11 @@
         "pid": 1000,
         "type": 0,
         "url": "/main/system/role",
-        "name": "Role Management",
+        "name": "DICT_MENU_ROLE",
         "icon": "safety",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid",
         "children": [
           {
             "id": 1021,
@@ -81,8 +102,11 @@
         "pid": 1000,
         "type": 0,
         "url": "/main/system/menu",
-        "name": "Menu Management",
-        "icon": "safety"
+        "name": "DICT_MENU_MENU",
+        "icon": "safety",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
       }
     ]
   }

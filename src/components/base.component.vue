@@ -1,6 +1,8 @@
 <script>
 import qs from 'qs'
+import StoreComponent from '@/components/store.component'
 export default {
+  extends: StoreComponent,
   data() {
     return {
       key: 'id', // 表格行ID
@@ -14,24 +16,6 @@ export default {
       loading: false, // 表格数据加载
       tableScrollY: '', // 表格高度
       body: {} // 查询条件
-    }
-  },
-  computed: {
-    collapsed: {
-      get() {
-        return this.$store.state.common.collapsed
-      },
-      set(val) {
-        this.$store.dispatch('common/updateCollapsed', val)
-      }
-    },
-    breadcrumbs: {
-      get() {
-        return this.$store.state.common.breadcrumbs
-      },
-      set(val) {
-        this.$store.dispatch('common/updateBreadcrumbs', val)
-      }
     }
   },
   created() {
@@ -70,6 +54,12 @@ export default {
           this.tableScrollY = ''
         }
       }, 0)
+    },
+    // -- 查询 --
+    onSimpleSearch: function(val) {
+      this.body.search = val
+      this.page = 1
+      this.getData()
     },
     // -- 分页 --
     // 当前页变化

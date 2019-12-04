@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import BaseComponent from '@/components/base.component'
+import StoreComponent from '@/components/store.component'
 import { Layout } from 'ant-design-vue'
 // import { Layout, Breadcrumb } from 'ant-design-vue'
 import MainSider from './main-sider'
@@ -48,12 +48,11 @@ import MainHeader from './main-header'
 
 export default {
   name: 'home',
-  extends: BaseComponent,
+  extends: StoreComponent,
   data() {
     return {}
   },
-  computed: {
-  },
+  computed: {},
   components: {
     ALayout: Layout,
     ALayoutHeader: Layout.Header,
@@ -61,6 +60,12 @@ export default {
     ALayoutContent: Layout.Content,
     MainSider,
     MainHeader
+  },
+  created() {
+    // 获取字典数据并保存
+    this.$http.get(this.$api.DICT_LIST).then(({ data }) => {
+      this.dicts = data
+    })
   }
 }
 </script>

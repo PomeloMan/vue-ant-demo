@@ -1,0 +1,32 @@
+[
+  {
+    "code": "DICT_MENU_DASHBOARD",
+    "value_zh": "报表",
+    "value_en": "Dashboard"
+  },
+  {
+    "code": "DICT_MENU_PROJECT",
+    "value_zh": "项目管理",
+    "value_en": "Project Management"
+  },
+  {
+    "code": "DICT_MENU_SYSTEM",
+    "value_zh": "系统管理",
+    "value_en": "System Management"
+  },
+  {
+    "code": "DICT_MENU_USER",
+    "value_zh": "用户管理",
+    "value_en": "User Management"
+  },
+  {
+    "code": "DICT_MENU_ROLE",
+    "value_zh": "角色管理",
+    "value_en": "Role Management"
+  },
+  {
+    "code": "DICT_MENU_MENU",
+    "value_zh": "菜单管理",
+    "value_en": "Menu Management"
+  }
+]

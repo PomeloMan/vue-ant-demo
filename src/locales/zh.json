@@ -17,7 +17,14 @@
     "file_upload_success": "文件上传成功",
     "file_upload_failure": "文件上传失败",
     "save_success": "保存成功",
-    "save_failure": "保存失败"
+    "save_failure": "保存失败",
+    "table": {
+      "status": "状态",
+      "modifier": "修改人",
+      "modifyDate": "修改时间",
+      "operation": "操作",
+      "dictCode": "字典码"
+    }
   },
   "breadcrumb": {
     "home": "首页",
@@ -26,5 +33,24 @@
     "role": "角色管理",
     "auth": "权限管理",
     "menu": "菜单管理"
+  },
+  "user": {
+    "table": {
+      "username": "账号",
+      "displayName": "昵称",
+      "role": "角色",
+      "email": "邮箱"
+    }
+  },
+  "role": {
+    "table": {
+      "number": "序号",
+      "name": "角色名"
+    }
+  },
+  "menu": {
+    "table": {
+      "name": "菜单名"
+    }
   }
 }
