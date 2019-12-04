@@ -5,8 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve --mode dev",
     "build:dev": "vue-cli-service build --mode dev",
+    "build:gh": "vue-cli-service build --mode gh",
     "build": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint",
+    "predeploy": "npm run build:dev",
+    "deploy": "gh-pages -d dist",
+    "deploy:git": "npm run build:gh && deploy.bat",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
@@ -33,6 +37,7 @@
     "babel-plugin-import": "^1.12.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "gh-pages": "^2.1.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "prettier": "1.18.2",
