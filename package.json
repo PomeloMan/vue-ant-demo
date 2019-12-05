@@ -1,6 +1,7 @@
 {
   "name": "vue-ant-demo",
   "version": "0.1.0",
+  "homepage": "https://pomeloman.github.io/vue-ant-demo",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode dev",
@@ -8,8 +9,8 @@
     "build:gh": "vue-cli-service build --mode gh",
     "build": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint",
-    "predeploy": "npm run build:dev",
-    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build:gh",
+    "deploy": "node deploy.js",
     "deploy:git": "npm run build:gh && deploy.bat",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
