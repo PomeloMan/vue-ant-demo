@@ -28,6 +28,9 @@
   },
   "breadcrumb": {
     "home": "首页",
+    "dashboard": "报表",
+    "antvg2": "Antv-G2",
+    "project": "项目管理",
     "system": "系统管理",
     "user": "用户管理",
     "role": "角色管理",

@@ -28,6 +28,9 @@
   },
   "breadcrumb": {
     "home": "Home",
+    "dashboard": "Dashboard",
+    "antvg2": "Antv-G2",
+    "project": "Project Management",
     "system": "System Management",
     "user": "User Management",
     "role": "Role Management",

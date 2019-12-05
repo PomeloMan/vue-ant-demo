@@ -31,4 +31,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app-header {
+  background: #fff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  box-shadow: 1px 2px 4px rgba($color: #eee, $alpha: 0.6);
+}
 </style>

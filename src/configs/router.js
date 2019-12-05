@@ -66,15 +66,18 @@ const routes = [{
       },
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/role')
     }, {
+      name: 'system-menu',
       path: 'system/menu',
+      meta: {
+        breadcrumbs: BREADCRUMB['system-menu']
+      },
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/menu')
     }
   ]
 }]
 
 const router = new VueRouter({
-  // mode: 'hash',
-  mode: 'history',
+  mode: process.env.VUE_APP_ENV === 'gh' ? 'hash' : 'history',
   routes: routes
 })
 

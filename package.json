@@ -11,7 +11,7 @@
     "lint": "vue-cli-service lint",
     "predeploy": "npm run build:gh",
     "deploy": "node deploy.js",
-    "deploy:git": "npm run build:gh && deploy.bat",
+    "deploy:gh-pages": "npm run build:gh && deploy.bat",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {

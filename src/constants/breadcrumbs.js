@@ -2,6 +2,21 @@ export default {
   'main': [{
     'name': 'home',
   }],
+  'dashboard-antv-g2': [{
+    'name': 'breadcrumb.home',
+    'url': '/'
+  }, {
+    'name': 'breadcrumb.dashboard',
+    'url': '/main/dashboard'
+  }, {
+    'name': 'breadcrumb.antvg2',
+  }],
+  'project': [{
+    'name': 'breadcrumb.home',
+    'url': '/'
+  }, {
+    'name': 'breadcrumb.project',
+  }],
   'system': [],
   // 用户管理
   'system-user': [{
