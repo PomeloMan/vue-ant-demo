@@ -34,6 +34,11 @@
         :loading="loading"
         :scroll="{ y: tableScrollY }"
       >
+        <!-- 列编辑 -->
+        <template slot="email" slot-scope="text, record">
+          <editable-cell :text="text" @change="onCellChange(record.key, 'email', $event)" />
+        </template>
+        <!-- 行编辑 -->
         <template
           v-for="prop in ['displayName']"
           :slot="prop"
@@ -136,6 +141,7 @@
 import BaseComponent from '@/components/base.component'
 import AppHeader from '@/components/header'
 import AppFooter from '@/components/footer'
+import EditableCell from '@/components/editable-cell.component'
 import {
   Table,
   Divider,
@@ -161,7 +167,8 @@ export default {
     AUpload: Upload,
     AInput: Input,
     AppHeader: AppHeader,
-    AppFooter: AppFooter
+    AppFooter: AppFooter,
+    EditableCell: EditableCell
   },
   data() {
     return {
@@ -195,7 +202,8 @@ export default {
             title: this.$i18n.t('user.table.email'),
             dataIndex: 'email',
             width: '25%',
-            align: 'center'
+            align: 'center',
+            scopedSlots: { customRender: 'email' }
           },
           {
             title: this.$i18n.t('common.table.status'),

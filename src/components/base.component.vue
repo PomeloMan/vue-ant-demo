@@ -129,6 +129,15 @@ export default {
         }
       })
     },
+    // 表格单元格编辑
+    onCellChange(key, dataIndex, value) {
+      const data = [...this.data]
+      const target = data.find(item => item.key === key)
+      if (target) {
+        target[dataIndex] = value
+        this.data = data
+      }
+    },
     // -- 操作 --
     // 编辑字段
     handlePropChange(val, record, prop) {
