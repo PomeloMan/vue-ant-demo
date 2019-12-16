@@ -28,5 +28,10 @@
     "code": "DICT_MENU_MENU",
     "value_zh": "菜单管理",
     "value_en": "Menu Management"
+  },
+  {
+    "code": "DICT_MENU_THREE",
+    "value_zh": "三维模型",
+    "value_en": "3D Model"
   }
 ]
