@@ -3,15 +3,17 @@
     <slot name="action-group">
       <div></div>
     </slot>
-    <a-pagination
-      size="small"
-      @change="onPageChange"
-      @showSizeChange="onPageSizeChange"
-      :current="current"
-      :total="50"
-      showSizeChanger
-      showQuickJumper
-    />
+    <template v-if="showPagination">
+      <a-pagination
+        size="small"
+        @change="onPageChange"
+        @showSizeChange="onPageSizeChange"
+        :current="current"
+        :total="50"
+        showSizeChanger
+        showQuickJumper
+      />
+    </template>
   </div>
 </template>
 
@@ -25,6 +27,10 @@ export default {
   props: {
     total: Number,
     current: Number,
+    showPagination: {
+      type: Boolean,
+      default: true
+    },
     showSizeChanger: Boolean,
     showQuickJumper: Boolean,
     pageSizeOptions: {

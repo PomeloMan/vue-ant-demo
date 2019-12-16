@@ -15,6 +15,12 @@ const routes = [{
   },
   component: () => import(/* webpackChunkName: "group-main" */ '../pages/main'),
   children: [
+    // Three Module
+    {
+      name: 'three',
+      path: 'three',
+      component: () => import(/* webpackChunkName: "group-three" */ '../pages/three')
+    },
     // Dashboard Module
     {
       name: 'dashboard',
