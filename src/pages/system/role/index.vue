@@ -138,8 +138,8 @@
 
 <script>
 import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header'
-import AppFooter from '@/components/footer'
+import AppHeader from '@/components/header.component'
+import AppFooter from '@/components/footer.component'
 import {
   Table,
   Divider,

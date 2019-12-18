@@ -8,7 +8,7 @@
         <main-header></main-header>
       </a-layout-header>
       <a-layout-content class="layout-content">
-        <!-- @reference '@/components/header.vue' -->
+        <!-- @reference '@/components/header.component.vue' -->
         <!-- <a-breadcrumb
           class="breadcrumb-wrapper"
           :style="{

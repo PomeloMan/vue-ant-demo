@@ -17,7 +17,7 @@
 
 <script>
 import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header'
+import AppHeader from '@/components/header.component'
 import { Divider, Button } from 'ant-design-vue'
 
 export default {

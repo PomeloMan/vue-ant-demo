@@ -9,7 +9,7 @@
 
 <script>
 import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header'
+import AppHeader from '@/components/header.component'
 
 export default {
   name: 'dashboard',

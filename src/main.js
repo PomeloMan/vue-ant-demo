@@ -23,15 +23,14 @@ Vue.prototype.$api = API;
 // ]
 import { Icon, message } from 'ant-design-vue'
 Vue.component(Icon.name, Icon)
-
 Vue.prototype.$message = message;
 
 // global style
 import './assets/style.scss'
-
 // i18n
 import i18n from './i18n'
-
+// icon
+import './icons'
 // 挂载管道
 import './pipes'
 

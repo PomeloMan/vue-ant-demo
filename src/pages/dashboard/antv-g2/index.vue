@@ -13,7 +13,7 @@
 import * as G2 from '@antv/g2'
 import { format, subMinutes } from 'date-fns'
 import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header'
+import AppHeader from '@/components/header.component'
 
 export default {
   extends: BaseComponent,

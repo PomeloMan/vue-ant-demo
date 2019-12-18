@@ -13,8 +13,14 @@
           语言 <a-icon type="down" />
         </li>
         <a-menu slot="overlay">
-          <a-menu-item key="0" @click="i18n('zh')">中文</a-menu-item>
-          <a-menu-item key="1" @click="i18n('en')">英文</a-menu-item>
+          <a-menu-item key="0" @click="i18n('zh')">
+            <svg-icon icon-class="locale_zh"></svg-icon>
+            中文
+          </a-menu-item>
+          <a-menu-item key="1" @click="i18n('en')">
+            <svg-icon icon-class="locale_en"></svg-icon>
+            英文
+          </a-menu-item>
         </a-menu>
       </a-dropdown>
     </div>
