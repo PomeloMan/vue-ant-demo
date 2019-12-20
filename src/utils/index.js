@@ -71,3 +71,51 @@ export function extractFields(data, options) {
     return obj
   }
 }
+
+/**
+ * 获取数据所有组合
+ * @param {*} array 
+ * 
+ * @returns array
+ * 
+ * @example
+ *  array: [['红色', '白色'], ['16G', '32G']]
+ *  return: ['红色|16G', '红色|32G', '白色|16G', '白色|32G']
+ */
+export function combineAll(array) {
+  let result = []
+  const length = array.length
+  if (length >= 2) {
+    result = combine(array[0], array[1])
+    let index = 2
+    while (index > length) {
+      result = combine(result, array[index])
+      index++
+    }
+    return result
+  } else {
+    return array
+  }
+}
+
+/**
+ * 合并组合两一维数组
+ * @param {*} array1 
+ * @param {*} array2 
+ * 
+ * @returns array
+ * 
+ * @example
+ *  array1: ['红色', '白色']
+ *  array2: ['16G', '32G']
+ *  return: ['红色|16G', '红色|32G', '白色|16G', '白色|32G']
+ */
+export function combine(array1, array2) {
+  const result = []
+  array1.forEach(item1 => {
+    array2.forEach(item2 => {
+      result.push(`${item1}|${item2}`)
+    })
+  })
+  return result
+}
