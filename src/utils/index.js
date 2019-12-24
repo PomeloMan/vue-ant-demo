@@ -52,6 +52,9 @@ export function findIndex(data, target, options = { key: 'id' }) {
  *  return [{"title":"服装","value":1,"key":1,"children":[{"title":"外套","value":7,"key":7},{"title":"T恤","value":8,"key":8},{"title":"休闲裤","value":9,"key":9},{"title":"牛仔裤","value":10,"key":10},{"title":"衬衫","value":11,"key":11},{"title":"男鞋","value":29,"key":29}]},{"title":"手机数码","value":2,"key":2,"children":[{"title":"手机通讯","value":19,"key":19},{"title":"手机配件","value":30,"key":30},{"title":"摄影摄像","value":31,"key":31},{"title":"影音娱乐","value":32,"key":32},{"title":"数码配件","value":33,"key":33},{"title":"智能设备","value":34,"key":34}]},{"title":"家用电器","value":3,"key":3,"children":[{"title":"电视","value":35,"key":35},{"title":"空调","value":36,"key":36},{"title":"洗衣机","value":37,"key":37},{"title":"冰箱","value":38,"key":38},{"title":"厨卫大电","value":39,"key":39},{"title":"厨房小电","value":40,"key":40},{"title":"生活电器","value":41,"key":41},{"title":"个护健康","value":42,"key":42}]},{"title":"家具家装","value":4,"key":4,"children":[{"title":"厨房卫浴","value":43,"key":43},{"title":"灯饰照明","value":44,"key":44},{"title":"五金工具","value":45,"key":45},{"title":"卧室家具","value":46,"key":46},{"title":"客厅家具","value":47,"key":47}]},{"title":"汽车用品","value":5,"key":5,"children":[{"title":"全新整车","value":48,"key":48},{"title":"车载电器","value":49,"key":49},{"title":"维修保养","value":50,"key":50},{"title":"汽车装饰","value":51,"key":51}]}]
  */
 export function extractFields(data, options) {
+  if (!data) {
+    return data
+  }
   if (data instanceof Array) {
     return data.map(item => {
       const obj = extractFields(item, options)
@@ -118,4 +121,21 @@ export function combine(array1, array2) {
     })
   })
   return result
+}
+
+/**
+ * 获取图片
+ * @param {*} img 图片数据
+ * @param {*} callback 图片回调 回调参数为转换后的 Base64 url
+ * 
+ * @example
+ *  getBase64(info.file.originFileObj, imageUrl => {
+ *    this.imageUrl = imageUrl;
+ *    this.loading = false;
+ *  });
+ */
+export function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
 }
