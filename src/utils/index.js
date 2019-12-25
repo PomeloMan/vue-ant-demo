@@ -91,7 +91,7 @@ export function combineAll(array) {
   if (length >= 2) {
     result = combine(array[0], array[1])
     let index = 2
-    while (index > length) {
+    while (index < length) {
       result = combine(result, array[index])
       index++
     }
