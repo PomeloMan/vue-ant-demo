@@ -28,6 +28,18 @@ export default {
   }, {
     'name': 'breadcrumb.user'
   }],
+  'system-user-info': [{
+    'name': 'breadcrumb.home',
+    'url': '/'
+  }, {
+    'name': 'breadcrumb.system',
+    'url': '/main/system'
+  }, {
+    'name': 'breadcrumb.user',
+    'url': '/main/system/user'
+  }, {
+    'name': 'breadcrumb.info'
+  }],
   // 角色管理
   'system-role': [{
     'name': 'breadcrumb.home',
