@@ -34,7 +34,7 @@ import i18n from '@/constants/i18n'
 
 export default {
   name: 'main-header',
-  extends: StoreComponent,
+  mixins: [StoreComponent],
   components: {
     AMenu: Menu,
     AMenuItem: Menu.Item,

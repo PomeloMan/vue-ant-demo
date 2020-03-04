@@ -3,11 +3,7 @@
 </template>
 
 <script>
-import BaseComponent from '@/components/base.component'
-
-export default {
-  extends: BaseComponent
-}
+export default {}
 </script>
 
 <style scoped>

@@ -48,7 +48,7 @@ import MainHeader from './main-header'
 
 export default {
   name: 'home',
-  extends: StoreComponent,
+  mixins: [StoreComponent],
   data() {
     return {}
   },

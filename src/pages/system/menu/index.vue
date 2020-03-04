@@ -9,9 +9,9 @@
         <a-button type="link">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
         <a-popconfirm
-          :title="$t('common.confirm_delete')"
-          :okText="$t('common.confirm_ok')"
-          :cancelText="$t('common.confirm_cancel')"
+          :title="$t('message.is_confirm_delete')"
+          :okText="$t('common.ok')"
+          :cancelText="$t('common.cancel')"
           @confirm="onDeleteConfirmOk()"
         >
           <a-button type="link" :disabled="selectedRowKeys.length === 0">{{
@@ -60,8 +60,8 @@
             <a-divider type="vertical" />
             <a-popconfirm
               :title="$t('common.confirm_save_cancel')"
-              :okText="$t('common.confirm_ok')"
-              :cancelText="$t('common.confirm_cancel')"
+              :okText="$t('common.ok')"
+              :cancelText="$t('common.cancel')"
               @confirm="editCancel(record)"
             >
               <a-button type="link" size="small">{{
@@ -75,9 +75,9 @@
             }}</a-button>
             <a-divider type="vertical" />
             <a-popconfirm
-              :title="$t('common.confirm_delete')"
-              :okText="$t('common.confirm_ok')"
-              :cancelText="$t('common.confirm_cancel')"
+              :title="$t('message.is_confirm_delete')"
+              :okText="$t('common.ok')"
+              :cancelText="$t('common.cancel')"
               @confirm="onDeleteConfirmOk(record.id)"
             >
               <a-button type="link" size="small">{{
@@ -88,11 +88,7 @@
         </span>
       </a-table>
     </div>
-    <app-footer
-      :total="total"
-      @onPageChange="onPageChange"
-      @onPageSizeChange="onPageSizeChange"
-    >
+    <app-footer :total="total" :showPagination="false">
       <div slot="action-group">
         <a-menu mode="horizontal">
           <a-menu-item>
@@ -131,19 +127,8 @@
 
 <script>
 import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header.component'
-import AppFooter from '@/components/footer.component'
-import {
-  Table,
-  Divider,
-  Button,
-  Menu,
-  Dropdown,
-  Popconfirm,
-  Upload,
-  Input
-} from 'ant-design-vue'
 import { date } from '@/pipes'
+import { mapState } from 'vuex'
 
 const rowSelection = $this => {
   return {
@@ -162,38 +147,29 @@ const rowSelection = $this => {
 
 export default {
   name: 'sys_menu',
-  extends: BaseComponent,
-  components: {
-    ATable: Table,
-    ADivider: Divider,
-    AButton: Button,
-    AMenu: Menu,
-    AMenuItem: Menu.Item,
-    ADropdown: Dropdown,
-    APopconfirm: Popconfirm,
-    AUpload: Upload,
-    AInput: Input,
-    AppHeader: AppHeader,
-    AppFooter: AppFooter
-  },
+  mixins: [BaseComponent],
+  components: {},
   data() {
     return {
       rowSelection: rowSelection(this)
     }
   },
   computed: {
+    ...mapState({
+      mapOfDict: state => state.common.mapOfDict
+    }),
     columns: {
       get() {
         const $this = this
         return [
           {
-            title: this.$i18n.t('common.table.dictCode'),
+            title: this.$i18n.t('common.dict_code'),
             dataIndex: 'name',
             width: '25%',
             scopedSlots: { customRender: 'name' }
           },
           {
-            title: this.$i18n.t('menu.table.name'),
+            title: this.$i18n.t('common.menu_name'),
             width: '15%',
             align: 'center',
             customRender: function(text, record) {
@@ -201,19 +177,19 @@ export default {
             }
           },
           {
-            title: this.$i18n.t('common.table.status'),
+            title: this.$i18n.t('common.status'),
             dataIndex: 'status',
             width: '10%',
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.table.modifier'),
+            title: this.$i18n.t('common.modifier'),
             dataIndex: 'modifier',
             width: '10%',
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.table.modifyDate'),
+            title: this.$i18n.t('common.modify_date'),
             dataIndex: 'modifiedDate',
             width: '15%',
             align: 'center',
@@ -222,7 +198,7 @@ export default {
             }
           },
           {
-            title: this.$i18n.t('common.table.operation'),
+            title: this.$i18n.t('common.operation'),
             dataIndex: 'operation',
             width: '20%',
             align: 'center',

@@ -14,6 +14,13 @@
         showQuickJumper
       />
     </template>
+    <template v-else>
+      <slot name="pagination">
+        <span style="padding: 0 20px;">
+          {{ $t('common.total_number', { num: total }) }}
+        </span>
+      </slot>
+    </template>
   </div>
 </template>
 

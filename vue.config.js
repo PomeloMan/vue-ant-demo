@@ -12,6 +12,13 @@ module.exports = {
   css: {
     loaderOptions: {
       less: {
+        modifyVars: {
+          // 'primary-color': '#00C6C6',
+          // 'heading-color': '#303133',
+          'text-color': '#333333'
+          // 'link-color': '#1DA57A',
+          // 'border-radius-base': '2px',
+        },
         javascriptEnabled: true
       }
     }
@@ -61,4 +68,17 @@ module.exports = {
       enableInSFC: true
     }
   }
+
+  // 设置代理
+  // devServer: {
+  //   proxy: {
+  //     '/commerce': {
+  //       target: process.env.VUE_APP_COMMERCE_PROXY_URL, //代理接口
+  //       changeOrigin: true,
+  //       pathRewrite: {
+  //         '^/commerce': '/' //代理的路径
+  //       }
+  //     },
+  //   }
+  // }
 }

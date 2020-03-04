@@ -1,30 +1,38 @@
 {
-  "message": "你好 i18n !!",
+  "message": {
+    "file_upload_failure": "文件上传失败!",
+    "file_upload_success": "文件上传成功!",
+    "is_confirm_delete": "是否确认删除?",
+    "is_confirm_cancel": "是否确认取消?",
+    "save_success": "保存成功!",
+    "save_failure": "保存失败!"
+  },
   "common": {
-    "new": "新增",
-    "save": "保存",
+    "account": "账号",
     "cancel": "取消",
-    "edit": "编辑",
+    "ok": "确认",
     "delete": "删除",
-    "import": "导入",
+    "dict_code": "字典码",
+    "edit": "编辑",
+    "email": "邮箱",
     "export": "导出",
-    "export_template": "导出模板",
     "export_data": "导出数据",
-    "confirm_delete": "是否确认删除?",
-    "confirm_ok": "确认",
-    "confirm_cancel": "取消",
-    "confirm_save_cancel": "是否取消保存?",
-    "file_upload_success": "文件上传成功",
-    "file_upload_failure": "文件上传失败",
-    "save_success": "保存成功",
-    "save_failure": "保存失败",
-    "table": {
-      "status": "状态",
-      "modifier": "修改人",
-      "modifyDate": "修改时间",
-      "operation": "操作",
-      "dictCode": "字典码"
-    }
+    "export_template": "导出模板",
+    "import": "导入",
+    "menu": "菜单",
+    "menu_name": "菜单名",
+    "modifier": "修改人",
+    "modify_date": "修改时间",
+    "name": "名称",
+    "new": "新增",
+    "nick_name": "昵称",
+    "number": "序号",
+    "operation": "操作",
+    "role": "角色",
+    "role_name": "角色名",
+    "save": "保存",
+    "status": "状态",
+    "total_number": "共 {num} 项"
   },
   "breadcrumb": {
     "home": "首页",
@@ -37,24 +45,5 @@
     "auth": "权限管理",
     "menu": "菜单管理",
     "info": "详情"
-  },
-  "user": {
-    "table": {
-      "username": "账号",
-      "displayName": "昵称",
-      "role": "角色",
-      "email": "邮箱"
-    }
-  },
-  "role": {
-    "table": {
-      "number": "序号",
-      "name": "角色名"
-    }
-  },
-  "menu": {
-    "table": {
-      "name": "菜单名"
-    }
   }
 }

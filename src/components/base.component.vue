@@ -1,8 +1,6 @@
 <script>
 import qs from 'qs'
-import StoreComponent from '@/components/store.component'
 export default {
-  extends: StoreComponent,
   data() {
     return {
       key: 'id', // 表格行ID
@@ -15,7 +13,8 @@ export default {
       selectedRowKeys: [], // 选中行ID
       loading: false, // 表格数据加载
       tableScrollY: '', // 表格高度
-      body: {} // 查询条件
+      body: {}, // 查询条件
+      breadcrumbs: [] // 面包屑导航
     }
   },
   created() {

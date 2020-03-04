@@ -39,7 +39,7 @@ import { Menu } from 'ant-design-vue'
 
 export default {
   name: 'main-sider',
-  extends: StoreComponent,
+  mixins: [StoreComponent],
   components: {
     AMenu: Menu,
     AMenuItem: Menu.Item,

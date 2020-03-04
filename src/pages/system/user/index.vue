@@ -6,9 +6,9 @@
         <a-divider type="vertical" />
         <template v-if="selectedRowKeys.length !== 0">
           <a-popconfirm
-            :title="$t('common.confirm_delete')"
-            :okText="$t('common.confirm_ok')"
-            :cancelText="$t('common.confirm_cancel')"
+            :title="$t('message.is_confirm_delete')"
+            :okText="$t('common.ok')"
+            :cancelText="$t('common.cancel')"
             @confirm="onDeleteConfirmOk()"
           >
             <a-button type="link">{{ $t('common.delete') }}</a-button>
@@ -36,7 +36,10 @@
       >
         <!-- 列编辑 -->
         <template slot="email" slot-scope="text, record">
-          <editable-cell :text="text" @change="onCellChange(record.key, 'email', $event)" />
+          <editable-cell
+            :text="text"
+            @change="onCellChange(record.key, 'email', $event)"
+          />
         </template>
         <!-- 行编辑 -->
         <template
@@ -67,8 +70,8 @@
             <a-divider type="vertical" />
             <a-popconfirm
               :title="$t('common.confirm_save_cancel')"
-              :okText="$t('common.confirm_ok')"
-              :cancelText="$t('common.confirm_cancel')"
+              :okText="$t('common.ok')"
+              :cancelText="$t('common.cancel')"
               @confirm="editCancel(record)"
             >
               <a-button type="link" size="small">{{
@@ -82,9 +85,9 @@
             }}</a-button>
             <a-divider type="vertical" />
             <a-popconfirm
-              :title="$t('common.confirm_delete')"
-              :okText="$t('common.confirm_ok')"
-              :cancelText="$t('common.confirm_cancel')"
+              :title="$t('message.is_confirm_delete')"
+              :okText="$t('common.ok')"
+              :cancelText="$t('common.cancel')"
               @confirm="onDeleteConfirmOk(record.id)"
             >
               <a-button type="link" size="small">{{
@@ -139,35 +142,12 @@
 
 <script>
 import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header.component'
-import AppFooter from '@/components/footer.component'
 import EditableCell from '@/components/editable-cell.component'
-import {
-  Table,
-  Divider,
-  Button,
-  Menu,
-  Dropdown,
-  Popconfirm,
-  Upload,
-  Input
-} from 'ant-design-vue'
 
 export default {
   name: 'sys_user',
-  extends: BaseComponent,
+  mixins: [BaseComponent],
   components: {
-    ATable: Table,
-    ADivider: Divider,
-    AButton: Button,
-    AMenu: Menu,
-    AMenuItem: Menu.Item,
-    ADropdown: Dropdown,
-    APopconfirm: Popconfirm,
-    AUpload: Upload,
-    AInput: Input,
-    AppHeader: AppHeader,
-    AppFooter: AppFooter,
     EditableCell: EditableCell
   },
   data() {
@@ -180,39 +160,39 @@ export default {
       get() {
         return [
           {
-            title: this.$i18n.t('user.table.username'),
+            title: this.$i18n.t('common.account'),
             dataIndex: 'username',
             width: '15%',
             align: 'center'
           },
           {
-            title: this.$i18n.t('user.table.displayName'),
+            title: this.$i18n.t('common.nick_name'),
             dataIndex: 'displayName',
             width: '15%',
             align: 'center',
             scopedSlots: { customRender: 'displayName' }
           },
           {
-            title: this.$i18n.t('user.table.role'),
+            title: this.$i18n.t('common.role_name'),
             dataIndex: 'role',
             width: '10%',
             align: 'center'
           },
           {
-            title: this.$i18n.t('user.table.email'),
+            title: this.$i18n.t('common.email'),
             dataIndex: 'email',
             width: '25%',
             align: 'center',
             scopedSlots: { customRender: 'email' }
           },
           {
-            title: this.$i18n.t('common.table.status'),
+            title: this.$i18n.t('common.status'),
             dataIndex: 'status',
             width: '10%',
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.table.operation'),
+            title: this.$i18n.t('common.operation'),
             width: '20%',
             align: 'center',
             scopedSlots: { customRender: 'operation' }

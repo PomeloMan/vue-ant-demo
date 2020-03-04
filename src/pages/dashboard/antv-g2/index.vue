@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-header :breadcrumbs="breadcrumbs"></app-header>
+    <app-header :breadcrumbs="$route.meta.breadcrumbs || []"></app-header>
     <div class="scroll-wrapper no-footer">
       <div class="content-wrapper">
         <div id="line"></div>
@@ -12,14 +12,9 @@
 <script>
 import * as G2 from '@antv/g2'
 import { format, subMinutes } from 'date-fns'
-import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header.component'
 
 export default {
-  extends: BaseComponent,
-  components: {
-    AppHeader: AppHeader
-  },
+  components: {},
   data() {
     return {
       interval: null,
@@ -27,7 +22,11 @@ export default {
     }
   },
   mounted() {
-    this.renderLine()
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.renderLine()
+      }, 0);
+    })
   },
   destroyed() {
     if (this.interval) {

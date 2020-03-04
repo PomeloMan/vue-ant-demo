@@ -7,9 +7,9 @@ const API = {
 let api
 const mode = process.env.VUE_APP_CURRENT_MODE
 if (mode === 'mock') {
-  api = Mock_API
+  api = { ...API, ...Mock_API }
 } else {
-  api = API
+  api = { ...Mock_API, ...API }
 }
 
 export default api

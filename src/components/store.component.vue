@@ -1,6 +1,8 @@
 <script>
+// 全局变量存储状态
 export default {
   computed: {
+    // 菜单栏是否折叠
     collapsed: {
       get() {
         return this.$store.state.common.collapsed
@@ -9,14 +11,7 @@ export default {
         this.$store.dispatch('common/updateCollapsed', val)
       }
     },
-    breadcrumbs: {
-      get() {
-        return this.$store.state.common.breadcrumbs
-      },
-      set(val) {
-        this.$store.dispatch('common/updateBreadcrumbs', val)
-      }
-    },
+    // 字典表集合
     dicts: {
       get() {
         return this.$store.state.common.dicts
@@ -28,6 +23,7 @@ export default {
         })
       }
     },
+    // 字典表对象
     mapOfDict: {
       get() {
         return this.$store.state.common.mapOfDict

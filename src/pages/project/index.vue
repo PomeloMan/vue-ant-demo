@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-header :breadcrumbs="breadcrumbs" :searchType="'simple'">
+    <app-header :breadcrumbs="$route.meta.breadcrumbs || []" :searchType="'simple'">
       <div slot="action-group">
         <a-button type="link">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
@@ -16,17 +16,8 @@
 </template>
 
 <script>
-import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header.component'
-import { Divider, Button } from 'ant-design-vue'
-
 export default {
-  extends: BaseComponent,
-  components: {
-    AppHeader: AppHeader,
-    ADivider: Divider,
-    AButton: Button
-  }
+  components: {}
 }
 </script>
 

@@ -6,9 +6,9 @@
         <a-divider type="vertical" />
         <template v-if="selectedRowKeys.length !== 0">
           <a-popconfirm
-            :title="$t('common.confirm_delete')"
-            :okText="$t('common.confirm_ok')"
-            :cancelText="$t('common.confirm_cancel')"
+            :title="$t('message.is_confirm_delete')"
+            :okText="$t('common.ok')"
+            :cancelText="$t('common.cancel')"
             @confirm="onDeleteConfirmOk()"
           >
             <a-button type="link">{{ $t('common.delete') }}</a-button>
@@ -26,6 +26,7 @@
         :columns="columns"
         :rowKey="record => record.id"
         :rowSelection="{
+          width: 50,
           selectedRowKeys: selectedRowKeys,
           onChange: onSelectChange
         }"
@@ -34,8 +35,9 @@
         :loading="loading"
         :scroll="{ y: tableScrollY }"
       >
+        <!-- 名称（可编辑） -->
         <template
-          v-for="prop in ['displayName']"
+          v-for="prop in ['name']"
           :slot="prop"
           slot-scope="text, record"
         >
@@ -57,6 +59,7 @@
         <!-- 操作 -->
         <span slot="operation" slot-scope="text, record">
           <template v-if="record.editable">
+            <!-- 保存编辑 -->
             <a-button
               type="link"
               size="small"
@@ -64,10 +67,11 @@
               >{{ $t('common.save') }}</a-button
             >
             <a-divider type="vertical" />
+            <!-- 取消编辑 -->
             <a-popconfirm
-              :title="$t('common.confirm_save_cancel')"
-              :okText="$t('common.confirm_ok')"
-              :cancelText="$t('common.confirm_cancel')"
+              :title="$t('message.is_confirm_cancel')"
+              :okText="$t('common.ok')"
+              :cancelText="$t('common.cancel')"
               @confirm="editCancel(record)"
             >
               <a-button type="link" size="small">{{
@@ -76,14 +80,16 @@
             </a-popconfirm>
           </template>
           <template v-else>
+            <!-- 编辑 -->
             <a-button type="link" size="small" @click="edit(record)">{{
               $t('common.edit')
             }}</a-button>
             <a-divider type="vertical" />
+            <!-- 删除 -->
             <a-popconfirm
-              :title="$t('common.confirm_delete')"
-              :okText="$t('common.confirm_ok')"
-              :cancelText="$t('common.confirm_cancel')"
+              :title="$t('message.is_confirm_delete')"
+              :okText="$t('common.ok')"
+              :cancelText="$t('common.cancel')"
               @confirm="onDeleteConfirmOk(record.id)"
             >
               <a-button type="link" size="small">{{
@@ -138,77 +144,55 @@
 
 <script>
 import BaseComponent from '@/components/base.component'
-import AppHeader from '@/components/header.component'
-import AppFooter from '@/components/footer.component'
-import {
-  Table,
-  Divider,
-  Button,
-  Menu,
-  Dropdown,
-  Popconfirm,
-  Upload,
-  Input
-} from 'ant-design-vue'
 
 export default {
   name: 'sys_role',
-  extends: BaseComponent,
-  components: {
-    ATable: Table,
-    ADivider: Divider,
-    AButton: Button,
-    AMenu: Menu,
-    AMenuItem: Menu.Item,
-    ADropdown: Dropdown,
-    APopconfirm: Popconfirm,
-    AUpload: Upload,
-    AInput: Input,
-    AppHeader: AppHeader,
-    AppFooter: AppFooter
-  },
+  mixins: [BaseComponent],
+  components: {},
   data() {
     return {}
   },
   computed: {
-    columns: { // 表头国际化，切换时需要立刻更新组件渲染，所以需要放进 computed 函数
+    columns: {
+      // 表头国际化，切换时需要立刻更新组件渲染，所以需要放进 computed 函数
       get() {
         return [
           {
-            title: this.$i18n.t('role.table.number'),
-            width: '10%',
+            title: this.$i18n.t('common.number'),
+            width: 50,
             align: 'center',
             customRender: function(text, record, index) {
               return index + 1
             }
           },
           {
-            title: this.$i18n.t('role.table.name'),
+            title: this.$i18n.t('common.role_name'),
             dataIndex: 'name',
-            width: '15%',
-            align: 'center'
+            width: 150,
+            align: 'center',
+            scopedSlots: { customRender: 'name' }
           },
           {
-            title: this.$i18n.t('common.table.status'),
+            title: this.$i18n.t('common.status'),
             dataIndex: 'status',
-            width: '15%',
+            width: 100,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.table.modifier'),
+            title: this.$i18n.t('common.modifier'),
             dataIndex: 'modifier',
-            width: '15%',
+            width: 100,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.table.modifyDate'),
+            title: this.$i18n.t('common.modify_date'),
             dataIndex: 'modifyDate',
-            width: '20%',
+            width: 150,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.table.operation'),
-            width: '20%',
+            title: this.$i18n.t('common.operation'),
+            width: 150,
             align: 'center',
             scopedSlots: { customRender: 'operation' }
           }
