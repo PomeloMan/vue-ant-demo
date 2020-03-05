@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BREADCRUMB from '@/constants/breadcrumbs'
 
+import NProgress from 'nprogress'
+// 添加页面进度条
+import './nprogress'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -94,9 +97,15 @@ const router = new VueRouter({
   routes: routes
 })
 
+// 当路由进入前
 router.beforeEach((to, from, next) => {
-  console.log(to, from, next)
+  //console.log(to, from, next)
+  NProgress.start();
   next()
+})
+// 当路由进入后：关闭进度条
+router.afterEach(() => {
+  NProgress.done()
 })
 
 export default router

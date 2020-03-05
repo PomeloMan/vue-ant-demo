@@ -1,6 +1,11 @@
 <template>
   <div>
-    <app-header :breadcrumbs="breadcrumbs" :searchType="'advanced'">
+    <app-header
+      :breadcrumbs="breadcrumbs"
+      :searchType="'advanced'"
+      :formItem="formItem"
+      @onAdvancedSearch="onAdvancedSearch"
+    >
       <div slot="action-group">
         <a-button type="link">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
@@ -26,6 +31,7 @@
         :columns="columns"
         :rowKey="record => record.username"
         :rowSelection="{
+          columnWidth: 50,
           selectedRowKeys: selectedRowKeys,
           onChange: onSelectChange
         }"
@@ -152,7 +158,40 @@ export default {
   },
   data() {
     return {
-      key: 'username'
+      key: 'username',
+      formItem: [
+        {
+          label: this.$i18n.t('common.account'),
+          key: 'username',
+          type: 'input'
+        },
+        {
+          label: this.$i18n.t('common.nick_name'),
+          key: 'displayName',
+          type: 'input'
+        },
+        {
+          label: this.$i18n.t('common.role_name'),
+          key: 'role',
+          type: 'select',
+          options: [{ value: 1, label: '管理员' }]
+        },
+        {
+          label: this.$i18n.t('common.email'),
+          key: 'email',
+          type: 'input'
+        },
+        {
+          label: this.$i18n.t('common.status'),
+          key: 'status',
+          type: 'radio',
+          options: [
+            { value: '', label: '全部' },
+            { value: '0', label: '初始话' },
+            { value: '1', label: '已生效' }
+          ]
+        }
+      ]
     }
   },
   computed: {
@@ -162,38 +201,38 @@ export default {
           {
             title: this.$i18n.t('common.account'),
             dataIndex: 'username',
-            width: '15%',
+            width: 100,
             align: 'center'
           },
           {
             title: this.$i18n.t('common.nick_name'),
             dataIndex: 'displayName',
-            width: '15%',
+            width: 150,
             align: 'center',
             scopedSlots: { customRender: 'displayName' }
           },
           {
             title: this.$i18n.t('common.role_name'),
             dataIndex: 'role',
-            width: '10%',
+            width: 100,
             align: 'center'
           },
           {
             title: this.$i18n.t('common.email'),
             dataIndex: 'email',
-            width: '25%',
+            width: 150,
             align: 'center',
             scopedSlots: { customRender: 'email' }
           },
           {
             title: this.$i18n.t('common.status'),
             dataIndex: 'status',
-            width: '10%',
+            width: 100,
             align: 'center'
           },
           {
             title: this.$i18n.t('common.operation'),
-            width: '20%',
+            width: 150,
             align: 'center',
             scopedSlots: { customRender: 'operation' }
           }
@@ -206,6 +245,11 @@ export default {
   },
   mounted() {},
   methods: {
+    onAdvancedSearch(values) {
+      this.page = 1
+      this.body = values
+      this.getData()
+    },
     getData() {
       this.loading = true
       if (this.$env === 'mock') {

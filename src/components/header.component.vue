@@ -24,17 +24,78 @@
         <a-button
           type="link"
           class="fs-13"
-          @click="isAdvanceWrapperVisible = !isAdvanceWrapperVisible"
+          @click="isAdvancedWrapperVisible = !isAdvancedWrapperVisible"
         >
-          高级搜索
+          {{ $t('common.advance_search') }}
           <a-icon type="down" />
         </a-button>
       </div>
 
       <div
-        class="advance-wrapper"
-        :class="{ visible: isAdvanceWrapperVisible }"
-      ></div>
+        id="advancedWrapper"
+        class="advanced-wrapper"
+        :class="{ visible: isAdvancedWrapperVisible }"
+      >
+        <a-form id="advancedForm" :layout="'inline'" :form="advancedForm">
+          <a-row :gutter="24" type="flex">
+            <a-col
+              :span="24 / column"
+              :key="index"
+              v-for="(item, index) in formItem"
+            >
+              <a-form-item
+                :label="item.label"
+                :labelCol="{ span: 4 }"
+                :wrapperCol="{ span: 20 }"
+              >
+                <!-- input -->
+                <template v-if="item.type === 'input'">
+                  <a-input v-decorator="[item.key]"></a-input>
+                </template>
+                <!-- select -->
+                <template v-else-if="item.type === 'select'">
+                  <a-select v-decorator="[item.key]">
+                    <a-select-option
+                      :key="option.value"
+                      :value="option.value"
+                      v-for="option in item.options"
+                      >{{ option.label }}
+                    </a-select-option>
+                  </a-select>
+                </template>
+                <!-- radio -->
+                <template v-else-if="item.type === 'radio'">
+                  <a-radio-group v-decorator="[item.key]" buttonStyle="solid">
+                    <a-radio-button
+                      :key="option.value"
+                      :value="option.value"
+                      v-for="option in item.options"
+                      >{{ option.label }}
+                    </a-radio-button>
+                  </a-radio-group>
+                </template>
+              </a-form-item>
+            </a-col>
+          </a-row>
+          <!-- 重置和查询按钮 -->
+          <a-row>
+            <a-col :span="12">
+              <a-form-item :wrapperCol="{ span: 20, offset: 4 }">
+                <a-button @click="advancedForm.resetFields()">
+                  <a-icon type="rest" />{{ $t('common.reset') }}
+                </a-button>
+                <a-divider
+                  type="vertical"
+                  style="background: transparent"
+                ></a-divider>
+                <a-button type="primary" @click="onAdvancedSearch">
+                  <a-icon type="search" />{{ $t('common.search') }}
+                </a-button>
+              </a-form-item>
+            </a-col>
+          </a-row>
+        </a-form>
+      </div>
     </template>
     <template v-if="searchType === 'simple'">
       <div>
@@ -43,7 +104,7 @@
           placeholder="Quick search"
           style="width: 200px"
           v-model="keyword"
-          @search="onSearch"
+          @search="onSimpleSearch"
         />
       </div>
     </template>
@@ -76,19 +137,51 @@ export default {
       default: function() {
         return 'none'
       }
+    },
+    formItem: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    },
+    column: {
+      type: Number,
+      default: function() {
+        return 2
+      }
     }
   },
   data() {
     return {
-      isAdvanceWrapperVisible: false,
-      keyword: undefined
+      isAdvancedWrapperVisible: false,
+      keyword: undefined,
+      advancedForm: this.$form.createForm(this)
+    }
+  },
+  watch: {
+    isAdvancedWrapperVisible(val) {
+      // 计算 form 高度并赋值给 advance-wrapper 元素
+      this.$nextTick(() => {
+        const advFormEl = document.getElementById('advancedForm')
+        const advWrapEl = document.getElementById('advancedWrapper')
+        if (val) {
+          if (advFormEl && advWrapEl) {
+            advWrapEl.style.height = advFormEl.clientHeight + 'px'
+          }
+        } else {
+          advWrapEl.style.height = '0px'
+        }
+      })
     }
   },
   methods: {
-    onSearch() {
+    onSimpleSearch() {
       this.$emit('onSimpleSearch', this.keyword)
     },
-    onAdvancedSearch() {}
+    onAdvancedSearch() {
+      this.isAdvancedWrapperVisible = !this.isAdvancedWrapperVisible
+      this.$emit('onAdvancedSearch', this.advancedForm.getFieldsValue())
+    }
   }
 }
 </script>
@@ -114,21 +207,27 @@ export default {
     margin-right: 4px;
   }
 }
-.advance-wrapper {
+.advanced-wrapper {
   position: absolute;
   top: 40px;
   width: 100%;
   height: 0;
   left: 0;
-  padding: 0 16px;
   z-index: 1;
   background: white;
   overflow: hidden;
   transition: all 0.3s;
 
   &.visible {
-    height: 200px;
+    // height: 200px; // 自适应，watch.isAdvancedWrapperVisible
     border-bottom: 1px solid #e8e8e8;
+  }
+  .ant-form {
+    padding: 16px;
+    .ant-form-item {
+      display: flex;
+      margin-bottom: 0;
+    }
   }
 }
 </style>

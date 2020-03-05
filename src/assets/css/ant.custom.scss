@@ -1,8 +1,11 @@
 .ant-table-wrapper {
   height: 100%;
+  .ant-table {
+    word-break: break-all;
+  }
 }
 
-// app-header 头部菜单栏 link 按钮样式 
+// app-header 头部菜单栏 link 按钮样式
 // ant-table 表格内 link 按钮样式
 .app-header .ant-btn-link,
 .ant-table-wrapper .ant-btn-link {
