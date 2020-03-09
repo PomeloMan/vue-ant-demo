@@ -22,3 +22,16 @@
     display: inline-block;
   }
 }
+
+// ant-drawer body 滚动条样式
+.ant-drawer .ant-drawer-body {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    background: #e6d8d8;
+  }
+}

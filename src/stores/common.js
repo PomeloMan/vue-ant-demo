@@ -18,15 +18,6 @@ export default {
         mapOfDict[key] = dict[`value_${locale}`]
       });
       state.mapOfDict = mapOfDict
-    },
-    updateMapOfDict(state, locale) {
-      if (!locale) { locale = 'zh' }
-      const mapOfDict = new Object()
-      state.dicts.forEach(dict => {
-        const key = dict.code
-        mapOfDict[key] = dict[`value_${locale}`]
-      });
-      state.mapOfDict = mapOfDict
     }
   },
   actions: {
@@ -35,9 +26,6 @@ export default {
     },
     updateDicts(context, { val, locale }) {
       context.commit('updateDicts', { dicts: val, locale })
-    },
-    updateMapOfDict(context, locale) {
-      context.commit('updateMapOfDict', locale)
     }
   }
 }

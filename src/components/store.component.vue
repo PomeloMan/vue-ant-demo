@@ -1,7 +1,11 @@
 <script>
+import { mapState } from 'vuex'
 // 全局变量存储状态
 export default {
   computed: {
+    ...mapState({
+      mapOfDict: state => state.common.mapOfDict // 字典表对象
+    }),
     // 菜单栏是否折叠
     collapsed: {
       get() {
@@ -21,15 +25,6 @@ export default {
           val: val,
           locale: this.$i18n.locale || 'zh'
         })
-      }
-    },
-    // 字典表对象
-    mapOfDict: {
-      get() {
-        return this.$store.state.common.mapOfDict
-      },
-      set(locale) {
-        this.$store.dispatch('common/updateMapOfDict', locale)
       }
     }
   }

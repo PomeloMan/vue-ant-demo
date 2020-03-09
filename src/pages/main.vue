@@ -42,17 +42,12 @@
 <script>
 import StoreComponent from '@/components/store.component'
 import { Layout } from 'ant-design-vue'
-// import { Layout, Breadcrumb } from 'ant-design-vue'
 import MainSider from './main-sider'
 import MainHeader from './main-header'
 
 export default {
   name: 'home',
   mixins: [StoreComponent],
-  data() {
-    return {}
-  },
-  computed: {},
   components: {
     ALayout: Layout,
     ALayoutHeader: Layout.Header,
@@ -60,6 +55,10 @@ export default {
     ALayoutContent: Layout.Content,
     MainSider,
     MainHeader
+  },
+  computed: {},
+  data() {
+    return {}
   },
   created() {
     // 获取字典数据并保存

@@ -35,6 +35,7 @@ Vue.use(Antd)
 
 // global style
 import './assets/style.scss'
+import 'perfect-scrollbar/css/perfect-scrollbar.css' // 引入 perfect-scrollbar CSS库
 // i18n
 import i18n from './i18n'
 // icon 自定义svg标签

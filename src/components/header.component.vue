@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header">
+  <div class="app-header" :class="type === 'bordered' ? 'app-header-bordered' : ''">
     <a-breadcrumb>
       <template v-for="item in breadcrumbs">
         <a-breadcrumb-item :key="item.name">
@@ -126,6 +126,12 @@ export default {
     AInputSearch: Input.Search
   },
   props: {
+    type: {
+      type: String,
+      default: function() {
+        return 'default'
+      }
+    },
     breadcrumbs: {
       type: Array,
       default: function() {
@@ -194,6 +200,13 @@ export default {
   justify-content: space-between;
   padding: 0 16px;
   height: 40px;
+
+  &.app-header-bordered {
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    box-shadow: 1px 2px 4px rgba($color: #eee, $alpha: 0.6);
+  }
 
   > *:nth-child(1),
   > *:nth-child(3) {

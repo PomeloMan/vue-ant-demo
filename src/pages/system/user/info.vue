@@ -6,12 +6,10 @@
 
 <script>
 import AppHeader from '@/components/header.component'
-// import AppFooter from '@/components/footer.component'
 
 export default {
   components: {
-    AppHeader,
-    // AppFooter
+    AppHeader
   },
   created() {
     this.breadcrumbs = this.$route.meta.breadcrumbs || []

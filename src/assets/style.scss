@@ -14,15 +14,21 @@
   overflow: hidden;
   position: relative;
 
+  .app-header-bordered + .scroll-wrapper {
+    padding: 16px 16px 24px;
+  }
+
   // 自定义内容
   .scroll-wrapper {
+    position: relative;
     overflow: auto;
     padding: 0 16px 24px;
     &::-webkit-scrollbar {
       width: 6px;
       height: 12px;
     }
-    &::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    &::-webkit-scrollbar-thumb {
+      /*滚动条里面小方块*/
       border-radius: 10px;
       background: #e6d8d8;
     }
@@ -56,5 +62,12 @@
   .scroll-wrapper.no-header.no-footer,
   .table-content-wrapper.no-header.no-footer {
     height: 100%;
+  }
+}
+
+// Grid 布局 ant-spin 样式调整
+.grid-spin {
+  .ant-spin-spinning {
+    bottom: 0;
   }
 }
