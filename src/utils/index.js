@@ -139,3 +139,11 @@ export function getBase64(img, callback) {
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 }
+
+export function setStoreItemByBase64(key, value) {
+  localStorage.setItem(key, btoa(encodeURI(JSON.stringify(value))))
+}
+
+export function getStoreItemByBase64(key) {
+  return JSON.parse(decodeURI(atob(localStorage.getItem(key))))
+}

@@ -35,3 +35,8 @@
     background: #e6d8d8;
   }
 }
+
+// ant-avatar 样式修改 (覆盖 .ant-menu-item .anticon { margin-right: 10px; })
+.ant-avatar .anticon {
+  margin-right: 0;
+}

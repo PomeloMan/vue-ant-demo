@@ -44,6 +44,7 @@ import StoreComponent from '@/components/store.component'
 import { Layout } from 'ant-design-vue'
 import MainSider from './main-sider'
 import MainHeader from './main-header'
+import { getStoreItemByBase64 } from '@/utils'
 
 export default {
   name: 'home',
@@ -61,6 +62,8 @@ export default {
     return {}
   },
   created() {
+    this.$user = this.$user || getStoreItemByBase64('user')
+    console.log(this.$user)
     // 获取字典数据并保存
     this.$http.get(this.$api.DICT_LIST).then(({ data }) => {
       this.dicts = data

@@ -4,6 +4,9 @@ const API = {
   // Three
   THREE_LIST: '/mock/three/list.json',
 
+  LOGIN_URL: '/mock/success.json', // 登录
+  USER_INFO: '/mock/success.json', // 登录后查询用户信息
+
   // -- SYSTEM --
   // User
   USER_PAGE: '/mock/user/page.json',

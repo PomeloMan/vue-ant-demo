@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BREADCRUMB from '@/constants/breadcrumbs'
+import LoginComponent from '@/pages/login'
 
 import NProgress from 'nprogress'
 // 添加页面进度条
@@ -10,6 +11,10 @@ Vue.use(VueRouter)
 const routes = [{
   path: '/',
   redirect: '/main'
+}, {
+  name: 'login',
+  path: '/login',
+  component: LoginComponent
 }, {
   name: 'main',
   path: '/main',

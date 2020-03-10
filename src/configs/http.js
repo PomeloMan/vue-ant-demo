@@ -22,6 +22,8 @@ http.interceptors.request.use(config => {
 
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`
+  } else {
+    router.push({ name: 'login' })
   }
   return config
 }, error => {
