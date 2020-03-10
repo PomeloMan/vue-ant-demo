@@ -9,6 +9,7 @@
     <div>
       <a-form class="login-form" :form="form" @submit="login">
         <div class="logo">
+          <img />
           <!-- <img src="~@/assets/images/login_logo.svg" /> -->
         </div>
         <div class="input-wrap">
@@ -31,11 +32,7 @@
             <span class="separator"></span>
           </a-form-item>
         </div>
-        <div class="input-wrap">
-          <a-form-item>
-            <a-button type="primary" html-type="submit">{{$t('common.login')}}</a-button>
-          </a-form-item>
-        </div>
+        <a-button class="full-width" type="primary" html-type="submit">{{$t('common.login')}}</a-button>
       </a-form>
     </div>
   </div>
@@ -144,8 +141,8 @@ export default {
   // 表单样式
   .login-form {
     width: 60%;
-    height: 44%;
-    min-height: 340px;
+    height: 40%;
+    min-height: 320px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -156,6 +153,11 @@ export default {
       font-size: 14px;
       font-weight: 600;
       text-align: center;
+      margin-bottom: 24px;
+      img {
+        width: 64px;
+        height: 64px;
+      }
       p {
         margin: 0;
       }
