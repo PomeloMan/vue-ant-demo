@@ -106,13 +106,6 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
-.title {
-  font-size: 48px;
-  font-weight: 500;
-}
-.subtitle {
-  font-size: 24px;
-}
 .container {
   display: flex;
   // 左侧样式
@@ -130,6 +123,13 @@ export default {
       position: absolute;
       top: 33%;
       left: 5%;
+      .title {
+        font-size: 48px;
+        font-weight: 500;
+      }
+      .subtitle {
+        font-size: 24px;
+      }
     }
   }
   // 右侧样式
@@ -180,6 +180,7 @@ export default {
 
       // 使用 autocomplete 会改变 input 背景色，这里强制背景色与项目色彩一致
       .ant-input:-webkit-autofill {
+        box-shadow: 0 0 0 1000px #242e42 inset !important;
         -webkit-text-fill-color: white !important; // input 字体
         -webkit-box-shadow: 0 0 0 1000px #242e42 inset !important; // input 背景色
       }
