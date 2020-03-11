@@ -12,26 +12,5 @@
     "description": "",
     "modifyDate": "2019-01-01T00:00:00",
     "modifier": "admin"
-  },
-  {
-    "id": 3,
-    "name": "电商平台",
-    "description": "",
-    "modifyDate": "2019-01-01T00:00:00",
-    "modifier": "admin"
-  },
-  {
-    "id": 4,
-    "name": "电商平台",
-    "description": "",
-    "modifyDate": "2019-01-01T00:00:00",
-    "modifier": "admin"
-  },
-  {
-    "id": 5,
-    "name": "电商平台",
-    "description": "",
-    "modifyDate": "2019-01-01T00:00:00",
-    "modifier": "admin"
   }
 ]
