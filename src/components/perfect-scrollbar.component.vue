@@ -19,9 +19,15 @@ export default {
     initPerfectScrollbar() {
       this.$nextTick(() => {
         setTimeout(() => {
+          const $el = document.querySelector('.scroll-wrapper')
+          // 初始话 perfect-scrollbar
           this.scrollContainer = document.querySelector(this.elementId)
           if (this.scrollContainer) {
+            if ($el) {
+              this.scrollContainer.style.height = $el.clientHeight + 'px'
+            }
             this.perfectScrollbar = new PerfectScrollbar(this.scrollContainer)
+            this.scrollContainer.style.position = 'relative'
             // 添加滚动事件
             this.scrollContainer.addEventListener(
               'ps-y-reach-end',

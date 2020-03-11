@@ -7,53 +7,52 @@
       @onSimpleSearch="onSearch"
     >
       <div slot="action-group">
-        <a-button type="link" @click="showNewDrawer">{{
-          $t('common.new')
-        }}</a-button>
+        <a-button type="link" @click="showNewDrawer">{{ $t('common.new') }}</a-button>
       </div>
     </app-header>
-    <div id="scrollContainer" class="scroll-wrapper no-footer">
+    <div class="scroll-wrapper no-footer" style="padding: 0;">
       <a-spin :spinning="loadingData" wrapperClassName="grid-spin">
-        <a-row :gutter="24" style="min-height: 200px;">
-          <a-col :span="10" :key="item.id" v-for="item in data">
-            <a-card
-              class="project-card"
-              :bordered="false"
-              :bodyStyle="{
+        <div id="scrollContainer" style="padding: 16px 16px 24px;">
+          <a-row :gutter="24" style="height: calc(100% + 1px);">
+            <a-col :span="10" :key="item.id" v-for="item in data">
+              <a-card
+                class="project-card"
+                :bordered="false"
+                :bodyStyle="{
                 padding: '20px',
                 height: '100%',
                 display: 'flex'
               }"
-            >
-              <div class="project-logo">
-                <!-- <img :src="item.imageUrl" v-if="item.imageUrl" /> -->
-                <a-avatar
-                  shape="square"
-                  :size="48"
-                  :src="item.imageUrl"
-                  :style="{
+              >
+                <div class="project-logo">
+                  <!-- <img :src="item.imageUrl" v-if="item.imageUrl" /> -->
+                  <a-avatar
+                    shape="square"
+                    :size="48"
+                    :src="item.imageUrl"
+                    :style="{
                     backgroundColor: '#00a2ae',
                     verticalAlign: 'middle'
                   }"
-                  >{{ item.name.substring(0, 1) }}</a-avatar
-                >
-              </div>
-              <div class="project-details">
-                <div class="project-name fw-600 fs-16">{{ item.name }}</div>
-                <div class="project-description">{{ item.description }}</div>
-                <div class="project-links">
-                  <a-tooltip :title="$t('common.overview')">
-                    <a href="javascript:;">
-                      <a-icon type="project" />
-                    </a>
-                  </a-tooltip>
+                  >{{ item.name.substring(0, 1) }}</a-avatar>
                 </div>
-              </div>
-            </a-card>
-          </a-col>
-        </a-row>
+                <div class="project-details">
+                  <div class="project-name fw-600 fs-16">{{ item.name }}</div>
+                  <div class="project-description">{{ item.description }}</div>
+                  <div class="project-links">
+                    <a-tooltip :title="$t('common.overview')">
+                      <a href="javascript:;">
+                        <a-icon type="project" />
+                      </a>
+                    </a-tooltip>
+                  </div>
+                </div>
+              </a-card>
+            </a-col>
+          </a-row>
+          <a-back-top :target="scrollWrapper" :visibilityHeight="100"></a-back-top>
+        </div>
       </a-spin>
-      <a-back-top :target="scrollWrapper" :visibilityHeight="100"></a-back-top>
     </div>
     <new-drawer ref="newDrawer"></new-drawer>
   </div>
@@ -72,7 +71,8 @@ export default {
       data: [], // 项目列表
       page: 1,
       pageSize: 10,
-      loadingData: false // 加载列表
+      loadingData: false, // 加载列表
+      searchKeyword: ''
     }
   },
   created() {
@@ -82,25 +82,37 @@ export default {
     this.initPerfectScrollbar()
   },
   methods: {
-    onSearch(values) {
-      console.log(values)
-      this.page = 1
-      this.data = []
-      this.getData()
-    },
-    getData: _.debounce(function() {
-      this.loadingData = true
-      this.$http
-        .get(this.$api.PROJECT_PAGE)
-        .then(({ data }) => {
-          this.loadingData = false
-          this.data = [...this.data, ...data]
+    onSearch: _.debounce(
+      function(values) {
+        this.page = 1
+        this.data = []
+        this.searchKeyword = values
+        this.$nextTick(() => {
+          this.perfectScrollbar.update() // 更新滚动条
+          this.scrollContainer.scrollTop = 0
+          this.getData()
         })
-        .catch(err => {
-          this.loadingData = false
-          this.$message.error(err.message)
-        })
-    }, 500),
+      },
+      500,
+      { leading: true, trailing: false } // leading 延迟前执行，trailing 延迟后执行),
+    ),
+    getData: _.debounce(
+      function() {
+        this.loadingData = true
+        this.$http
+          .get(this.$api.PROJECT_PAGE)
+          .then(({ data }) => {
+            this.loadingData = false
+            this.data = [...this.data, ...data]
+          })
+          .catch(err => {
+            this.loadingData = false
+            this.$message.error(err.message)
+          })
+      },
+      500,
+      { leading: true, trailing: false } // leading 延迟前执行，trailing 延迟后执行
+    ),
     showNewDrawer() {
       this.$refs['newDrawer'].form.resetFields()
       this.$refs['newDrawer'].visible = true
