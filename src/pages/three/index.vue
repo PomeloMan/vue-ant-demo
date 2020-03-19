@@ -22,15 +22,13 @@ import {
   CSS3DObject,
   CSS3DRenderer
 } from 'three/examples/jsm/renderers/CSS3DRenderer'
-import AppFooter from '@/components/footer.component'
 import { Menu } from 'ant-design-vue'
 
 export default {
   name: 'three',
   components: {
     AMenu: Menu,
-    AMenuItem: Menu.Item,
-    AppFooter: AppFooter
+    AMenuItem: Menu.Item
   },
   data() {
     return {

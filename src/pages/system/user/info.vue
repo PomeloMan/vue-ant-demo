@@ -5,12 +5,7 @@
 </template>
 
 <script>
-import AppHeader from '@/components/header.component'
-
 export default {
-  components: {
-    AppHeader
-  },
   created() {
     this.breadcrumbs = this.$route.meta.breadcrumbs || []
   }
