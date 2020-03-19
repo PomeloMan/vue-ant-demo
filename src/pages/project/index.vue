@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import PerfectScrollbar from '@/components/perfect-scrollbar.component.vue'
+import PerfectScrollbar from '@/components/plugins/perfect-scrollbar.vue'
 import NewDrawer from './drawer/new.drawer.vue'
 import _ from 'lodash'
 export default {

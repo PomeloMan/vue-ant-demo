@@ -43,7 +43,7 @@ import './icons'
 // 挂载管道
 import './pipes'
 // 注册全局组件
-import './components'
+import './components/layouts'
 
 // 挂载全局
 Vue.prototype.$http = http

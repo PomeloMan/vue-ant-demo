@@ -148,7 +148,7 @@
 
 <script>
 import BaseComponent from '@/components/base.component'
-import EditableCell from '@/components/editable-cell.component'
+import EditableCell from '@/components/plugins/editable-cell'
 
 export default {
   name: 'sys_user',
