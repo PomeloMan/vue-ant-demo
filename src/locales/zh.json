@@ -4,13 +4,15 @@
     "subtitle": "副标题"
   },
   "message": {
+    "delete_success": "删除成功!",
     "file_upload_failure": "文件上传失败!",
     "file_upload_success": "文件上传成功!",
     "is_confirm_delete": "是否确认删除?",
     "is_confirm_cancel": "是否确认取消?",
     "save_success": "保存成功!",
     "save_failure": "保存失败!",
-    "please_input": "请输入{content}"
+    "please_input": "请输入{content}",
+    "must_be_positive_integer": "{name}必须是正整数"
   },
   "common": {
     "account": "账号",
@@ -28,10 +30,13 @@
     "login": "登录",
     "menu": "菜单",
     "menu_name": "菜单名",
+    "menu_icon": "菜单图标",
+    "menu_parent": "父级菜单",
     "modifier": "修改人",
     "modify_date": "修改时间",
     "name": "名称",
     "new": "新建",
+    "new_menu": "新建菜单",
     "new_project": "新建项目",
     "nick_name": "昵称",
     "number": "序号",
@@ -45,7 +50,8 @@
     "search": "查询",
     "status": "状态",
     "submit": "提交",
-    "total_number": "共 {num} 项"
+    "total_number": "共 {num} 项",
+    "weights": "权重"
   },
   "breadcrumb": {
     "home": "首页",

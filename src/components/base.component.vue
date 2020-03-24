@@ -1,5 +1,22 @@
 <script>
-import qs from 'qs'
+// import qs from 'qs'
+
+const rowSelection = $this => {
+  return {
+    columnWidth: 50,
+    onChange: (selectedRowKeys, selectedRows) => {
+      $this.selectedRowKeys = selectedRowKeys
+      $this.selectedRows = selectedRows
+    },
+    onSelect: (record, selected, selectedRows) => {
+      console.log(record, selected, selectedRows)
+    },
+    onSelectAll: (selected, selectedRows, changeRows) => {
+      console.log(selected, selectedRows, changeRows)
+    }
+  }
+}
+
 export default {
   data() {
     return {
@@ -12,9 +29,11 @@ export default {
       selectedRows: [], // 选中行
       selectedRowKeys: [], // 选中行ID
       loading: false, // 表格数据加载
+      deleting: false, // 表格数据删除
       tableScrollY: '', // 表格高度
       body: {}, // 查询条件
-      breadcrumbs: [] // 面包屑导航
+      breadcrumbs: [], // 面包屑导航
+      rowSelection: rowSelection(this)
     }
   },
   created() {
@@ -76,19 +95,6 @@ export default {
     // 选择行
     onSelectChange(selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
-    },
-    // 删除
-    delete(url, ids) {
-      return this.$http
-        .delete(url, {
-          params: { ids: ids },
-          paramsSerializer: params => {
-            return qs.stringify(params, { indices: false })
-          }
-        })
-        .then(() => {
-          this.getData()
-        })
     },
     // 上传
     uploadChange(info) {
@@ -162,7 +168,7 @@ export default {
         this.cacheData = data.map(item => ({ ...item }))
 
         return this.$http.put(url, record).then(() => {
-          this.$message.success(this.$i18n.t('common.save_success'))
+          this.$message.success(this.$i18n.t('message.save_success'))
         })
       }
     },
@@ -176,7 +182,52 @@ export default {
         delete record.editable
         this.data = data
       }
+    },
+    // 删除表格行数据
+    onDeleteConfirmOk(url, record) {
+      let ids = []
+      if (record) {
+        ids = [record[this.key]]
+        record.deleting = true
+        this.$forceUpdate()
+      } else {
+        ids = this.selectedRowKeys
+        this.deleting = true
+      }
+      this.$http
+        .delete(url, { data: ids })
+        .then(() => {
+          this.getData()
+          this.refreshDeleteStatus(record)
+          this.$message.success(this.$i18n.t('message.delete_success'))
+        })
+        .catch(err => {
+          console.error(err)
+          this.refreshDeleteStatus(record)
+          this.$message.error(err.message)
+        })
+    },
+    refreshDeleteStatus(record) {
+      if (record) {
+        record.deleting = false
+        this.$forceUpdate()
+      } else {
+        this.deleting = false
+      }
     }
+    // 删除
+    // delete(url, ids) {
+    //   return this.$http
+    //     .delete(url, {
+    //       params: { ids: ids },
+    //       paramsSerializer: params => {
+    //         return qs.stringify(params, { indices: false })
+    //       }
+    //     })
+    //     .then(() => {
+    //       this.getData()
+    //     })
+    // }
   }
 }
 </script>

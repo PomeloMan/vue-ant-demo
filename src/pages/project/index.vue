@@ -54,16 +54,16 @@
         </div>
       </a-spin>
     </div>
-    <new-drawer ref="newDrawer"></new-drawer>
+    <add-drawer ref="addDrawer"></add-drawer>
   </div>
 </template>
 
 <script>
 import PerfectScrollbar from '@/components/plugins/perfect-scrollbar.vue'
-import NewDrawer from './drawer/new.drawer.vue'
+import AddDrawer from './drawer/add.vue'
 import _ from 'lodash'
 export default {
-  components: { NewDrawer },
+  components: { AddDrawer },
   mixins: [PerfectScrollbar],
   data() {
     return {
@@ -113,9 +113,9 @@ export default {
       500,
       { leading: true, trailing: false } // leading 延迟前执行，trailing 延迟后执行
     ),
-    showNewDrawer() {
-      this.$refs['newDrawer'].form.resetFields()
-      this.$refs['newDrawer'].visible = true
+    showAddDrawer() {
+      this.$refs['addDrawer'].form.resetFields()
+      this.$refs['addDrawer'].visible = true
     },
     onScrollbarYReachEnd() {
       this.page++
