@@ -44,6 +44,18 @@
             :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
           ></a-tree-select>
         </a-form-item>
+        <!-- 链接地址 -->
+        <a-form-item :label="$t('common.url')">
+          <a-input
+            v-decorator="[
+              'icon', {
+                rules: [
+                  { required: true, message: $t('message.please_input', { content: $t('common.url') }) }
+                ]
+              }
+            ]"
+          />
+        </a-form-item>
         <!-- 图标名称 -->
         <a-form-item :label="$t('common.menu_icon')">
           <a-input

@@ -51,6 +51,7 @@
     "status": "状态",
     "submit": "提交",
     "total_number": "共 {num} 项",
+    "url": "链接地址",
     "weights": "权重"
   },
   "breadcrumb": {
