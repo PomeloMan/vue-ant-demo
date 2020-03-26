@@ -6,7 +6,9 @@ const API = {
   // -- 权限管理 --
   // SYS_MENU_PAGE: `${process.env.VUE_APP_USER_URL}/auth/page`,
   SYS_MENU_LIST: `${process.env.VUE_APP_USER_URL}/auth/list`,
-  SYS_MENU: `${process.env.VUE_APP_USER_URL}/auth`
+  SYS_MENU: `${process.env.VUE_APP_USER_URL}/auth`,
+  SYS_ROLE_PAGE: `${process.env.VUE_APP_USER_URL}/role/page`,
+  SYS_ROLE: `${process.env.VUE_APP_USER_URL}/role`
 }
 
 let api

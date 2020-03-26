@@ -1,8 +1,8 @@
 <template>
   <div>
-    <app-header :breadcrumbs="breadcrumbs" :searchType="'advanced'">
+    <app-header :breadcrumbs="breadcrumbs" :searchType="'simple'" @onSimpleSearch="onSimpleSearch">
       <div slot="action-group">
-        <a-button type="link">{{ $t('common.new') }}</a-button>
+        <a-button type="link" @click="showAddDrawer(0)">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
         <template v-if="selectedRowKeys.length !== 0">
           <a-popconfirm
@@ -15,16 +15,14 @@
           </a-popconfirm>
         </template>
         <template v-else>
-          <a-button type="link" :disabled="selectedRowKeys.length === 0">{{
-            $t('common.delete')
-          }}</a-button>
+          <a-button type="link" :disabled="selectedRowKeys.length === 0">{{ $t('common.delete') }}</a-button>
         </template>
       </div>
     </app-header>
     <div class="table-content-wrapper">
       <a-table
         :columns="columns"
-        :rowKey="record => record.id"
+        :rowKey="record => record[key]"
         :rowSelection="{
           width: 50,
           selectedRowKeys: selectedRowKeys,
@@ -35,23 +33,6 @@
         :loading="loading"
         :scroll="{ y: tableScrollY }"
       >
-        <!-- 名称（可编辑） -->
-        <template
-          v-for="prop in ['name']"
-          :slot="prop"
-          slot-scope="text, record"
-        >
-          <a-input
-            v-if="record.editable"
-            :key="prop"
-            size="small"
-            :value="text"
-            @change="e => handlePropChange(e.target.value, record, prop)"
-          />
-          <span v-else :key="prop" style="word-break: break-all;">{{
-            text
-          }}</span>
-        </template>
         <!-- 时间 -->
         <template slot="date" slot-scope="text">
           <span>{{ text | date }}</span>
@@ -64,8 +45,7 @@
               type="link"
               size="small"
               @click="save($api.MENU_SAVE, record)"
-              >{{ $t('common.save') }}</a-button
-            >
+            >{{ $t('common.save') }}</a-button>
             <a-divider type="vertical" />
             <!-- 取消编辑 -->
             <a-popconfirm
@@ -74,27 +54,25 @@
               :cancelText="$t('common.cancel')"
               @confirm="editCancel(record)"
             >
-              <a-button type="link" size="small">{{
-                $t('common.cancel')
-              }}</a-button>
+              <a-button type="link" size="small">{{ $t('common.cancel') }}</a-button>
             </a-popconfirm>
           </template>
           <template v-else>
             <!-- 编辑 -->
-            <a-button type="link" size="small" @click="edit(record)">{{
-              $t('common.edit')
-            }}</a-button>
+            <a-button
+              type="link"
+              size="small"
+              @click="showAddDrawer(record[key])"
+            >{{ $t('common.edit') }}</a-button>
             <a-divider type="vertical" />
             <!-- 删除 -->
             <a-popconfirm
               :title="$t('message.is_confirm_delete')"
               :okText="$t('common.ok')"
               :cancelText="$t('common.cancel')"
-              @confirm="onDeleteConfirmOk(record.id)"
+              @confirm="onDeleteConfirmOk($api.SYS_ROLE, record)"
             >
-              <a-button type="link" size="small">{{
-                $t('common.delete')
-              }}</a-button>
+              <a-button type="link" size="small">{{ $t('common.delete') }}</a-button>
             </a-popconfirm>
           </template>
         </span>
@@ -102,6 +80,7 @@
     </div>
     <app-footer
       :current="page"
+      :total="total"
       @onPageChange="onPageChange"
       @onPageSizeChange="onPageSizeChange"
     >
@@ -116,41 +95,43 @@
               :withCredentials="true"
               :action="$http.baseURL + $api.MENU_UPLOAD"
               @change="uploadChange"
-              >{{ $t('common.import') }}</a-upload
-            >
+            >{{ $t('common.import') }}</a-upload>
           </a-menu-item>
           <a-dropdown :trigger="['click']" :placement="'topLeft'">
             <li class="ant-menu-item">{{ $t('common.export') }}</li>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a target="_blank" :href="$http.baseURL + $api.MENU_TEMPLATE">{{
-                  $t('common.export_template')
-                }}</a>
+                <a
+                  target="_blank"
+                  :href="$http.baseURL + $api.MENU_TEMPLATE"
+                >{{ $t('common.export_template') }}</a>
               </a-menu-item>
               <a-menu-item>
                 <a
                   href="javascript:void(0)"
                   @click="download($api.MENU_DOWNLOAD, selectedRowKeys)"
-                  >{{ $t('common.export_data') }}</a
-                >
+                >{{ $t('common.export_data') }}</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </a-menu>
       </div>
     </app-footer>
+    <add-drawer ref="addDrawer" @refresh="getData"></add-drawer>
   </div>
 </template>
 
 <script>
 import BaseComponent from '@/components/base.component'
-
+import AddDrawer from './drawer/add'
 export default {
   name: 'sys_role',
   mixins: [BaseComponent],
-  components: {},
+  components: { AddDrawer },
   data() {
-    return {}
+    return {
+      key: 'name'
+    }
   },
   computed: {
     columns: {
@@ -166,15 +147,20 @@ export default {
             }
           },
           {
-            title: this.$i18n.t('common.role_name'),
+            title: this.$i18n.t('common.dict_code'),
             dataIndex: 'name',
+            width: 100,
+            align: 'center'
+          },
+          {
+            title: this.$i18n.t('common.role_name'),
+            dataIndex: 'displayName',
             width: 150,
-            align: 'center',
-            scopedSlots: { customRender: 'name' }
+            align: 'center'
           },
           {
             title: this.$i18n.t('common.status'),
-            dataIndex: 'status',
+            dataIndex: 'statusDesc',
             width: 100,
             align: 'center'
           },
@@ -186,9 +172,10 @@ export default {
           },
           {
             title: this.$i18n.t('common.modify_date'),
-            dataIndex: 'modifyDate',
+            dataIndex: 'modifiedDate',
             width: 150,
-            align: 'center'
+            align: 'center',
+            scopedSlots: { customRender: 'date' }
           },
           {
             title: this.$i18n.t('common.operation'),
@@ -208,25 +195,45 @@ export default {
     getData() {
       this.loading = true
       let method = 'post'
-      if (this.$env === 'mock') {
-        method = 'get'
-      }
       this.$http({
         method: method,
-        url: this.$api.ROLE_PAGE,
+        url: this.$api.SYS_ROLE_PAGE,
         data: {
           page: this.page - 1,
           size: this.pageSize,
-          ...this.body
+          object: { ...this.body }
         }
       })
         .then(({ data }) => {
           this.loading = false
-          this.data = data
+          this.data = data.content
+          this.total = data.totalElements
         })
         .catch(() => {
           this.loading = false
         })
+    },
+    showAddDrawer(id) {
+      this.$refs['addDrawer'].form.resetFields()
+      this.$refs['addDrawer'].visible = true
+      this.$refs['addDrawer'].isnew = true
+      if (id) {
+        this.$refs['addDrawer'].isnew = false
+        this.$http
+          .get(`${this.$api.SYS_ROLE}/${id}`)
+          .then(({ data }) => {
+            const formData = {
+              name: data.name,
+              displayName: data.displayName,
+              authorities: data.authorities.map(item => item.name)
+            }
+            this.$refs['addDrawer'].form.setFieldsValue(formData)
+          })
+          .catch(err => {
+            console.log(err)
+            this.$message.error(err.message)
+          })
+      }
     }
   }
 }

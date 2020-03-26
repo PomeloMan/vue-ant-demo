@@ -61,7 +61,7 @@ export default {
     i18n(locale) {
       this.$i18n.locale = locale
       // this.dicts = this.$store.state.common.dicts
-      this.mapOfDict = this.$i18n.locale
+      // this.mapOfDict = this.$i18n.locale
     },
     logout() {
       localStorage.removeItem('oauth2AccessToken')

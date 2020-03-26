@@ -8,17 +8,16 @@
         size="small"
         @change="onPageChange"
         @showSizeChange="onPageSizeChange"
+        :showTotal="showTotal"
         :current="current"
-        :total="50"
+        :total="total"
         showSizeChanger
         showQuickJumper
       />
     </template>
     <template v-else>
       <slot name="pagination">
-        <span style="padding: 0 20px;">
-          {{ $t('common.total_number', { num: total }) }}
-        </span>
+        <span style="padding: 0 20px;">{{ $t('common.total_number', { num: total }) }}</span>
       </slot>
     </template>
   </div>
@@ -53,6 +52,13 @@ export default {
     },
     onPageSizeChange: function(current, size) {
       this.$emit('onPageSizeChange', current, size)
+    },
+    showTotal(total, range) {
+      return this.$i18n.t('common.page_show_total', {
+        from: range[0],
+        to: range[1],
+        total: total
+      })
     }
   }
 }

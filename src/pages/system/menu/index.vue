@@ -210,11 +210,13 @@ export default {
           console.error(err)
         })
     },
-    // 分页查询
+    // 查询
     getData() {
       this.loading = true
       this.$http
-        .post(this.$api.SYS_MENU_LIST)
+        .post(this.$api.SYS_MENU_LIST, {
+          levels: [1, 2, 3] // 只查询菜单权限
+        })
         .then(({ data }) => {
           this.loading = false
           this.menus = data.map(item => ({ ...item }))

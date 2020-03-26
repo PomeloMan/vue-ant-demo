@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-drawer
-      :title="$t('common.new_menu')"
+      :title="isnew ? $t('common.new_role') : $t('common.edit_role')"
       :visible="visible"
       :width="640"
       :bodyStyle="{
@@ -10,7 +10,6 @@
       }"
       @close="visible = false"
     >
-      <!-- <a-form :form="form" layout="vertical" hideRequiredMark> -->
       <a-form :form="form" layout="vertical">
         <!-- 字典码 -->
         <a-form-item :label="$t('common.dict_code')">
@@ -24,59 +23,33 @@
             ]"
           />
         </a-form-item>
-        <!-- 菜单名 -->
-        <a-form-item :label="$t('common.menu_name')">
+        <!-- 角色名 -->
+        <a-form-item :label="$t('common.role_name')">
           <a-input
             v-decorator="[
               'displayName', {
                 rules: [
-                  { required: true, message: $t('message.please_input', { content: $t('common.menu_name') }) }
+                  { required: true, message: $t('message.please_input', { content: $t('common.role_name') }) }
                 ]
               }
             ]"
           />
         </a-form-item>
-        <!-- 父级菜单 -->
-        <a-form-item :label="$t('common.menu_parent')">
+        <!-- 角色权限 -->
+        <a-form-item :label="$t('common.role_auth')">
           <a-tree-select
-            v-decorator="['parentName']"
+            treeCheckable
+            v-decorator="[
+              'authorities', {
+              rules: [
+                { required: true, message: $t('message.please_select', { content: $t('common.role_auth') }) }
+              ]
+            }]"
             :treeData="menuTreeData"
             :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
+            :showCheckedStrategy="showCheckedStrategy"
+            :treeDefaultExpandAll="true"
           ></a-tree-select>
-        </a-form-item>
-        <!-- 链接地址 -->
-        <a-form-item :label="$t('common.url')">
-          <a-input v-decorator="[ 'url' ]" />
-        </a-form-item>
-        <!-- 图标名称 -->
-        <a-form-item :label="$t('common.menu_icon')">
-          <a-input v-decorator="['icon']" />
-        </a-form-item>
-        <!-- 图标层级 -->
-        <a-form-item :label="$t('common.level')">
-          <a-input
-            type="number"
-            v-decorator="[
-              'level', {
-                rules: [
-                  { required: true, validator: checkNumber },
-                ]
-              }
-            ]"
-          />
-        </a-form-item>
-        <!-- 权重 -->
-        <a-form-item :label="$t('common.weights')">
-          <a-input
-            type="number"
-            v-decorator="[
-              'sequence', {
-                rules: [
-                  { required: true, validator: checkNumber },
-                ]
-              }
-            ]"
-          />
         </a-form-item>
       </a-form>
       <footer class="drawer-footer">
@@ -93,47 +66,61 @@
 
 <script>
 import { extractFields, buildTree } from '@/utils'
+import { TreeSelect } from 'ant-design-vue'
 export default {
-  props: {
-    menus: {
-      type: Array,
-      default: () => []
-    }
-  },
   data() {
     return {
+      isnew: true,
       visible: false,
-      menuTreeData: []
-    }
-  },
-  watch: {
-    menus() {
-      if (this.menus) {
-        // 将菜单集合转成树形结构数据，且使用 a-tree-select 数据结构
-        const list = extractFields(this.menus, {
-          alias: {
-            title: 'displayName',
-            value: 'name',
-            key: 'name',
-            parent: 'parentName'
-          }
-        })
-        this.menuTreeData = buildTree(list, {
-          key: 'key',
-          parentKey: 'parent'
-        })
-      }
+      showCheckedStrategy: TreeSelect.SHOW_ALL, // TreeSelect.SHOW_PARENT
+      menus: [], // 接口返回数据
+      menuTreeData: [] // ant-tree 树形结构数据
     }
   },
   beforeCreate() {
     this.form = this.$form.createForm(this)
   },
+  created() {
+    this.initAuthData()
+  },
   methods: {
+    initAuthData() {
+      this.$http
+        .post(this.$api.SYS_MENU_LIST)
+        .then(({ data }) => {
+          this.menus = data.map(item => ({ ...item }))
+          const list = extractFields(this.menus, {
+            alias: {
+              title: 'displayName',
+              value: 'name',
+              key: 'name',
+              parent: 'parentName'
+            }
+          })
+          this.menuTreeData = buildTree(list, {
+            key: 'key',
+            parentKey: 'parent'
+          })
+          console.log(this.menuTreeData)
+        })
+        .catch(err => {
+          console.error(err)
+          this.$message.error(err.message)
+        })
+    },
     submitForm() {
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.$http
-            .post(this.$api.SYS_MENU, values)
+          let method = 'post' // 新建
+          if (!this.isnew) {
+            // 修改
+            method = 'put'
+          }
+          this.$http({
+            method: method,
+            url: this.$api.SYS_ROLE,
+            data: values
+          })
             .then(() => {
               this.visible = false
               this.$message.success(this.$i18n.t('message.save_success'))
