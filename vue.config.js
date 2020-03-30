@@ -67,18 +67,20 @@ module.exports = {
       localeDir: 'locales',
       enableInSFC: true
     }
-  }
+  },
 
   // 设置代理
-  // devServer: {
-  //   proxy: {
-  //     '/commerce': {
-  //       target: process.env.VUE_APP_COMMERCE_PROXY_URL, //代理接口
-  //       changeOrigin: true,
-  //       pathRewrite: {
-  //         '^/commerce': '/' //代理的路径
-  //       }
-  //     },
-  //   }
-  // }
+  devServer: {
+    host: '127.0.0.1',
+    port: 8082,
+    // proxy: {
+    //   '/commerce': {
+    //     target: process.env.VUE_APP_COMMERCE_PROXY_URL, //代理接口
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/commerce': '/' //代理的路径
+    //     }
+    //   },
+    // }
+  }
 }

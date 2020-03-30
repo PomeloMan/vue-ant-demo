@@ -2,19 +2,24 @@
   <div>
     <app-header :breadcrumbs="breadcrumbs" :searchType="'simple'" @onSimpleSearch="onSimpleSearch">
       <div slot="action-group">
-        <a-button type="link" @click="showAddDrawer">{{ $t('common.new') }}</a-button>
+        <a-button type="link" @click="showInfoDrawer">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
-        <a-popconfirm
-          :title="$t('message.is_confirm_delete')"
-          :okText="$t('common.ok')"
-          :cancelText="$t('common.cancel')"
-          @confirm="onDeleteConfirmOk()"
-        >
-          <a-button type="link" :disabled="deleting">
-            <a-icon type="loading" v-if="deleting" />
-            {{ $t('common.delete') }}
-          </a-button>
-        </a-popconfirm>
+        <template v-if="selectedRowKeys.length !== 0">
+          <a-popconfirm
+            :title="$t('message.is_confirm_delete')"
+            :okText="$t('common.ok')"
+            :cancelText="$t('common.cancel')"
+            @confirm="onDeleteConfirmOk($api.SYS_MENU)"
+          >
+            <a-button type="link" :disabled="deleting">
+              <a-icon type="loading" v-if="deleting" />
+              {{ $t('common.delete') }}
+            </a-button>
+          </a-popconfirm>
+        </template>
+        <template v-else>
+          <a-button type="link" :disabled="selectedRowKeys.length === 0">{{ $t('common.delete') }}</a-button>
+        </template>
       </div>
     </app-header>
     <div class="table-content-wrapper">
@@ -112,13 +117,13 @@
         </a-menu>
       </div>
     </app-footer>
-    <add-drawer ref="addDrawer" :menus="menus" @refresh="getData"></add-drawer>
+    <info-drawer ref="infoDrawer" :menus="menus" @refresh="getData"></info-drawer>
   </div>
 </template>
 
 <script>
 import BaseComponent from '@/components/base.component'
-import AddDrawer from './drawer/add'
+import InfoDrawer from './drawer/info'
 import { mapState } from 'vuex'
 import { date } from '@/pipes'
 import { buildTree } from '@/utils'
@@ -126,7 +131,7 @@ import { buildTree } from '@/utils'
 export default {
   name: 'sys_menu',
   mixins: [BaseComponent],
-  components: { AddDrawer },
+  components: { InfoDrawer },
   data() {
     return {
       key: 'name',
@@ -194,22 +199,6 @@ export default {
   },
   mounted() {},
   methods: {
-    getMockData() {
-      this.loading = true
-      this.$http
-        .get(this.$api.MENU_LIST)
-        .then(({ data }) => {
-          this.loading = false
-          this.data = data
-          this.total = this.data.length
-          this.cacheData = this.data.map(item => ({ ...item }))
-          this.resize()
-        })
-        .catch(err => {
-          this.loading = false
-          console.error(err)
-        })
-    },
     // 查询
     getData() {
       this.loading = true
@@ -235,9 +224,19 @@ export default {
           this.getMockData()
         })
     },
-    showAddDrawer() {
-      this.$refs['addDrawer'].form.resetFields()
-      this.$refs['addDrawer'].visible = true
+    showInfoDrawer() {
+      this.$refs['infoDrawer'].form.resetFields()
+      this.$refs['infoDrawer'].visible = true
+    },
+    // ----- delete -----
+    getMockData() {
+      this.$http.get(this.$api.MENU_LIST).then(({ data }) => {
+        this.data = data
+        this.total = this.data.length
+        this.cacheData = this.data.map(item => ({ ...item }))
+        this.resize()
+        this.$message.warning(this.$i18n.t('message.using_mock_data'))
+      })
     }
   }
 }

@@ -135,12 +135,21 @@ export default {
       })
     },
     // 表格单元格编辑
-    onCellChange(key, dataIndex, value) {
+    onCellChange(url, key, dataIndex, value) {
       const data = [...this.data]
-      const target = data.find(item => item.key === key)
+      const target = data.find(item => item[this.key] === key)
       if (target) {
         target[dataIndex] = value
-        this.data = data
+        this.$http
+          .put(url, target)
+          .then(() => {
+            this.$message.success(this.$i18n.t('message.update_success'))
+            this.data = data
+          })
+          .catch(err => {
+            console.error(err)
+            this.$message.error(err.message)
+          })
       }
     },
     // -- 操作 --

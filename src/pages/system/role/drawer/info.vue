@@ -132,17 +132,6 @@ export default {
             })
         }
       })
-    },
-    checkNumber(rule, value, callback) {
-      if (!/(^[1-9]\d*$)/.test(value)) {
-        callback(
-          this.$i18n.t('message.must_be_positive_integer', {
-            name: this.$i18n.t('common.weights')
-          })
-        )
-        return
-      }
-      callback()
     }
   }
 }

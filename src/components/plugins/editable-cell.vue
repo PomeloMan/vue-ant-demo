@@ -5,7 +5,7 @@
       <a-icon type="check" class="editable-cell-icon-check" @click="check" />
     </div>
     <div v-else class="editable-cell-text-wrapper">
-      {{ value || ' ' }}
+      <a @click="editable = true">{{ value || ' ' }}</a>
       <a-icon type="edit" class="editable-cell-icon" @click="edit" />
     </div>
   </div>
@@ -23,6 +23,11 @@ export default {
     return {
       value: this.text,
       editable: false
+    }
+  },
+  watch: {
+    text() {
+      this.value = this.text
     }
   },
   methods: {
@@ -52,6 +57,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 31px;
 }
 
 .editable-cell-text-wrapper {

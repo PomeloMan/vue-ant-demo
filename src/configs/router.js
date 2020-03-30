@@ -73,13 +73,6 @@ const routes = [{
       },
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/user')
     }, {
-      name: 'system-user-info',
-      path: 'system/user/:id',
-      meta: {
-        breadcrumbs: BREADCRUMB['system-user-info']
-      },
-      component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/user/info')
-    }, {
       name: 'system-role',
       path: 'system/role',
       meta: {

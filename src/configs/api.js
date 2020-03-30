@@ -8,7 +8,10 @@ const API = {
   SYS_MENU_LIST: `${process.env.VUE_APP_USER_URL}/auth/list`,
   SYS_MENU: `${process.env.VUE_APP_USER_URL}/auth`,
   SYS_ROLE_PAGE: `${process.env.VUE_APP_USER_URL}/role/page`,
-  SYS_ROLE: `${process.env.VUE_APP_USER_URL}/role`
+  SYS_ROLE_LIST: `${process.env.VUE_APP_USER_URL}/role/list`,
+  SYS_ROLE: `${process.env.VUE_APP_USER_URL}/role`,
+  SYS_USER_PAGE: `${process.env.VUE_APP_USER_URL}/user/page`,
+  SYS_USER: `${process.env.VUE_APP_USER_URL}/user`
 }
 
 let api

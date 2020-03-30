@@ -2,16 +2,19 @@
   <div>
     <app-header :breadcrumbs="breadcrumbs" :searchType="'simple'" @onSimpleSearch="onSimpleSearch">
       <div slot="action-group">
-        <a-button type="link" @click="showAddDrawer(0)">{{ $t('common.new') }}</a-button>
+        <a-button type="link" @click="showInfoDrawer(0)">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
         <template v-if="selectedRowKeys.length !== 0">
           <a-popconfirm
             :title="$t('message.is_confirm_delete')"
             :okText="$t('common.ok')"
             :cancelText="$t('common.cancel')"
-            @confirm="onDeleteConfirmOk()"
+            @confirm="onDeleteConfirmOk($api.SYS_ROLE)"
           >
-            <a-button type="link">{{ $t('common.delete') }}</a-button>
+            <a-button type="link" :disabled="deleting">
+              <a-icon type="loading" v-if="deleting" />
+              {{ $t('common.delete') }}
+            </a-button>
           </a-popconfirm>
         </template>
         <template v-else>
@@ -62,7 +65,7 @@
             <a-button
               type="link"
               size="small"
-              @click="showAddDrawer(record[key])"
+              @click="showInfoDrawer(record[key])"
             >{{ $t('common.edit') }}</a-button>
             <a-divider type="vertical" />
             <!-- 删除 -->
@@ -117,17 +120,17 @@
         </a-menu>
       </div>
     </app-footer>
-    <add-drawer ref="addDrawer" @refresh="getData"></add-drawer>
+    <info-drawer ref="infoDrawer" @refresh="getData"></info-drawer>
   </div>
 </template>
 
 <script>
 import BaseComponent from '@/components/base.component'
-import AddDrawer from './drawer/add'
+import InfoDrawer from './drawer/info'
 export default {
   name: 'sys_role',
   mixins: [BaseComponent],
-  components: { AddDrawer },
+  components: { InfoDrawer },
   data() {
     return {
       key: 'name'
@@ -211,14 +214,15 @@ export default {
         })
         .catch(() => {
           this.loading = false
+          this.getMockData()
         })
     },
-    showAddDrawer(id) {
-      this.$refs['addDrawer'].form.resetFields()
-      this.$refs['addDrawer'].visible = true
-      this.$refs['addDrawer'].isnew = true
+    showInfoDrawer(id) {
+      this.$refs['infoDrawer'].form.resetFields()
+      this.$refs['infoDrawer'].visible = true
+      this.$refs['infoDrawer'].isnew = true
       if (id) {
-        this.$refs['addDrawer'].isnew = false
+        this.$refs['infoDrawer'].isnew = false
         this.$http
           .get(`${this.$api.SYS_ROLE}/${id}`)
           .then(({ data }) => {
@@ -227,13 +231,21 @@ export default {
               displayName: data.displayName,
               authorities: data.authorities.map(item => item.name)
             }
-            this.$refs['addDrawer'].form.setFieldsValue(formData)
+            this.$refs['infoDrawer'].form.setFieldsValue(formData)
           })
           .catch(err => {
             console.log(err)
             this.$message.error(err.message)
           })
       }
+    },
+    // ----- delete -----
+    getMockData() {
+      this.$http.get(this.$api.ROLE_PAGE).then(({ data }) => {
+        this.data = data.content
+        this.total = data.totalElements
+        this.$message.warning(this.$i18n.t('message.using_mock_data'))
+      })
     }
   }
 }
