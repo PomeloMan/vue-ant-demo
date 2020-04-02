@@ -206,3 +206,26 @@ export function setStoreItemByBase64(key, value) {
 export function getStoreItemByBase64(key) {
   return JSON.parse(decodeURI(atob(localStorage.getItem(key))))
 }
+
+/**
+ * 处理数据下载
+ * @param {*} data 二进制数据
+ * @param {*} options 默认excel格式
+ */
+export function handleBlobData(filename, data, options = { type: 'application/vnd.ms-excel' }) {
+  const blob = new Blob([data], options)
+  //对于<a>标签，只有 Firefox 和 Chrome（内核） 支持 download 属性
+  //IE10以上支持blob但是依然不支持download
+  if ('download' in document.createElement('a')) {
+    const link = document.createElement('a')
+    link.download = filename
+    link.style.display = 'none'
+    link.href = URL.createObjectURL(blob)
+    document.body.appendChild(link)
+    link.click()
+    URL.revokeObjectURL(link.href) // 释放url
+    document.body.removeChild(link) // 释放标签
+  } else {
+    window.navigator.msSaveBlob(blob, filename)
+  }
+}

@@ -9,7 +9,6 @@
     <div>
       <a-form class="login-form" :form="form" @submit="login">
         <div class="logo">
-          <img />
           <!-- <img src="~@/assets/images/login_logo.svg" /> -->
         </div>
         <div class="input-wrap">

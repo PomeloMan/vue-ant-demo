@@ -7,6 +7,7 @@
     "serve": "vue-cli-service serve --mode dev",
     "build:dev": "vue-cli-service build --mode dev",
     "build:gh": "vue-cli-service build --mode gh",
+    "build:test": "vue-cli-service build --mode test",
     "build": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint",
     "predeploy": "npm run build:gh",
