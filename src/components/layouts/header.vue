@@ -7,13 +7,10 @@
             <router-link
               v-if="item.url === '/'"
               :to="{ path: item.url, query: { t: Date.now() } }"
-              >{{ $t(item.name) }}</router-link
-            >
+            >{{ $t(item.name) }}</router-link>
             <router-link v-else :to="item.url">{{ $t(item.name) }}</router-link>
           </template>
-          <template v-else>
-            {{ $t(item.name) }}
-          </template>
+          <template v-else>{{ $t(item.name) }}</template>
         </a-breadcrumb-item>
       </template>
     </a-breadcrumb>
@@ -21,13 +18,9 @@
     <slot name="action-group"></slot>
     <template v-if="searchType === 'advanced'">
       <div>
-        <a-button
-          type="link"
-          class="fs-13"
-          @click="isAdvancedWrapperVisible = !isAdvancedWrapperVisible"
-        >
+        <a-button class="advanced-btn fs-13" type="link" @click="toggole">
           {{ $t('common.advance_search') }}
-          <a-icon type="down" />
+          <a-icon data-rotation="180" :type="'up'" style="transform: rotate(180deg)" />
         </a-button>
       </div>
 
@@ -38,16 +31,8 @@
       >
         <a-form id="advancedForm" :layout="'inline'" :form="advancedForm">
           <a-row :gutter="24" type="flex">
-            <a-col
-              :span="24 / column"
-              :key="index"
-              v-for="(item, index) in formItem"
-            >
-              <a-form-item
-                :label="item.label"
-                :labelCol="{ span: 4 }"
-                :wrapperCol="{ span: 20 }"
-              >
+            <a-col :span="24 / column" :key="index" v-for="(item, index) in formItem">
+              <a-form-item :label="item.label" :labelCol="{ span: 4 }" :wrapperCol="{ span: 20 }">
                 <!-- input -->
                 <template v-if="item.type === 'input'">
                   <a-input v-decorator="[item.key]"></a-input>
@@ -59,8 +44,7 @@
                       :key="option.value"
                       :value="option.value"
                       v-for="option in item.options"
-                      >{{ option.label }}
-                    </a-select-option>
+                    >{{ option.label }}</a-select-option>
                   </a-select>
                 </template>
                 <!-- radio -->
@@ -70,8 +54,7 @@
                       :key="option.value"
                       :value="option.value"
                       v-for="option in item.options"
-                      >{{ option.label }}
-                    </a-radio-button>
+                    >{{ option.label }}</a-radio-button>
                   </a-radio-group>
                 </template>
               </a-form-item>
@@ -82,14 +65,13 @@
             <a-col :span="12">
               <a-form-item :wrapperCol="{ span: 20, offset: 4 }">
                 <a-button @click="advancedForm.resetFields()">
-                  <a-icon type="rest" />{{ $t('common.reset') }}
+                  <a-icon type="rest" />
+                  {{ $t('common.reset') }}
                 </a-button>
-                <a-divider
-                  type="vertical"
-                  style="background: transparent"
-                ></a-divider>
+                <a-divider type="vertical" style="background: transparent"></a-divider>
                 <a-button type="primary" @click="onAdvancedSearch">
-                  <a-icon type="search" />{{ $t('common.search') }}
+                  <a-icon type="search" />
+                  {{ $t('common.search') }}
                 </a-button>
               </a-form-item>
             </a-col>
@@ -109,12 +91,15 @@
       </div>
     </template>
     <template v-else>
-      <div><!-- none --></div>
+      <div>
+        <!-- none -->
+      </div>
     </template>
   </div>
 </template>
 
 <script>
+import TWEEN from '@tweenjs/tween.js'
 import { Breadcrumb, Button, Input } from 'ant-design-vue'
 
 export default {
@@ -161,7 +146,9 @@ export default {
     return {
       isAdvancedWrapperVisible: false,
       keyword: undefined,
-      advancedForm: this.$form.createForm(this)
+      advancedForm: this.$form.createForm(this),
+      toUpTween: '',
+      toDownTween: ''
     }
   },
   watch: {
@@ -180,13 +167,55 @@ export default {
       })
     }
   },
+  mounted() {
+    this.initTween()
+    this.animate()
+  },
   methods: {
+    initTween() {
+      const $this = this
+      this.$nextTick(() => {
+        const el = document.querySelector('.advanced-btn .anticon')
+        if (el.dataset) {
+          this.toUpTween = new TWEEN.Tween(el.dataset)
+            .to({ rotation: 0 }, 300)
+            .onUpdate(function(object) {
+              $this.updateBox(el, object)
+            })
+          this.toDownTween = new TWEEN.Tween(el.dataset)
+            .to({ rotation: 180 }, 300)
+            .onUpdate(function(object) {
+              $this.updateBox(el, object)
+            })
+        }
+      })
+    },
     onSimpleSearch() {
       this.$emit('onSimpleSearch', this.keyword)
     },
     onAdvancedSearch() {
-      this.isAdvancedWrapperVisible = !this.isAdvancedWrapperVisible
+      this.toggole()
       this.$emit('onAdvancedSearch', this.advancedForm.getFieldsValue())
+    },
+    // 开启/关闭高级搜索选项
+    toggole() {
+      this.isAdvancedWrapperVisible = !this.isAdvancedWrapperVisible
+      if (this.isAdvancedWrapperVisible) {
+        this.toUpTween.start()
+      } else {
+        this.toDownTween.start()
+      }
+    },
+    updateBox(box, params) {
+      var s = box.style,
+        transform = 'rotate(' + Math.floor(params.rotation) + 'deg)'
+      s.webkitTransform = transform
+      s.mozTransform = transform
+      s.transform = transform
+    },
+    animate(time) {
+      requestAnimationFrame(this.animate)
+      TWEEN.update(time)
     }
   }
 }
@@ -226,7 +255,7 @@ export default {
   width: 100%;
   height: 0;
   left: 0;
-  z-index: 1;
+  z-index: 100;
   background: white;
   overflow: hidden;
   transition: all 0.3s;

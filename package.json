@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode dev",
+    "serve:test": "vue-cli-service serve --mode test",
     "build:dev": "vue-cli-service build --mode dev",
     "build:gh": "vue-cli-service build --mode gh",
     "build:test": "vue-cli-service build --mode test",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "@antv/g2": "^3.5.11",
+    "@tweenjs/tween.js": "^18.5.0",
     "accounting": "^0.4.1",
     "ant-design-vue": "^1.4.11",
     "axios": "^0.19.0",
