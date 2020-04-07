@@ -1,40 +1,61 @@
 <script>
 export default {
+  data() {
+    return {
+      editableColumns: [
+        {
+          slot: 'displayName',
+          align: 'center'
+        },
+        {
+          slot: 'email',
+          align: 'center'
+        }
+      ]
+    }
+  },
   computed: {
     columns: {
       get() {
         return [
           {
+            title: this.$i18n.t('common.avatar'),
+            dataIndex: 'avatar',
+            width: 80,
+            align: 'center',
+            scopedSlots: { customRender: 'avatar' }
+          },
+          {
             title: this.$i18n.t('common.account'),
             dataIndex: 'username',
-            width: 100,
+            width: 120,
             align: 'center'
           },
           {
             title: this.$i18n.t('common.nick_name'),
             dataIndex: 'displayName',
-            width: 150,
+            width: 120,
             align: 'center',
             scopedSlots: { customRender: 'displayName' }
           },
           {
             title: this.$i18n.t('common.role_name'),
             dataIndex: 'roles',
-            width: 100,
+            width: 120,
             align: 'center',
             scopedSlots: { customRender: 'role' }
           },
           {
             title: this.$i18n.t('common.email'),
             dataIndex: 'email',
-            width: 150,
+            width: 180,
             align: 'center',
             scopedSlots: { customRender: 'email' }
           },
           {
             title: this.$i18n.t('common.status'),
             dataIndex: 'statusDesc',
-            width: 100,
+            width: 80,
             align: 'center'
           },
           {

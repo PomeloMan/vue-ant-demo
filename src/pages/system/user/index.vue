@@ -39,12 +39,18 @@
         :scroll="{ y: tableScrollY }"
       >
         <!-- 列编辑 -->
-        <template v-for="prop in ['displayName', 'email']" :slot="prop" slot-scope="text, record">
+        <template v-for="prop in editableColumns" :slot="prop.slot" slot-scope="text, record">
           <editable-cell
-            :key="prop"
+            :class="prop.align"
+            :key="prop.slot"
             :text="text"
-            @change="onCellChange($api.SYS_USER, record[key], prop, $event)"
+            @change="onCellChange($api.SYS_USER, record[key], prop.slot, $event)"
           />
+        </template>
+        <template slot="avatar" slot-scope="text, record">
+          <a-tooltip :title="$t('common.upload_avatar')">
+            <a-avatar size="large" :src="text" icon="user" @click="showAvatarModal(record)"></a-avatar>
+          </a-tooltip>
         </template>
         <!-- 角色显示 -->
         <span slot="role" slot-scope="text, record">
@@ -113,6 +119,7 @@
       </div>
     </app-footer>
     <info-drawer ref="infoDrawer" @refresh="getData"></info-drawer>
+    <avatar-modal ref="avatarModal"></avatar-modal>
   </div>
 </template>
 
@@ -120,15 +127,16 @@
 import BaseComponent from '@/components/base.component'
 import EditableCell from '@/components/plugins/editable-cell'
 import InfoDrawer from './drawer/info'
+import AvatarModal from './modal/avatar'
 import FormItem from './mixins/form-item'
 import TableColumn from './mixins/table-column'
-
 export default {
   name: 'sys_user',
   mixins: [BaseComponent, FormItem, TableColumn],
   components: {
     EditableCell,
-    InfoDrawer
+    InfoDrawer,
+    AvatarModal
   },
   data() {
     return {
@@ -189,10 +197,17 @@ export default {
             this.$message.error(err.message)
           })
       }
+    },
+    showAvatarModal(record) {
+      this.$refs['avatarModal'].visible = true
+      this.$refs['avatarModal'].avatar = record.avatar
     }
   }
 }
 </script>
 
 <style scoped>
+.ant-avatar {
+  cursor: pointer;
+}
 </style>

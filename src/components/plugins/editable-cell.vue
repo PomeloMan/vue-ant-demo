@@ -49,6 +49,18 @@ export default {
 <style lang="scss" scoped>
 .editable-cell {
   position: relative;
+  &.center {
+    .editable-cell-input-wrapper,
+    .editable-cell-text-wrapper {
+      justify-content: center;
+    }
+  }
+  &.end {
+    .editable-cell-input-wrapper,
+    .editable-cell-text-wrapper {
+      justify-content: flex-end;
+    }
+  }
 }
 
 .editable-cell-input-wrapper,
@@ -56,7 +68,6 @@ export default {
   padding-right: 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
   min-height: 31px;
 }
 

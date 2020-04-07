@@ -4,6 +4,8 @@
     "subtitle": "副标题"
   },
   "message": {
+    "avatar_upload_failure": "头像上传失败!",
+    "avatar_upload_success": "头像上传成功!",
     "delete_success": "删除成功!",
     "file_upload_failure": "文件上传失败!",
     "file_upload_success": "文件上传成功!",
@@ -21,6 +23,7 @@
   "common": {
     "account": "账号",
     "advance_search": "高级搜索",
+    "avatar": "头像",
     "cancel": "取消",
     "ok": "确认",
     "delete": "删除",
@@ -62,6 +65,8 @@
     "status": "状态",
     "submit": "提交",
     "total_number": "共 {num} 项",
+    "upload": "上传",
+    "upload_avatar": "上传头像",
     "url": "链接地址",
     "weights": "权重"
   },

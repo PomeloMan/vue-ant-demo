@@ -72,7 +72,7 @@ module.exports = {
   // 设置代理
   devServer: {
     host: '127.0.0.1',
-    port: 8082,
+    port: 8000,
     // proxy: {
     //   '/commerce': {
     //     target: process.env.VUE_APP_COMMERCE_PROXY_URL, //代理接口
