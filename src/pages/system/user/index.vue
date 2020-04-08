@@ -37,6 +37,7 @@
         :pagination="false"
         :loading="loading"
         :scroll="{ y: tableScrollY }"
+        size="middle"
       >
         <!-- 列编辑 -->
         <template v-for="prop in editableColumns" :slot="prop.slot" slot-scope="text, record">

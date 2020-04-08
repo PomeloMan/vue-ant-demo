@@ -1,5 +1,22 @@
 {
-  "message": "hello i18n !!",
+  "message": {
+    "avatar_upload_failure": "头像上传失败!",
+    "avatar_upload_success": "头像上传成功!",
+    "delete_success": "删除成功!",
+    "file_upload_failure": "文件上传失败!",
+    "file_upload_success": "文件上传成功!",
+    "is_confirm_delete": "是否确认删除?",
+    "is_confirm_cancel": "是否确认取消?",
+    "save_success": "保存成功!",
+    "save_failure": "保存失败!",
+    "update_success": "修改成功!",
+    "update_failure": "修改失败!",
+    "please_input": "请输入{content}",
+    "please_select": "请选择{content}",
+    "must_be_positive_integer": "{name}必须是正整数",
+    "using_mock_data": "正在使用模拟数据",
+    "click_drag_file": "Click or drag file to this area"
+  },
   "common": {
     "new": "New",
     "save": "Save",

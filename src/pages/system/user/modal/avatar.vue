@@ -3,40 +3,72 @@
     :visible="visible"
     :title="$t('common.upload_avatar')"
     :maskClosable="false"
-    :width="680"
+    :width="640"
     @cancel="visible = false"
     @ok="save"
   >
     <div>
       <template v-if="!avatar">
-        <a-upload-dragger
-          name="file"
-          :multiple="false"
-          :showUploadList="false"
-          :beforeUpload="beforeUpload"
-        >
-          <p class="ant-upload-drag-icon">
-            <a-icon :type="!uploading ? 'inbox' : 'loading'" />
-          </p>
-          <p class="ant-upload-text">Click or drag file to this area to upload</p>
-          <p class="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-            band files
-          </p>
-        </a-upload-dragger>
+        <div class="upload-wrapper">
+          <a-upload-dragger
+            name="file"
+            :multiple="false"
+            :showUploadList="false"
+            :beforeUpload="beforeUpload"
+          >
+            <p class="ant-upload-drag-icon">
+              <a-icon :type="!uploading ? 'inbox' : 'loading'" />
+            </p>
+            <p class="ant-upload-text">{{$t('message.drag_area_title')}}</p>
+            <p class="ant-upload-hint">{{$t('message.drag_area_hint')}}</p>
+          </a-upload-dragger>
+        </div>
       </template>
       <template v-else>
-        <a-row class="cropper-wrapper" :gutter="24">
-          <a-col :span="14">
+        <a-row class="cropper-wrapper" :gutter="24" type="flex">
+          <a-col class="ant-col" :span="14">
             <div>
               <img id="avatar" :src="avatar" />
             </div>
           </a-col>
-          <a-col :span="10">
+          <a-col class="ant-col" :span="10">
             <div class="preview-wrapper clearfix">
               <div class="img-preview"></div>
-              <a-divider type="vertical" style="background: transparent"></a-divider>
+              <span class="flex-spacer"></span>
               <div class="img-preview"></div>
+            </div>
+            <div>
+              <a-button type="primary" @click="cropper.reset()">
+                <a-icon type="reload"></a-icon>
+                {{$t('common.reset')}}
+              </a-button>
+              <a-divider type="vertical" class="transparent"></a-divider>
+              <a-button-group>
+                <a-tooltip :title="$t('common.rotate_counterclockwise', {angle:45})">
+                  <a-button type="primary" @click="cropper.rotate(-45)">
+                    <a-icon type="undo"></a-icon>
+                  </a-button>
+                </a-tooltip>
+                <a-tooltip :title="$t('common.rotate_clockwise', {angle:45})">
+                  <a-button type="primary" @click="cropper.rotate(45)">
+                    <a-icon type="redo"></a-icon>
+                  </a-button>
+                </a-tooltip>
+              </a-button-group>
+            </div>
+            <div>
+              <a-upload
+                name="file"
+                :multiple="false"
+                :showUploadList="false"
+                :beforeUpload="beforeUpload"
+              >
+                <a-button type="primary">
+                  <a-icon type="upload" />
+                  {{$t('common.import')}}
+                </a-button>
+              </a-upload>
+              <a-divider type="vertical" class="transparent"></a-divider>
             </div>
           </a-col>
         </a-row>
@@ -53,67 +85,43 @@ export default {
     return {
       visible: false,
       uploading: false,
+      originalFile: '',
       avatar: '',
-      cropper: ''
+      cropper: '',
+      cropperOptions: {
+        dragMode: 'move',
+        aspectRatio: 1 / 1,
+        autoCrop: true, // false手动执行crop方法，详见ready() { this.cropper.crop() }
+        autoCropArea: 0.65,
+        guides: false,
+        center: false, // 截取框居中
+        cropBoxMovable: false, // 截取框是否可以移动，如果设为false则移动背景图
+        cropBoxResizable: false, // 是否可以改变截取框大小
+        toggleDragModeOnDblclick: false, // 双击切换截取框移动方式
+        preview: '.img-preview', // 预览元素（需要设置长宽）
+        viewMode: 1,
+        // 0:没有限制
+        // 1:限制裁切框不要超过画布的大小。
+        // 2:限制最小画布大小以适合容器。 如果画布和容器的比例不同，则最小画布将在其中一个维度中被多余的空间包围。
+        // 3:限制最小画布大小以适合容器。 如果画布和容器的比例不同，则容器将无法以一个尺寸容纳整个画布。
+        ready: function() {},
+        crop(event) {
+          console.log(event)
+        }
+      }
     }
   },
   watch: {
     avatar() {
       if (this.avatar) {
         this.$nextTick(() => {
-          const avatar = document.getElementById('avatar')
-          const previews = document.querySelectorAll('.img-preview')
-          this.cropper = new Cropper(avatar, {
-            dragMode: 'move',
-            aspectRatio: 1 / 1,
-            autoCrop: false, // 手动执行crop方法，详见ready() { this.cropper.crop() }
-            autoCropArea: 0.65,
-            guides: false,
-            center: false, // 截取框居中
-            cropBoxMovable: false, // 截取框是否可以移动，如果设为false则移动背景图
-            cropBoxResizable: false, // 是否可以改变截取框大小
-            toggleDragModeOnDblclick: false,
-            ready: function() {
-              var clone = this.cloneNode()
-              clone.className = ''
-              clone.style.cssText =
-                'display: block;' +
-                'width: 100%;' +
-                'min-width: 0;' +
-                'min-height: 0;' +
-                'max-width: none;' +
-                'max-height: none;'
-              previews.forEach(elem => {
-                elem.appendChild(clone.cloneNode())
-              })
-              this.cropper.crop()
-            },
-            crop(event) {
-              var data = event.detail
-              var cropper = this.cropper
-              var imageData = cropper.getImageData()
-              // var previewAspectRatio = data.width / data.height
-
-              previews.forEach(elem => {
-                var previewImage = elem.querySelector('img')
-                if (previewImage) {
-                  var previewWidth = elem.offsetWidth
-                  // var previewHeight = previewWidth / previewAspectRatio
-                  var imageScaledRatio = data.width / previewWidth
-
-                  // elem.style.height = previewHeight + 'px'
-                  previewImage.style.width =
-                    imageData.naturalWidth / imageScaledRatio + 'px'
-                  previewImage.style.height =
-                    imageData.naturalHeight / imageScaledRatio + 'px'
-                  previewImage.style.marginLeft =
-                    -data.x / imageScaledRatio + 'px'
-                  previewImage.style.marginTop =
-                    -data.y / imageScaledRatio + 'px'
-                }
-              })
-            }
-          })
+          if (this.cropper) {
+            this.cropper.destroy()
+          }
+          this.cropper = new Cropper(
+            document.getElementById('avatar'),
+            this.cropperOptions
+          )
         })
       }
     }
@@ -121,6 +129,7 @@ export default {
   methods: {
     beforeUpload(file) {
       const $this = this
+      this.originalFile = file
       getBase64(file, function(result) {
         $this.avatar = result
       })
@@ -131,22 +140,25 @@ export default {
       cropped.toDataURL('image/jpeg') // 截取后图片的Base64
 
       const $this = this
-      this.cropper.getCroppedCanvas().toBlob(
-        blob => {
-          const formData = new FormData()
-          // Pass the image file name as the third parameter if necessary.
-          formData.append('file', blob /*, 'example.png' */)
-          $this.$http
-            .post($this.$api.UPLOAD, formData)
-            .then(() => {
-              $this.$message.success($this.$i18n.t('common.avatar_upload_success'))
-              $this.visible = false
-            })
-            .catch(err => {
-              $this.$message.error(err.message)
-            })
-        } /*, 'image/png' */
-      )
+      this.cropper.getCroppedCanvas().toBlob(blob => {
+        const formData = new FormData()
+        formData.append('file', blob, this.originalFile.name)
+        $this.$http
+          .post($this.$api.FILE_USER_AVATAR_UPLOAD, formData, {
+            params: {
+              type: 'avatar'
+            }
+          })
+          .then(() => {
+            $this.$message.success(
+              $this.$i18n.t('message.avatar_upload_success')
+            )
+            $this.visible = false
+          })
+          .catch(err => {
+            $this.$message.error(err.message)
+          })
+      }, this.originalFile.type)
     }
   }
 }
@@ -157,7 +169,16 @@ img {
   display: block;
   max-width: 100%;
 }
+.upload-wrapper {
+  max-width: 400px;
+  margin: auto;
+}
 .cropper-wrapper {
+  .ant-col:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   .preview-wrapper {
     display: flex;
     justify-content: space-between;
