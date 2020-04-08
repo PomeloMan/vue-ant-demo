@@ -37,26 +37,7 @@
               <span class="flex-spacer"></span>
               <div class="img-preview"></div>
             </div>
-            <div>
-              <a-button type="primary" @click="cropper.reset()">
-                <a-icon type="reload"></a-icon>
-                {{$t('common.reset')}}
-              </a-button>
-              <a-divider type="vertical" class="transparent"></a-divider>
-              <a-button-group>
-                <a-tooltip :title="$t('common.rotate_counterclockwise', {angle:45})">
-                  <a-button type="primary" @click="cropper.rotate(-45)">
-                    <a-icon type="undo"></a-icon>
-                  </a-button>
-                </a-tooltip>
-                <a-tooltip :title="$t('common.rotate_clockwise', {angle:45})">
-                  <a-button type="primary" @click="cropper.rotate(45)">
-                    <a-icon type="redo"></a-icon>
-                  </a-button>
-                </a-tooltip>
-              </a-button-group>
-            </div>
-            <div>
+            <div class="operate-wrapper">
               <a-upload
                 name="file"
                 :multiple="false"
@@ -68,7 +49,23 @@
                   {{$t('common.import')}}
                 </a-button>
               </a-upload>
-              <a-divider type="vertical" class="transparent"></a-divider>
+              <a-button-group>
+                <a-tooltip :title="$t('common.reset')">
+                  <a-button type="primary" @click="cropper.reset()">
+                    <a-icon type="reload"></a-icon>
+                  </a-button>
+                </a-tooltip>
+                <a-tooltip :title="$t('common.rotate_counterclockwise', {angle:45})">
+                  <a-button type="primary" @click="cropper.rotate(-45)">
+                    <a-icon type="undo"></a-icon>
+                  </a-button>
+                </a-tooltip>
+                <a-tooltip :title="$t('common.rotate_clockwise', {angle:45})">
+                  <a-button type="primary" @click="cropper.rotate(45)">
+                    <a-icon type="redo"></a-icon>
+                  </a-button>
+                </a-tooltip>
+              </a-button-group>
             </div>
           </a-col>
         </a-row>
@@ -85,6 +82,7 @@ export default {
     return {
       visible: false,
       uploading: false,
+      user: '',
       originalFile: '',
       avatar: '',
       cropper: '',
@@ -105,9 +103,9 @@ export default {
         // 2:限制最小画布大小以适合容器。 如果画布和容器的比例不同，则最小画布将在其中一个维度中被多余的空间包围。
         // 3:限制最小画布大小以适合容器。 如果画布和容器的比例不同，则容器将无法以一个尺寸容纳整个画布。
         ready: function() {},
-        crop(event) {
-          console.log(event)
-        }
+        // crop(event) {
+        //   console.log(event)
+        // }
       }
     }
   },
@@ -149,11 +147,21 @@ export default {
               type: 'avatar'
             }
           })
-          .then(() => {
+          .then(({ data }) => {
             $this.$message.success(
               $this.$i18n.t('message.avatar_upload_success')
             )
-            $this.visible = false
+            // 上传文件成功将文件ID赋值给用户头像
+            $this.user.avatar = data[0] && data[0].id
+            $this.$http
+              .put($this.$api.SYS_USER, $this.user)
+              .then(() => {
+                $this.$emit('refresh')
+                $this.visible = false
+              })
+              .catch(err => {
+                $this.$message.error(err.message)
+              })
           })
           .catch(err => {
             $this.$message.error(err.message)
@@ -174,10 +182,10 @@ img {
   margin: auto;
 }
 .cropper-wrapper {
+  min-height: 200px;
   .ant-col:last-child {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
   .preview-wrapper {
     display: flex;
@@ -192,6 +200,11 @@ img {
         border-radius: 50%;
       }
     }
+  }
+  .operate-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0;
   }
 }
 </style>

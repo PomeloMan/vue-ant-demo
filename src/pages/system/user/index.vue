@@ -120,7 +120,7 @@
       </div>
     </app-footer>
     <info-drawer ref="infoDrawer" @refresh="getData"></info-drawer>
-    <avatar-modal ref="avatarModal"></avatar-modal>
+    <avatar-modal ref="avatarModal" @refresh="getData"></avatar-modal>
   </div>
 </template>
 
@@ -201,6 +201,7 @@ export default {
     },
     showAvatarModal(record) {
       this.$refs['avatarModal'].visible = true
+      this.$refs['avatarModal'].user = record
       this.$refs['avatarModal'].avatar = record.avatar
     }
   }
