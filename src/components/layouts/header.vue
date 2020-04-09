@@ -176,7 +176,7 @@ export default {
       const $this = this
       this.$nextTick(() => {
         const el = document.querySelector('.advanced-btn .anticon')
-        if (el.dataset) {
+        if (el && el.dataset) {
           this.toUpTween = new TWEEN.Tween(el.dataset)
             .to({ rotation: 0 }, 300)
             .onUpdate(function(object) {

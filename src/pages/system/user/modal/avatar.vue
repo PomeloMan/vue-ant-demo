@@ -38,34 +38,42 @@
               <div class="img-preview"></div>
             </div>
             <div class="operate-wrapper">
-              <a-upload
-                name="file"
-                :multiple="false"
-                :showUploadList="false"
-                :beforeUpload="beforeUpload"
-              >
-                <a-button type="primary">
-                  <a-icon type="upload" />
-                  {{$t('common.import')}}
+              <div>
+                <a-upload
+                  name="file"
+                  :multiple="false"
+                  :showUploadList="false"
+                  :beforeUpload="beforeUpload"
+                >
+                  <a-button type="primary">
+                    <a-icon type="upload" />
+                    {{$t('common.import')}}
+                  </a-button>
+                </a-upload>
+                <a-button-group>
+                  <a-tooltip :title="$t('common.reset')">
+                    <a-button type="primary" @click="cropper.reset()">
+                      <a-icon type="reload"></a-icon>
+                    </a-button>
+                  </a-tooltip>
+                  <a-tooltip :title="$t('common.rotate_counterclockwise', {angle:45})">
+                    <a-button type="primary" @click="cropper.rotate(-45)">
+                      <a-icon type="undo"></a-icon>
+                    </a-button>
+                  </a-tooltip>
+                  <a-tooltip :title="$t('common.rotate_clockwise', {angle:45})">
+                    <a-button type="primary" @click="cropper.rotate(45)">
+                      <a-icon type="redo"></a-icon>
+                    </a-button>
+                  </a-tooltip>
+                </a-button-group>
+              </div>
+              <div>
+                <a-button type="primary" @click="printAvatar">
+                  <a-icon type="printer"></a-icon>
+                  {{$t('common.print')}}
                 </a-button>
-              </a-upload>
-              <a-button-group>
-                <a-tooltip :title="$t('common.reset')">
-                  <a-button type="primary" @click="cropper.reset()">
-                    <a-icon type="reload"></a-icon>
-                  </a-button>
-                </a-tooltip>
-                <a-tooltip :title="$t('common.rotate_counterclockwise', {angle:45})">
-                  <a-button type="primary" @click="cropper.rotate(-45)">
-                    <a-icon type="undo"></a-icon>
-                  </a-button>
-                </a-tooltip>
-                <a-tooltip :title="$t('common.rotate_clockwise', {angle:45})">
-                  <a-button type="primary" @click="cropper.rotate(45)">
-                    <a-icon type="redo"></a-icon>
-                  </a-button>
-                </a-tooltip>
-              </a-button-group>
+              </div>
             </div>
           </a-col>
         </a-row>
@@ -102,7 +110,7 @@ export default {
         // 1:限制裁切框不要超过画布的大小。
         // 2:限制最小画布大小以适合容器。 如果画布和容器的比例不同，则最小画布将在其中一个维度中被多余的空间包围。
         // 3:限制最小画布大小以适合容器。 如果画布和容器的比例不同，则容器将无法以一个尺寸容纳整个画布。
-        ready: function() {},
+        ready: function() {}
         // crop(event) {
         //   console.log(event)
         // }
@@ -167,6 +175,14 @@ export default {
             $this.$message.error(err.message)
           })
       }, this.originalFile.type)
+    },
+    printAvatar() {
+      const cropped = this.cropper.getCroppedCanvas()
+      this.$print({
+        printable: [this.avatar, cropped.toDataURL(this.originalFile.type)],
+        type: 'image',
+        imageStyle: 'margin-bottom:20px;'
+      })
     }
   }
 }
@@ -202,9 +218,14 @@ img {
     }
   }
   .operate-wrapper {
-    display: flex;
-    justify-content: space-between;
     padding: 24px 0;
+    > div {
+      display: flex;
+      justify-content: space-between;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
   }
 }
 </style>

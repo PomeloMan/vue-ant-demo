@@ -88,6 +88,7 @@
     >
       <div slot="action-group">
         <a-menu mode="horizontal">
+          <!-- 导入 -->
           <a-menu-item class="upload-menu-item">
             <a-upload
               ref="aupload"
@@ -99,6 +100,7 @@
               @change="uploadChange"
             >{{ $t('common.import') }}</a-upload>
           </a-menu-item>
+          <!-- 导出 -->
           <a-dropdown :trigger="['click']" :placement="'topLeft'">
             <li class="ant-menu-item">{{ $t('common.export') }}</li>
             <a-menu slot="overlay">

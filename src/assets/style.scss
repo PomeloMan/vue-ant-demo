@@ -3,6 +3,9 @@
 @import "./css/ant.custom.scss";
 @import "./css/constant.scss";
 
+body {
+  overflow: hidden;
+}
 /** 内容模块，每一个子页面都带有此属性
  * @reference /src/pages/main.vue
  * <template>

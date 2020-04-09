@@ -48,6 +48,8 @@ import './components/layouts'
 
 // 挂载全局
 Vue.prototype.$http = http
+import print from 'print-js'
+Vue.prototype.$print = print
 
 Vue.config.productionTip = false
 

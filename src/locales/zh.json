@@ -58,6 +58,7 @@
     "overview": "总览",
     "password": "密码",
     "page_show_total": "{from} ~ {to} 总共 {total} 条",
+    "print": "打印",
     "reset": "重置",
     "role": "角色",
     "role_auth": "角色权限",

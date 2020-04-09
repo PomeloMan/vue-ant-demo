@@ -11,7 +11,7 @@
       @close="visible = false"
     >
       <a-spin :spinning="loading">
-        <a-form :form="form" layout="vertical">
+        <a-form :form="form" layout="vertical" id="print-form">
           <!-- 账号 -->
           <a-form-item :label="$t('common.account')">
             <a-input
@@ -67,6 +67,7 @@
       </a-spin>
       <footer class="drawer-footer">
         <a-button :style="{ marginRight: '8px' }" @click="visible = false">{{ $t('common.cancel') }}</a-button>
+        <a-button :style="{ marginRight: '8px' }" @click="print">{{ $t('common.print') }}</a-button>
         <a-button
           type="primary"
           :disabled="!form.getFieldValue('username') || loading"
@@ -135,7 +136,14 @@ export default {
       },
       1000,
       { leading: true, trailing: false } // leading 延迟前执行，trailing 延迟后执行
-    )
+    ),
+    print() {
+      this.$print({
+        printable: 'print-form',
+        type: 'html',
+        targetStyles: ['*'] // 继承原来的所有样式
+      })
+    }
   }
 }
 </script>
@@ -155,5 +163,8 @@ export default {
   padding: 10px 16px;
   background: #fff;
   text-align: right;
+  .ant-btn:not(:last-child) {
+    margin-right: 8px;
+  }
 }
 </style>
