@@ -14,7 +14,8 @@
     "predeploy": "npm run build:gh",
     "deploy": "node deploy.js",
     "deploy:gh-pages": "npm run build:gh && deploy.bat",
-    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
+    "fix-memory-limit": "cross-env LIMIT=4096 increase-memory-limit"
   },
   "dependencies": {
     "@antv/g2": "^3.5.11",
@@ -48,9 +49,11 @@
     "@vue/cli-service": "^4.0.0",
     "babel-eslint": "^10.0.3",
     "babel-plugin-import": "^1.12.2",
+    "cross-env": "^7.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "gh-pages": "^2.1.1",
+    "increase-memory-limit": "^1.0.7",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "prettier": "1.18.2",
