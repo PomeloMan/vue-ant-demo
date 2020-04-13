@@ -16,7 +16,7 @@
 
 <script>
 import * as THREE from 'three'
-import * as TWEEN from '@tweenjs/tween.js'
+import TWEEN from '@tweenjs/tween.js'
 import TrackballControls from 'three-trackballcontrols'
 import {
   CSS3DObject,
