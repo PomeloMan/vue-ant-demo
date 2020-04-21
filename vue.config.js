@@ -73,14 +73,18 @@ module.exports = {
   devServer: {
     host: '127.0.0.1',
     port: 8000,
-    // proxy: {
-    //   '/commerce': {
-    //     target: process.env.VUE_APP_COMMERCE_PROXY_URL, //代理接口
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/commerce': '/' //代理的路径
-    //     }
-    //   },
-    // }
+    proxy: {
+      '/api/user': {
+        target: process.env.VUE_APP_USER_SERVER_PROXY_URL, //代理接口
+        changeOrigin: true,
+        headers: { // 解决POST请求403的问题，给请求头添加ORIGIN字段
+          host: process.env.VUE_APP_USER_SERVER_PROXY_URL,
+          origin: process.env.VUE_APP_USER_SERVER_PROXY_URL
+        },
+        pathRewrite: {
+          '^/api/user': '/' //代理的路径
+        }
+      },
+    }
   }
 }
