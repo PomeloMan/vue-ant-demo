@@ -173,6 +173,7 @@ export default {
         })
         .catch(() => {
           this.loading = false
+          this.getMockData()
         })
     },
     showInfoDrawer(id) {
@@ -205,6 +206,14 @@ export default {
       this.$refs['avatarModal'].visible = true
       this.$refs['avatarModal'].user = record
       this.$refs['avatarModal'].avatar = record.avatar
+    },
+    // ----- delete -----
+    getMockData() {
+      this.$http.get(this.$api.USER_PAGE).then(({ data }) => {
+        this.data = data.content
+        this.total = data.totalElements
+        this.$message.warning(this.$i18n.t('message.using_mock_data'))
+      })
     }
   }
 }
