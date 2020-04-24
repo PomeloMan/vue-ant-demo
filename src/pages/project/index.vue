@@ -7,7 +7,7 @@
       @onSimpleSearch="onSearch"
     >
       <div slot="action-group">
-        <a-button type="link" @click="showNewDrawer">{{ $t('common.new') }}</a-button>
+        <a-button type="link" @click="showAddDrawer">{{ $t('common.new') }}</a-button>
       </div>
     </app-header>
     <div class="scroll-wrapper no-footer" style="padding: 0;">
@@ -40,6 +40,13 @@
                   <div class="project-name fw-600 fs-16">{{ item.name }}</div>
                   <div class="project-description">{{ item.description }}</div>
                   <div class="project-links">
+                    <a-tooltip :title="$t('common.heart')">
+                      <a href="javascript:;" @click="item.focused = !item.focused">
+                        <ani :method="'burstOutGranule'" :event="'click'">
+                          <a-icon type="heart" :theme="item.focused?'filled':'outlined'" />
+                        </ani>
+                      </a>
+                    </a-tooltip>
                     <a-tooltip :title="$t('common.overview')">
                       <a href="javascript:;">
                         <a-icon type="project" />
@@ -62,6 +69,7 @@
 import PerfectScrollbar from '@/components/plugins/perfect-scrollbar.vue'
 import AddDrawer from './drawer/add.vue'
 import _ from 'lodash'
+
 export default {
   components: { AddDrawer },
   mixins: [PerfectScrollbar],
@@ -164,6 +172,9 @@ export default {
       position: absolute;
       bottom: 0;
       right: 0;
+      a:not(:last-child) {
+        margin-right: 12px;
+      }
       .anticon {
         font-size: 24px;
         cursor: pointer;

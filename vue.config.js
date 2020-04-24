@@ -44,6 +44,12 @@ module.exports = {
   chainWebpack(config) {
     // set svg-sprite-loader
     config.module
+      .rule('snapsvg')
+      .test(resolve('snapsvg/dist/snap.svg.js'))
+      .use('imports-loader?this=>window,fix=>module.exports=0')
+      .loader('imports-loader')
+      .end()
+    config.module
       .rule('svg')
       .exclude.add(resolve('src/icons'))
       .end()
