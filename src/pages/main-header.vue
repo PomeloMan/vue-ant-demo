@@ -29,6 +29,8 @@
           <a-menu-item @click="logout()">登出</a-menu-item>
         </a-menu>
       </a-dropdown>
+
+      <lottie-web></lottie-web>
     </div>
   </div>
 </template>
@@ -51,9 +53,8 @@ export default {
       locales: i18n.locales
     }
   },
-  created() {
-    // debugger
-  },
+  created() {},
+  mounted() {},
   methods: {
     collapse() {
       this.collapsed = !this.collapsed

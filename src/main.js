@@ -51,6 +51,10 @@ import Ani from './animations/ani'
 Vue.component('ani', Ani)
 import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
 Vue.prototype.$Snap = Snap;
+import lottie from 'lottie-web'
+Vue.prototype.$lottie = lottie
+import LottieWeb from '@/components/plugins/lottie-web'
+Vue.component('lottie-web', LottieWeb)
 
 // event Bus 用于无关系组件间的通信
 // 使用方式 this.$bus.$on(event_name, function(args){}); this.$bus.emit(event_name, args)
