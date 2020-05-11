@@ -6,6 +6,14 @@ import LoginComponent from '@/pages/login'
 import NProgress from 'nprogress'
 // 添加页面进度条
 import './nprogress'
+
+// 解决Vue-router3.1后$router.push()方法改为Promise后，控制台报[NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated"}]的错误
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [{
