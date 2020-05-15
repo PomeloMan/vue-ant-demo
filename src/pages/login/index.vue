@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { setStoreItemByBase64 } from '@/utils'
 export default {
   name: 'login',
   data() {
@@ -54,31 +53,33 @@ export default {
         if (!err) {
           // 登录
           this.$http
-            .get(this.$api.LOGIN_URL, {
-              loginName: values.username,
-              password: values.password
+            .post(this.$api.OAUTH_TOKEN, null, {
+              params: {
+                client_id: process.env.VUE_APP_OAUTH_CLIENT_ID,
+                client_secret: process.env.VUE_APP_OAUTH_CLIENT_SECRET,
+                grant_type: process.env.VUE_APP_OAUTH_GRANT_TYPE,
+                scope: process.env.VUE_APP_OAUTH_SCOPE,
+                username: values.username,
+                password: values.password
+              }
             })
             .then(({ data }) => {
-              console.log(data)
-              // localStorage.setItem('oauth2AccessToken', data)
-              localStorage.setItem(
-                'oauth2AccessToken',
-                btoa(values.username + values.password)
-              )
-              // 登录成功查询用户信息
-              this.$http
-                .get(this.$api.USER_INFO)
-                .then(({ data }) => {
-                  this.$user = data || {
-                    loginName: values.username,
-                    password: values.password
-                  }
-                  setStoreItemByBase64('user', this.$user)
-                  this.$router.push('/main')
-                })
-                .catch(err => {
-                  this.$message.error(err.message)
-                })
+              this.$store.dispatch('common/updateOauthToken', data)
+              this.$router.push('/main')
+              // localStorage.setItem(
+              //   'oauth2AccessToken',
+              //   btoa(values.username + values.password)
+              // )
+              // 登录成功查询用户信息，为了使刷新页面 vue-store 不丢失用户数，在 main.vue 获取用户信息
+              // this.$http
+              //   .get(this.$api.SYS_USER)
+              //   .then(({ data }) => {
+              //     this.$store.dispatch('common/updateUser', data)
+              //     this.$router.push('/main')
+              //   })
+              //   .catch(err => {
+              //     this.$message.error(err.message)
+              //   })
             })
             .catch(err => {
               this.$message.error(err.message)

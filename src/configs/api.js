@@ -3,6 +3,8 @@ import Mock_API from './api_mock'
 const API = {
   MENU_LIST: '/menus',
 
+  // -- OAuth2 --
+  OAUTH_TOKEN: `${process.env.VUE_APP_USER_SERVER_URL}/oauth/token`,
   // -- 权限管理 --
   // SYS_MENU_PAGE: `${process.env.VUE_APP_USER_URL}/auth/page`,
   SYS_MENU_LIST: `${process.env.VUE_APP_USER_SERVER_URL}/auth/list`,

@@ -64,6 +64,8 @@ Vue.prototype.$bus = new Vue()
 Vue.prototype.$http = http
 import print from 'print-js'
 Vue.prototype.$print = print
+import { storage } from './configs/storage'
+Vue.prototype.$storage = storage
 
 Vue.config.productionTip = false
 

@@ -1,5 +1,7 @@
 import axios from 'axios'
 import router from './router'
+import CONSTS from '../constants'
+import { storage } from './storage';
 
 const http = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
@@ -21,12 +23,12 @@ http.baseURL = process.env.VUE_APP_BASE_URL;
  */
 http.interceptors.request.use(config => {
   // config.headers['token'] = Vue.cookie.get('token')
-  let token = localStorage.getItem('oauth2AccessToken')
+  const token = storage.getItem(CONSTS.STORAGE_OAUTH2_TOKEN_INFO)
 
   if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`
+    config.headers[CONSTS.OAUTH2_AUTHORIZATION_HEADER] = `${token.token_type} ${token.access_token}`
   } else {
-    router.push({ name: 'login' })
+    router.push({ name: CONSTS.PAGE_LOGIN })
   }
   return config
 }, error => {
@@ -37,11 +39,11 @@ http.interceptors.request.use(config => {
  * 响应拦截
  */
 http.interceptors.response.use(response => {
-  if (response.data && response.data.code === 401) {
-    router.push({ name: 'login' })
-  }
   return response
 }, error => {
+  if (error.response && error.response.status === 401) {
+    router.push({ name: CONSTS.PAGE_LOGIN })
+  }
   return Promise.reject(error)
 })
 

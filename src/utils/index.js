@@ -199,14 +199,6 @@ export function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 
-export function setStoreItemByBase64(key, value) {
-  localStorage.setItem(key, btoa(encodeURI(JSON.stringify(value))))
-}
-
-export function getStoreItemByBase64(key) {
-  return JSON.parse(decodeURI(atob(localStorage.getItem(key))))
-}
-
 /**
  * 处理数据下载
  * @param {*} data 二进制数据

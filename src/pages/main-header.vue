@@ -4,6 +4,10 @@
       <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="collapse" />
     </div>
     <div class="right-wrapper">
+      <li class="ant-menu-item">
+        <lottie-web></lottie-web>
+      </li>
+
       <a-dropdown class :trigger="['click']">
         <li class="ant-menu-item ant-dropdown-link" href="#">
           语言
@@ -29,8 +33,6 @@
           <a-menu-item @click="logout()">登出</a-menu-item>
         </a-menu>
       </a-dropdown>
-
-      <lottie-web></lottie-web>
     </div>
   </div>
 </template>
