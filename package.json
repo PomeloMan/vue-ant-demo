@@ -26,8 +26,6 @@
     "axios": "^0.19.0",
     "core-js": "^3.3.2",
     "cropperjs": "^1.5.6",
-    "date-fns": "^2.8.1",
-    "date-fns-tz": "^1.0.8",
     "lodash": "^4.17.15",
     "lottie-web": "^5.6.8",
     "moment": "^2.24.0",
