@@ -129,13 +129,14 @@
 <script>
 import BaseComponent from '@/components/base.component'
 import EditableCell from '@/components/commons/editable-cell'
+import KeepAlive from '@/components/mixins/keep-alive'
 import InfoDrawer from './drawer/info'
 import AvatarModal from './modal/avatar'
 import FormItem from './mixins/form-item'
 import TableColumn from './mixins/table-column'
 export default {
-  name: 'sys_user',
-  mixins: [BaseComponent, FormItem, TableColumn],
+  name: 'sys_user_page_keepalive',
+  mixins: [BaseComponent, FormItem, TableColumn, KeepAlive],
   components: {
     EditableCell,
     InfoDrawer,

@@ -31,9 +31,9 @@
             </a-breadcrumb-item>
           </template>
         </a-breadcrumb>-->
-        <template>
+        <keep-alive :include="keepAliveList">
           <router-view class="container"></router-view>
-        </template>
+        </keep-alive>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -61,7 +61,8 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => new User(state.common.user)
+      user: state => new User(state.common.user),
+      keepAliveList: state => state.common.keepAliveList
     })
   },
   data() {

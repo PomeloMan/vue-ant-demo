@@ -12,7 +12,8 @@ export default {
     dicts: [], // 字典数据
     mapOfDict: {}, // 字典数据
     oauthToken: new OAuthToken(), // OAuth Token
-    user: new User()
+    user: new User(),
+    keepAliveList: []
   },
   mutations: {
     updateLocale(state, locale) {
@@ -39,6 +40,9 @@ export default {
     updateUser(state, user) {
       state.user = user
       storage.setItem(CONSTS.STORAGE_USER, user, true)
+    },
+    updateKeepAliveList(state, keepAliveList) {
+      state.keepAliveList = keepAliveList
     }
   },
   actions: {
@@ -56,6 +60,9 @@ export default {
     },
     updateUser(context, user) {
       context.commit('updateUser', user)
+    },
+    updateKeepAliveList(context, keepAliveList) {
+      context.commit('updateKeepAliveList', keepAliveList)
     }
   }
 }
