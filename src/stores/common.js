@@ -2,10 +2,12 @@ import { OAuthToken } from '../models/oauth_token'
 import CONSTS from '../constants'
 import { storage } from '../configs/storage'
 import { User } from '../models/user'
+import CONSTANTS from '@/constants'
 
 export default {
   namespaced: true,
   state: {
+    locale: CONSTANTS.DEFAULT_LOCALE, // 国际化
     collapsed: false, // 侧边栏展开/收缩
     dicts: [], // 字典数据
     mapOfDict: {}, // 字典数据
@@ -13,11 +15,14 @@ export default {
     user: new User()
   },
   mutations: {
+    updateLocale(state, locale) {
+      state.locale = locale
+      this.commit('common/updateDicts', { dicts: state.dicts, locale: locale.locale.slice(0, 2) })
+    },
     updateCollapsed(state, collapsed) {
       state.collapsed = collapsed
     },
     updateDicts(state, { dicts, locale }) {
-      if (!locale) { locale = 'zh' }
       state.dicts = dicts
       const mapOfDict = new Object()
       dicts.forEach(dict => {
@@ -37,6 +42,9 @@ export default {
     }
   },
   actions: {
+    updateLocale(context, locale) {
+      context.commit('updateLocale', locale)
+    },
     updateCollapsed(context, collapsed) {
       context.commit('updateCollapsed', collapsed)
     },

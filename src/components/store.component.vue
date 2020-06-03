@@ -1,11 +1,20 @@
 <script>
 import { mapState } from 'vuex'
+import CONSTANTS from '@/constants'
 // 全局变量存储状态
 export default {
   computed: {
     ...mapState({
       mapOfDict: state => state.common.mapOfDict // 字典表对象
     }),
+    locale: {
+      get() {
+        return this.$store.state.common.locale
+      },
+      set(val) {
+        this.$store.dispatch('common/updateLocale', val)
+      }
+    },
     // 菜单栏是否折叠
     collapsed: {
       get() {
@@ -21,9 +30,10 @@ export default {
         return this.$store.state.common.dicts
       },
       set(val) {
+        console.log()
         this.$store.dispatch('common/updateDicts', {
           val: val,
-          locale: this.$i18n.locale || 'zh'
+          locale: CONSTANTS.DEFAULT_LOCALE_NAME
         })
       }
     }

@@ -5,20 +5,22 @@
     </div>
     <div class="right-wrapper">
       <li class="ant-menu-item">
-        <lottie-web></lottie-web>
+        <!-- <lottie-web></lottie-web> -->
       </li>
 
       <a-dropdown class :trigger="['click']">
         <li class="ant-menu-item ant-dropdown-link" href="#">
-          语言
+          <span>{{$t('common.locale')}}</span>
           <a-icon type="down" />
         </li>
-        <a-menu slot="overlay">
-          <a-menu-item key="0" @click="i18n('zh')">
-            <svg-icon icon-class="locale_zh"></svg-icon>中文
+        <a-menu slot="overlay" class="i18n-menu">
+          <a-menu-item key="0" @click="i18n(zhCN)">
+            <svg-icon icon-class="locale_zh" class="icon"></svg-icon>
+            <span>{{$t('i18n.zh')}}</span>
           </a-menu-item>
-          <a-menu-item key="1" @click="i18n('en')">
-            <svg-icon icon-class="locale_en"></svg-icon>英文
+          <a-menu-item key="1" @click="i18n(enUS)">
+            <svg-icon icon-class="locale_en" class="icon"></svg-icon>
+            <span>{{$t('i18n.en')}}</span>
           </a-menu-item>
         </a-menu>
       </a-dropdown>
@@ -30,7 +32,7 @@
           <a-icon type="down" />
         </li>
         <a-menu slot="overlay">
-          <a-menu-item @click="logout()">登出</a-menu-item>
+          <a-menu-item @click="logout()">{{$t('common.logout')}}</a-menu-item>
         </a-menu>
       </a-dropdown>
     </div>
@@ -41,6 +43,9 @@
 import StoreComponent from '@/components/store.component'
 import { Menu, Dropdown } from 'ant-design-vue'
 import i18n from '@/constants/i18n'
+// 国际化
+import enUS from 'ant-design-vue/es/locale/en_US'
+import zhCN from 'ant-design-vue/es/locale/zh_CN'
 
 export default {
   name: 'main-header',
@@ -52,6 +57,8 @@ export default {
   },
   data() {
     return {
+      enUS,
+      zhCN,
       locales: i18n.locales
     }
   },
@@ -62,9 +69,8 @@ export default {
       this.collapsed = !this.collapsed
     },
     i18n(locale) {
-      this.$i18n.locale = locale
-      // this.dicts = this.$store.state.common.dicts
-      // this.mapOfDict = this.$i18n.locale
+      this.locale = locale
+      this.$moment.locale(locale.locale)
     },
     logout() {
       localStorage.removeItem('oauth2AccessToken')
@@ -110,5 +116,8 @@ export default {
     justify-content: center;
     margin-right: 10px;
   }
+}
+.i18n-menu .icon {
+  margin-right: 8px;
 }
 </style>

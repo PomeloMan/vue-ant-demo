@@ -10,6 +10,8 @@ Vue.prototype.$api = API;
 
 // 添加全局时间处理工具 momentjs
 import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh')
 Vue.prototype.$moment = moment
 // 添加全局金额，数字位处理工具 accountingjs
 import accounting from 'accounting'

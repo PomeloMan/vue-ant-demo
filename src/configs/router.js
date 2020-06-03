@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BREADCRUMB from '@/constants/breadcrumbs'
 import LoginComponent from '@/pages/login'
+import NotFoundComponent from '@/pages/error/404'
 
 import NProgress from 'nprogress'
 // 添加页面进度条
@@ -96,6 +97,10 @@ const routes = [{
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/menu')
     }
   ]
+}, {
+  name: '404',
+  path: '*',
+  component: NotFoundComponent
 }]
 
 const router = new VueRouter({

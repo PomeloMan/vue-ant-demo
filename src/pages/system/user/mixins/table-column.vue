@@ -17,6 +17,7 @@ export default {
   computed: {
     columns: {
       get() {
+        const $this = this
         return [
           {
             title: this.$i18n.t('common.avatar'),
@@ -57,6 +58,15 @@ export default {
             dataIndex: 'statusDesc',
             width: 80,
             align: 'center'
+          },
+          {
+            title: this.$i18n.t('common.create_time'),
+            dataIndex: 'createdDate',
+            width: 120,
+            align: 'center',
+            customRender: function(date) {
+              return $this.$moment(date).format('LL')
+            }
           },
           {
             title: this.$i18n.t('common.operation'),

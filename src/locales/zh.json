@@ -9,6 +9,11 @@
     "delete_success": "删除成功!",
     "file_upload_failure": "文件上传失败!",
     "file_upload_success": "文件上传成功!",
+    "image_upload_failure": "图片上传失败!",
+    "image_upload_success": "图片上传成功!",
+    "image_type_error": "图片格式错误",
+    "image_size_error": "图片大小错误，最大不超过{max}M",
+    "image_wh_error": "图片尺寸错误，最大不超过{w}x{h}",
     "is_confirm_delete": "是否确认删除?",
     "is_confirm_cancel": "是否确认取消?",
     "save_success": "保存成功!",
@@ -22,11 +27,16 @@
     "drag_area_title": "单击或将文件拖到该区域",
     "drag_area_hint": "建议使用jpg或png格式文件"
   },
+  "i18n": {
+    "en": "English",
+    "zh": "中文"
+  },
   "common": {
     "account": "账号",
     "advance_search": "高级搜索",
     "avatar": "头像",
     "cancel": "取消",
+    "create_time": "创建时间",
     "ok": "确认",
     "delete": "删除",
     "dict_code": "字典码",
@@ -40,7 +50,9 @@
     "heart": "关注",
     "import": "导入",
     "level": "层级",
+    "locale": "语言",
     "login": "登录",
+    "logout": "登出",
     "menu": "菜单",
     "menu_name": "菜单名",
     "menu_icon": "菜单图标",

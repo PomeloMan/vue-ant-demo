@@ -1,22 +1,19 @@
 <template>
-  <a-locale-provider :locale="locale">
+  <a-config-provider :locale="locale">
     <div id="app">
       <router-view :key="$route.query.t"></router-view>
     </div>
-  </a-locale-provider>
+  </a-config-provider>
 </template>
 
 <script>
-import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
-import enUS from 'ant-design-vue/lib/locale-provider/en_US'
+import { mapState } from 'vuex'
 export default {
   name: 'app',
   computed: {
-    locale: {
-      get() {
-        return this.$i18n.locale.includes('zh') ? zhCN : enUS
-      }
-    }
+    ...mapState({
+      locale: state => state.common.locale
+    })
   }
 }
 </script>

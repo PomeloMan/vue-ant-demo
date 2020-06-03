@@ -128,7 +128,7 @@
 
 <script>
 import BaseComponent from '@/components/base.component'
-import EditableCell from '@/components/plugins/editable-cell'
+import EditableCell from '@/components/commons/editable-cell'
 import InfoDrawer from './drawer/info'
 import AvatarModal from './modal/avatar'
 import FormItem from './mixins/form-item'

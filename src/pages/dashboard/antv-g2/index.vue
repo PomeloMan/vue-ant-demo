@@ -11,7 +11,6 @@
 
 <script>
 import * as G2 from '@antv/g2'
-import { format, subMinutes } from 'date-fns'
 
 export default {
   components: {},
@@ -42,11 +41,11 @@ export default {
         width: wrapper.clientWidth,
         animate: false
       })
-      let time = new Date().getTime()
-      let lastTime = subMinutes(time, 1).getTime()
+      let time = this.$moment().valueOf()
+      let lastTime = this.$moment().subtract(1, 'minutes').valueOf()
       const data = []
       while (time > lastTime) {
-        const second = format(lastTime, 'mm:ss')
+        const second = this.$moment(lastTime).format('mm:ss')
         data.push({
           second,
           value: Math.random()
@@ -75,7 +74,7 @@ export default {
       this.chart.render()
       this.interval = setInterval(() => {
         const _data = data
-        const second = format(time, 'mm:ss')
+        const second = this.$moment(time).format('mm:ss')
         _data.shift()
         _data.push({
           second,
