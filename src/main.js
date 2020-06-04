@@ -68,6 +68,9 @@ import print from 'print-js'
 Vue.prototype.$print = print
 import { storage } from './configs/storage'
 Vue.prototype.$storage = storage
+// 常量
+import constants from './constants/index'
+Vue.prototype.$constants = constants
 
 Vue.config.productionTip = false
 

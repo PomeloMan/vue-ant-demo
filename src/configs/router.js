@@ -80,21 +80,21 @@ const routes = [{
       meta: {
         breadcrumbs: BREADCRUMB['system-user']
       },
-      component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/user')
+      component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/user/index.vue')
     }, {
       name: 'system-role',
       path: 'system/role',
       meta: {
         breadcrumbs: BREADCRUMB['system-role']
       },
-      component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/role')
+      component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/role/index.vue')
     }, {
       name: 'system-menu',
       path: 'system/menu',
       meta: {
         breadcrumbs: BREADCRUMB['system-menu']
       },
-      component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/menu')
+      component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/menu/index.vue')
     }
   ]
 }, {

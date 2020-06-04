@@ -135,7 +135,7 @@ import AvatarModal from './modal/avatar'
 import FormItem from './mixins/form-item'
 import TableColumn from './mixins/table-column'
 export default {
-  name: 'sys_user_page_keepalive',
+  name: 'sys_user_keepalive',
   mixins: [BaseComponent, FormItem, TableColumn, KeepAlive],
   components: {
     EditableCell,
@@ -148,6 +148,11 @@ export default {
     }
   },
   created() {
+    // 进入组件时由于组件名带有 keepalive（详见KeepAlive.beforeRouteEnter），将组件加入到缓存中，第一次执行 created()
+    // 在未销毁的状态下第二次及之后执行 activated()；created()不会与 activated()同时执行
+    this.getData()
+  },
+  activated() {
     this.getData()
   },
   methods: {

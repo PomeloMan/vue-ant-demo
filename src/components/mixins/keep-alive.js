@@ -19,7 +19,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     if (to.name == 'system-role' && from.name == 'system-user') {
       // user -> role 取消 user 缓存
-      this.$store.dispatch('common/updateKeepAliveList', this.keepAliveList.filter(k => k != 'sys_user_page_keepalive'))
+      this.$store.dispatch('common/updateKeepAliveList', this.keepAliveList.filter(k => k != this.$options.name))
     }
     next()
   }

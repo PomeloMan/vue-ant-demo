@@ -129,7 +129,7 @@ import BaseComponent from '@/components/base.component'
 import KeepAlive from '@/components/mixins/keep-alive'
 import InfoDrawer from './drawer/info'
 export default {
-  name: 'sys_role_page_keepalive',
+  name: 'sys_role_keepalive',
   mixins: [BaseComponent, KeepAlive],
   components: { InfoDrawer },
   data() {

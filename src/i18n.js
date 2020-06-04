@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import CONSTANTS from './constants/index'
 
 Vue.use(VueI18n)
 
-function loadLocaleMessages () {
+function loadLocaleMessages() {
   const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
   const messages = {}
   locales.keys().forEach(key => {
@@ -17,7 +18,8 @@ function loadLocaleMessages () {
 }
 
 export default new VueI18n({
-  locale: process.env.VUE_APP_I18N_LOCALE || 'zh',
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'zh',
-  messages: loadLocaleMessages()
+  locale: CONSTANTS.DEFAULT_LOCALE_NAME,
+  fallbackLocale: CONSTANTS.DEFAULT_LOCALE_NAME,
+  messages: loadLocaleMessages(),
+  silentTranslationWarn: true
 })

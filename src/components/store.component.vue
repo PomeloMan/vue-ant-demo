@@ -1,6 +1,5 @@
 <script>
 import { mapState } from 'vuex'
-import CONSTANTS from '@/constants'
 // 全局变量存储状态
 export default {
   computed: {
@@ -33,7 +32,7 @@ export default {
         console.log()
         this.$store.dispatch('common/updateDicts', {
           val: val,
-          locale: CONSTANTS.DEFAULT_LOCALE_NAME
+          locale: this.$constants.DEFAULT_LOCALE_NAME
         })
       }
     }

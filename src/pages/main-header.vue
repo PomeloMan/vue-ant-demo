@@ -69,8 +69,9 @@ export default {
       this.collapsed = !this.collapsed
     },
     i18n(locale) {
-      this.locale = locale
-      this.$moment.locale(locale.locale)
+      this.locale = locale // Ant组件国际化
+      this.$moment.locale(locale.locale) // 时间组件国际化
+      this.$i18n.locale = locale.locale // 国际化
     },
     logout() {
       localStorage.removeItem('oauth2AccessToken')
@@ -98,7 +99,7 @@ export default {
 }
 .trigger {
   font-size: 18px;
-  line-height: 64px;
+  line-height: inherit;
   padding: 0 24px;
   cursor: pointer;
   transition: color 0.3s;

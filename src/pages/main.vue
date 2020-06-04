@@ -4,7 +4,7 @@
       <main-sider></main-sider>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
+      <a-layout-header>
         <main-header></main-header>
       </a-layout-header>
       <a-layout-content class="layout-content">
@@ -98,5 +98,11 @@ export default {
 <style lang="scss" scoped>
 .layout-wrapper {
   height: 100%;
+}
+.ant-layout-header {
+  background: rgb(255, 255, 255);
+  padding: 0px;
+  line-height: 56px;
+  height: 56px;
 }
 </style>
