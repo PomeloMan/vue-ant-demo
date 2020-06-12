@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import BaseComponent from '@/components/base.component'
+import BaseTable from '@/components/mixins/base-table'
 import InfoDrawer from './drawer/info'
 import { mapState } from 'vuex'
 import { date } from '@/pipes'
@@ -130,7 +130,7 @@ import { buildTree } from '@/utils'
 
 export default {
   name: 'sys_menu',
-  mixins: [BaseComponent],
+  mixins: [BaseTable],
   components: { InfoDrawer },
   data() {
     return {
@@ -146,36 +146,36 @@ export default {
       get() {
         return [
           {
-            title: this.$i18n.t('common.dict_code'),
+            title: this.$t('common.dict_code'),
             dataIndex: 'name',
             width: 150
           },
           {
-            title: this.$i18n.t('common.menu_name'),
+            title: this.$t('common.menu_name'),
             dataIndex: 'displayName',
             width: 150,
             scopedSlots: { customRender: 'displayName' }
           },
           {
-            title: this.$i18n.t('common.menu_icon'),
+            title: this.$t('common.menu_icon'),
             dataIndex: 'icon',
             width: 100,
             scopedSlots: { customRender: 'icon' }
           },
           {
-            title: this.$i18n.t('common.status'),
+            title: this.$t('common.status'),
             dataIndex: 'statusDesc',
             width: 100,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.modifier'),
+            title: this.$t('common.modifier'),
             dataIndex: 'modifier',
             width: 150,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.modify_date'),
+            title: this.$t('common.modify_date'),
             dataIndex: 'modifiedDate',
             width: 200,
             align: 'center',
@@ -184,7 +184,7 @@ export default {
             }
           },
           {
-            title: this.$i18n.t('common.operation'),
+            title: this.$t('common.operation'),
             dataIndex: 'operation',
             width: 200,
             align: 'center',
@@ -235,7 +235,7 @@ export default {
         this.total = this.data.length
         this.cacheData = this.data.map(item => ({ ...item }))
         this.resize()
-        this.$message.warning(this.$i18n.t('message.using_mock_data'))
+        this.$message.warning(this.$t('message.using_mock_data'))
       })
     }
   }

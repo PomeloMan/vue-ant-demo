@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="image-upload">
     <a-upload
       :name="name"
       accept=".jpg, .jpeg, .png"
@@ -12,6 +12,7 @@
       :beforeUpload="beforeUpload"
       @preview="handlePreview"
       @change="handleChange"
+      :style="uploadStyle"
     >
       <img v-if="imageUrl" :src="imageUrl" style="width:100%;" />
       <div v-else>
@@ -22,6 +23,7 @@
     <a-modal :visible="previewVisible" :footer="null" @cancel="previewVisible = false">
       <img style="width: 100%" :src="previewImageUrl" />
     </a-modal>
+    <slot></slot>
   </div>
 </template>
 
@@ -63,14 +65,42 @@ export default {
         height: 1024, // 1024px
         size: 10 // 1M
       })
-    }
+    },
+    width: [Number, String],
+    height: [Number, String]
   },
   data() {
     return {
       uploading: false,
       previewVisible: false, // 多图片字段
       imageUrl: '', // 单图片字段
-      previewImageUrl: '' // 多图片字段
+      previewImageUrl: '', // 多图片字段
+      uploadStyle: {}
+    }
+  },
+  mounted() {
+    const el = this.$el.querySelector(
+      '.ant-upload.ant-upload-select-picture-card'
+    )
+    if (this.width != null) {
+      if (isNaN(Number(this.width))) {
+        el.style.width = this.width
+      } else {
+        el.style.width = `${this.width}px`
+      }
+    }
+    if (this.height != null) {
+      if (isNaN(Number(this.height))) {
+        el.style.height = this.height
+      } else {
+        el.style.height = `${this.height}px`
+      }
+    }
+
+    if (!this.multiple) {
+      this.uploadStyle = {
+        width: 'auto'
+      }
     }
   },
   methods: {
@@ -96,7 +126,7 @@ export default {
       }
       if (file.status == 'error') {
         this.uploading = false
-        this.$message.error(this.$i18n.t('message.image_upload_failure'))
+        this.$message.error(this.$t('message.image_upload_failure'))
       }
     },
     handleMultipleChange(fileList) {
@@ -115,14 +145,14 @@ export default {
       // 校验图片
       const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
       if (!isJpgOrPng) {
-        this.$message.error(this.$i18n.t('message.image_type_error'))
+        this.$message.error(this.$t('message.image_type_error'))
         return false
       }
       // 校验大小
       const isLtSize = file.size / 1024 / 1024 < this.limit.size
       if (!isLtSize) {
         this.$message.error(
-          this.$i18n.t('message.image_size_error', { max: this.limit.size })
+          this.$t('message.image_size_error', { max: this.limit.size })
         )
         return false
       }
@@ -137,7 +167,7 @@ export default {
             $this.limit.height < image.height
           ) {
             $this.$message.error(
-              $this.$i18n.t('message.image_wh_error', {
+              $this.$t('message.image_wh_error', {
                 w: $this.limit.width,
                 h: $this.limit.height
               })

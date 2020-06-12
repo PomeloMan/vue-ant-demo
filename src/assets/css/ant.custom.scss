@@ -1,10 +1,3 @@
-.ant-table-wrapper {
-  height: 100%;
-  .ant-table {
-    word-break: break-all;
-  }
-}
-
 // app-header 头部菜单栏 link 按钮样式
 // ant-table 表格内 link 按钮样式
 .app-header .ant-btn-link,
@@ -39,4 +32,43 @@
 // ant-avatar 样式修改 (覆盖 .ant-menu-item .anticon { margin-right: 10px; })
 .ant-avatar .anticon {
   margin-right: 0;
+}
+
+// ant-table，ant-modal 列中图片样式
+.ant-table td img,
+.ant-modal img {
+  max-width: 100%;
+}
+// ant-table 样式
+.ant-table-wrapper {
+  height: 100%;
+  .ant-table {
+    word-break: break-all;
+    // 操作列最后一个 ant-divider 不显示
+    td > span.operation {
+      div:last-child.ant-divider.ant-divider-vertical {
+        display: none;
+      }
+    }
+  }
+}
+
+// ant-form 样式
+.ant-form {
+  .ant-form-extra {
+    font-size: 13px;
+  }
+}
+
+// ant-select 样式
+.ant-select /deep/ .ant-select-selection {
+  width: 100%;
+}
+
+// ant-input-number 样式
+.ant-input-number {
+  width: 100%;
+  /deep/ .ant-input-number-input-wrap {
+    width: 100%;
+  }
 }

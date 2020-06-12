@@ -120,5 +120,67 @@
         "status": "Valid"
       }
     ]
+  },
+  {
+    "id": 500,
+    "pid": 0,
+    "type": 0,
+    "name": "DICT_E_COMMERCE",
+    "icon": "shop",
+    "modifier": "admin",
+    "modifiedDate": "1990-01-01T00:00:00.000Z",
+    "status": "Valid",
+    "children": [
+      {
+        "id": 510,
+        "pid": 500,
+        "type": 0,
+        "url": "/main/e-commerce/shop",
+        "name": "DICT_EC_SHOP",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
+      },
+      {
+        "id": 520,
+        "pid": 500,
+        "type": 0,
+        "url": "/main/e-commerce/brand",
+        "name": "DICT_EC_BRAND",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
+      },
+      {
+        "id": 530,
+        "pid": 500,
+        "type": 0,
+        "url": "/main/e-commerce/category",
+        "name": "DICT_EC_CATEGORY",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
+      },
+      {
+        "id": 540,
+        "pid": 500,
+        "type": 0,
+        "url": "/main/e-commerce/standard",
+        "name": "DICT_EC_STANDARD",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
+      },
+      {
+        "id": 550,
+        "pid": 500,
+        "type": 0,
+        "url": "/main/e-commerce/product",
+        "name": "DICT_EC_PRODUCT",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
+      }
+    ]
   }
 ]

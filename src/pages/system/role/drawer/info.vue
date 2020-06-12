@@ -101,11 +101,6 @@ export default {
             key: 'key',
             parentKey: 'parent'
           })
-          console.log(this.menuTreeData)
-        })
-        .catch(err => {
-          console.error(err)
-          this.$message.error(err.message)
         })
     },
     submitForm() {
@@ -123,7 +118,7 @@ export default {
           })
             .then(() => {
               this.visible = false
-              this.$message.success(this.$i18n.t('message.save_success'))
+              this.$message.success(this.$t('message.save_success'))
               this.$emit('refresh')
             })
             .catch(err => {

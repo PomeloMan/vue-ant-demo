@@ -1,0 +1,27 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "颜色",
+      "standardId": "1",
+      "standardName": "美妆规格1",
+      "default": "红色 白色 墨绿色",
+      "sequence": 1,
+      "status": 1,
+      "createdDate": "2020-03-26T14:17:28.000+0000"
+    }
+  ],
+  "totalElements": 1,
+  "totalPages": 1,
+  "last": true,
+  "number": 0,
+  "size": 10,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "first": true,
+  "numberOfElements": 1,
+  "empty": false
+}

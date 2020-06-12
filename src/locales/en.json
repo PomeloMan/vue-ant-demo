@@ -1,49 +1,93 @@
 {
+  "app": {
+    "title": "Title",
+    "subtitle": "Subtitle"
+  },
   "message": {
-    "avatar_upload_failure": "头像上传失败!",
-    "avatar_upload_success": "头像上传成功!",
+    "avatar_upload_failure": "upload avatar failed!",
+    "avatar_upload_success": "upload avatar successfully!",
     "delete_success": "删除成功!",
     "file_upload_failure": "文件上传失败!",
     "file_upload_success": "文件上传成功!",
+    "image_upload_failure": "图片上传失败!",
+    "image_upload_success": "图片上传成功!",
+    "image_type_error": "图片格式错误",
+    "image_size_error": "图片大小错误，最大不超过{max}M",
+    "image_wh_error": "图片尺寸错误，最大不超过{w}x{h}",
     "is_confirm_delete": "是否确认删除?",
     "is_confirm_cancel": "是否确认取消?",
     "save_success": "保存成功!",
     "save_failure": "保存失败!",
     "update_success": "修改成功!",
     "update_failure": "修改失败!",
-    "please_input": "请输入{content}",
-    "please_select": "请选择{content}",
+    "please_input": "please input {content}",
+    "please_select": "please select {content}",
     "must_be_positive_integer": "{name}必须是正整数",
     "using_mock_data": "正在使用模拟数据",
-    "click_drag_file": "Click or drag file to this area"
+    "drag_area_title": "Click or drag file to this area to upload",
+    "drag_area_hint": "建议使用jpg或png格式文件"
   },
   "common": {
-    "new": "New",
-    "save": "Save",
+    "account": "Account",
+    "advance_search": "Advance search",
+    "avatar": "Avatar",
     "cancel": "Cancel",
-    "edit": "Edit",
+    "create_time": "Create date",
+    "ok": "OK",
     "delete": "Delete",
-    "import": "Upload",
-    "export": "Download",
-    "export_template": "Download template",
-    "export_data": "Download data",
-    "confirm_delete": "Are you sure to delete this data?",
-    "confirm_ok": "Ok",
-    "confirm_cancel": "Cancel",
-    "confirm_save_cancel": "Are you sure to cancel saving?",
-    "file_upload_success": "Uploaded file successfully",
-    "file_upload_failure": "Upload file failed",
-    "save_success": "Saved successfully",
-    "save_failure": "Save failed",
-    "table": {
-      "status": "Status",
-      "modifier": "Modifier",
-      "modifyDate": "Modify date",
-      "operation": "Operation",
-      "dictCode": "Dictionary code"
-    }
+    "detail": "Detail",
+    "dict_code": "Dictionary code",
+    "edit": "Edit",
+    "edit_role": "Edit role",
+    "edit_user": "Edit user",
+    "email": "Email",
+    "export": "Export",
+    "export_data": "Export data",
+    "export_template": "Export template",
+    "heart": "Follow",
+    "import": "Import",
+    "level": "Level",
+    "locale": "Language",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "menu": "Menu",
+    "menu_name": "菜单名",
+    "menu_icon": "菜单图标",
+    "menu_parent": "父级菜单",
+    "modifier": "修改人",
+    "modify_date": "修改时间",
+    "name": "名称",
+    "new": "新建",
+    "new_menu": "新建菜单",
+    "new_project": "新建项目",
+    "new_role": "新建角色",
+    "new_user": "新建用户",
+    "nick_name": "昵称",
+    "number": "序号",
+    "operation": "操作",
+    "overview": "总览",
+    "password": "密码",
+    "page_show_total": "{from} ~ {to} Total {total} items",
+    "print": "打印",
+    "reset": "重置",
+    "role": "角色",
+    "role_auth": "角色权限",
+    "role_name": "角色名",
+    "rotate_clockwise": "顺时针旋转{angle}度",
+    "rotate_counterclockwise": "逆时针旋转{angle}度",
+    "save": "保存",
+    "search": "查询",
+    "status": "状态",
+    "submit": "提交",
+    "total_number": "共 {num} 项",
+    "upload": "上传",
+    "upload_avatar": "上传头像",
+    "url": "链接地址",
+    "weights": "权重"
   },
   "breadcrumb": {
+    "add": "Add",
+    "detail": "Detail",
     "home": "Home",
     "dashboard": "Dashboard",
     "antvg2": "Antv-G2",
@@ -52,25 +96,14 @@
     "user": "User Management",
     "role": "Role Management",
     "auth": "Auth Management",
-    "menu": "Menu Management"
+    "menu": "Menu Management",
+    "e-commerce": "E-Commerce Management",
+    "ec-shop": "Shop Management",
+    "ec-brand": "Brand Management",
+    "ec-product": "Product Management"
   },
-  "user": {
-    "table": {
-      "username": "Username",
-      "displayName": "Display name",
-      "role": "Role",
-      "email": "E-mail"
-    }
-  },
-  "role": {
-    "table": {
-      "number": "Num",
-      "name": "Role name"
-    }
-  },
-  "menu": {
-    "table": {
-      "name": "Menu name"
-    }
+  "project": {
+    "name": "项目名称",
+    "description": "项目描述"
   }
 }

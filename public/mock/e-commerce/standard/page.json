@@ -1,0 +1,37 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "美妆规格1",
+      "categoryId": 1,
+      "shopId": 1,
+      "shopName": "LA MER海蓝之谜官方旗舰店",
+      "sequence": 1,
+      "status": 1,
+      "createdDate": "2020-03-26T14:17:28.000+0000"
+    },
+    {
+      "id": 2,
+      "name": "美妆规格2",
+      "categoryId": 1,
+      "shopId": 1,
+      "shopName": "LA MER海蓝之谜官方旗舰店",
+      "sequence": 1,
+      "status": 1,
+      "createdDate": "2020-03-26T14:17:28.000+0000"
+    }
+  ],
+  "totalElements": 2,
+  "totalPages": 1,
+  "last": true,
+  "number": 0,
+  "size": 10,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "first": true,
+  "numberOfElements": 2,
+  "empty": false
+}

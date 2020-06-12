@@ -20,47 +20,47 @@ export default {
         const $this = this
         return [
           {
-            title: this.$i18n.t('common.avatar'),
+            title: this.$t('common.avatar'),
             dataIndex: 'avatar',
             width: 80,
             align: 'center',
             scopedSlots: { customRender: 'avatar' }
           },
           {
-            title: this.$i18n.t('common.account'),
+            title: this.$t('common.account'),
             dataIndex: 'username',
             width: 120,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.nick_name'),
+            title: this.$t('common.nick_name'),
             dataIndex: 'displayName',
             width: 120,
             align: 'center',
             scopedSlots: { customRender: 'displayName' }
           },
           {
-            title: this.$i18n.t('common.role_name'),
+            title: this.$t('common.role_name'),
             dataIndex: 'roles',
             width: 120,
             align: 'center',
             scopedSlots: { customRender: 'role' }
           },
           {
-            title: this.$i18n.t('common.email'),
+            title: this.$t('common.email'),
             dataIndex: 'email',
             width: 180,
             align: 'center',
             scopedSlots: { customRender: 'email' }
           },
           {
-            title: this.$i18n.t('common.status'),
+            title: this.$t('common.status'),
             dataIndex: 'statusDesc',
             width: 80,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.create_time'),
+            title: this.$t('common.create_time'),
             dataIndex: 'createdDate',
             width: 120,
             align: 'center',
@@ -69,7 +69,7 @@ export default {
             }
           },
           {
-            title: this.$i18n.t('common.operation'),
+            title: this.$t('common.operation'),
             width: 150,
             align: 'center',
             scopedSlots: { customRender: 'operation' }

@@ -22,23 +22,24 @@
     "update_failure": "修改失败!",
     "please_input": "请输入{content}",
     "please_select": "请选择{content}",
+    "please_upload": "请上传{content}",
     "must_be_positive_integer": "{name}必须是正整数",
     "using_mock_data": "正在使用模拟数据",
     "drag_area_title": "单击或将文件拖到该区域",
     "drag_area_hint": "建议使用jpg或png格式文件"
   },
-  "i18n": {
-    "en": "English",
-    "zh": "中文"
-  },
   "common": {
     "account": "账号",
     "advance_search": "高级搜索",
     "avatar": "头像",
+    "back": "返回",
     "cancel": "取消",
+    "complete": "完成",
+    "config": "配置",
     "create_time": "创建时间",
     "ok": "确认",
     "delete": "删除",
+    "detail": "详情",
     "dict_code": "字典码",
     "edit": "编辑",
     "edit_role": "编辑角色",
@@ -50,6 +51,7 @@
     "heart": "关注",
     "import": "导入",
     "level": "层级",
+    "level_unit": "级",
     "locale": "语言",
     "login": "登录",
     "logout": "登出",
@@ -60,7 +62,9 @@
     "modifier": "修改人",
     "modify_date": "修改时间",
     "name": "名称",
+    "next_step": "下一步",
     "new": "新建",
+    "new_content": "新建{content}",
     "new_menu": "新建菜单",
     "new_project": "新建项目",
     "new_role": "新建角色",
@@ -71,6 +75,7 @@
     "overview": "总览",
     "password": "密码",
     "page_show_total": "{from} ~ {to} 总共 {total} 条",
+    "previous_step": "上一步",
     "print": "打印",
     "reset": "重置",
     "role": "角色",
@@ -80,15 +85,23 @@
     "rotate_counterclockwise": "逆时针旋转{angle}度",
     "save": "保存",
     "search": "查询",
+    "setting": "设置",
     "status": "状态",
+    "step_one": "第一步",
+    "step_two": "第二步",
+    "step_three": "第三步",
+    "step_four": "第四步",
     "submit": "提交",
     "total_number": "共 {num} 项",
     "upload": "上传",
     "upload_avatar": "上传头像",
     "url": "链接地址",
-    "weights": "权重"
+    "weights": "权重",
+    "weights_extra": "此值影响最终呈现顺序，值越低越靠前"
   },
   "breadcrumb": {
+    "add": "添加",
+    "detail": "详情",
     "home": "首页",
     "dashboard": "报表",
     "antvg2": "Antv-G2",
@@ -98,10 +111,90 @@
     "role": "角色管理",
     "auth": "权限管理",
     "menu": "菜单管理",
-    "info": "详情"
+    "e-commerce": "电商管理",
+    "ec-shop": "店铺管理",
+    "ec-brand": "品牌管理",
+    "ec-category": "商品分类",
+    "ec-product": "商品管理",
+    "ec-standard": "规格标准管理",
+    "ec-attribute": "SKU/SPU设置"
   },
   "project": {
     "name": "项目名称",
     "description": "项目描述"
+  },
+  "ecommerce": {
+    "shop": {
+      "base_info": "基本信息",
+      "location": "所在地",
+      "location_extra": "建议具体到区/县",
+      "logo": "店铺LOGO",
+      "logo_extra": "图片大小不超过10M，尺寸不超过1024x1024",
+      "name": "店铺名称",
+      "name_extra": "为了更好的用户体验，建议不超过10个字",
+      "platform": "所在平台",
+      "platform_extra": "可以选择多个平台",
+      "qualification_info": "资质信息",
+      "shopkeeper": "掌柜名",
+      "shopkeeper_info": "掌柜信息",
+      "type": "店铺类型",
+      "verified_date": "开店时间",
+      "wait_for_approval": "等待审批",
+      "wait_for_approval_content": "您的申请已提交，预计需要{day}个工作日出审批结果"
+    },
+    "shopkeeper": {
+      "name": "掌柜名称",
+      "name_extra": "平台账号显示昵称",
+      "actual_name": "真实姓名",
+      "actual_name_extra": "申请人真实姓名，需要与上传身份证保持一致",
+      "contact": "联系方式",
+      "contact_extra": "",
+      "ID_card_front": "上传身份证正面",
+      "ID_card_front_extra": "图片大小不超过10M，尺寸不超过1024x1024",
+      "ID_card_back": "上传身份证背面",
+      "ID_card_back_extra": "图片大小不超过10M，尺寸不超过1024x1024"
+    },
+    "brand": {
+      "_": "品牌",
+      "logo": "品牌LOGO",
+      "name": "品牌名称"
+    },
+    "category": {
+      "_": "分类",
+      "thumbnail": "分类缩图",
+      "name": "分类名称",
+      "level": "分类层级",
+      "level_default": "无上级分类",
+      "level_extra": "不选择则默认无上级分类"
+    },
+    "standard": {
+      "_": "规格标准",
+      "name": "标准名称",
+      "category": "所属分类",
+      "shop": "所属店铺"
+    },
+    "attribute": {
+      "_": "属性",
+      "name": "属性名称",
+      "name_extra": "为更好的用户体验，字数限制 {current}/{limit}",
+      "standard": "所属规格标准",
+      "standard_extra": "如需设置其他规格标准属性，请从规格标准管理进入设置，此处固定显示当前规格标准",
+      "entry_method": "属性录入方式",
+      "entry_method_extra": "【手动录入】可以输入预设值以外的数据，【预设值中选取】只能从预设值中选择数据",
+      "entry_method_value0": "手动录入",
+      "entry_method_value1": "预设值中选取",
+      "default": "属性预设值",
+      "default_extra": "多个值之间用空格符(' ')或逗号(',')隔开，如'红色 白色'或'红色,白色'"
+    },
+    "product": {
+      "name": "商品名称",
+      "picture": "商品图片",
+      "brand": "商品品牌",
+      "current_price": "现价",
+      "original_price": "原价",
+      "sequence": "商品权重",
+      "category": "商品大类",
+      "publisher": "发布人"
+    }
   }
 }

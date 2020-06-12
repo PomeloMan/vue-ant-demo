@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import PerfectScrollbar from '@/components/plugins/perfect-scrollbar.vue'
+import PerfectScrollbar from '@/components/mixins/perfect-scrollbar'
 import AddDrawer from './drawer/add.vue'
 import _ from 'lodash'
 
@@ -75,7 +75,6 @@ export default {
   mixins: [PerfectScrollbar],
   data() {
     return {
-      scrollWrapper: () => document.getElementById('scrollContainer'),
       data: [], // 项目列表
       page: 1,
       pageSize: 10,
@@ -86,9 +85,7 @@ export default {
   created() {
     this.getData()
   },
-  mounted() {
-    this.initPerfectScrollbar()
-  },
+  mounted() {},
   methods: {
     onSearch: _.debounce(
       function(values) {

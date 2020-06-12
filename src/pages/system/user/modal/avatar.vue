@@ -157,7 +157,7 @@ export default {
           })
           .then(({ data }) => {
             $this.$message.success(
-              $this.$i18n.t('message.avatar_upload_success')
+              $this.$t('message.avatar_upload_success')
             )
             // 上传文件成功将文件ID赋值给用户头像
             $this.user.avatar = data[0] && data[0].id

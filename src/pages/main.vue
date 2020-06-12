@@ -31,9 +31,11 @@
             </a-breadcrumb-item>
           </template>
         </a-breadcrumb>-->
-        <keep-alive :include="keepAliveList">
-          <router-view class="container"></router-view>
-        </keep-alive>
+        <transition name="slide-fade">
+          <keep-alive :include="keepAliveList">
+            <router-view class="container"></router-view>
+          </keep-alive>
+        </transition>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -69,21 +71,14 @@ export default {
     return {}
   },
   created() {
-    Promise.all([this.getUser(), this.getDict()]).then(() => {
-      console.log(this.user)
-    })
+    Promise.all([this.getUser(), this.getDict()]).then()
   },
   methods: {
     // 获取用户信息
     getUser() {
-      return this.$http
-        .get(this.$api.SYS_USER)
-        .then(({ data }) => {
-          this.$store.dispatch('common/updateUser', data)
-        })
-        .catch(err => {
-          this.$message.error(err.message)
-        })
+      return this.$http.get(this.$api.SYS_USER).then(({ data }) => {
+        this.$store.dispatch('common/updateUser', data)
+      })
     },
     // 获取字典数据
     getDict() {
@@ -104,5 +99,22 @@ export default {
   padding: 0px;
   line-height: 56px;
   height: 56px;
+}
+.layout-content {
+  overflow: hidden;
+}
+
+// <transition>
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+  transition-delay: 0.3s;
+}
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

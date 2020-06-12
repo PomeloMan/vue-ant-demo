@@ -1,0 +1,25 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "LA MER/海蓝之谜",
+      "logo": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+      "sequence": 1,
+      "status": 1,
+      "createdDate": "2020-03-26T14:17:28.000+0000"
+    }
+  ],
+  "totalElements": 1,
+  "totalPages": 1,
+  "last": true,
+  "number": 0,
+  "size": 10,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "first": true,
+  "numberOfElements": 1,
+  "empty": false
+}

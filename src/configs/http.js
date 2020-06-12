@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from './router'
+import Vue from 'vue'
 import CONSTS from '../constants'
 import { storage } from './storage';
 
@@ -44,6 +45,7 @@ http.interceptors.response.use(response => {
   if (error.response && error.response.status === 401) {
     router.push({ name: CONSTS.PAGE_LOGIN })
   }
+  Vue.prototype.$message.error(error.message)
   return Promise.reject(error)
 })
 

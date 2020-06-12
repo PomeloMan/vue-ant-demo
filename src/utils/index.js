@@ -129,6 +129,20 @@ export function combine(array1, array2) {
 export function verifyPhoneNumber(val) {
   return /^1[3456789]\d{9}$/.test(val)
 }
+/**
+ * 验证座机号码
+ */
+export function checkLandline(number) {
+  return /^((0\d{2,3}))(\d{7,8})(-(\d{3,}))?$/.test(number);
+}
+
+/**
+ * 检验正整数
+ * @param {*} value 
+ */
+export function checkPositiveNumber(value) {
+  return /(^[1-9]\d*$)/.test(value);
+}
 
 /**
  * 将集合构建成父子关系树形数据结构
@@ -200,6 +214,22 @@ export function getBase64(img, callback) {
 }
 
 /**
+ * 获取 video 元素第一帧图片，存在跨域问题
+ * @param {*} video video元素 <video>
+ * @param {*} scale 长宽比例
+ */
+export function captureImage(video, scale) {
+  var canvas = document.createElement("canvas")
+  canvas.width = video.videoWidth * scale
+  canvas.height = video.videoHeight * scale
+  canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height)
+
+  var img = document.createElement("img")
+  img.src = canvas.toDataURL("image/png")
+  return img
+}
+
+/**
  * 处理数据下载
  * @param {*} data 二进制数据
  * @param {*} options 默认excel格式
@@ -220,4 +250,22 @@ export function handleBlobData(filename, data, options = { type: 'application/vn
   } else {
     window.navigator.msSaveBlob(blob, filename)
   }
+}
+
+/**
+ * 文本替换
+ * @param {*} value 需要格式的文本，格式从{1}开始，如 hello,{1}
+ * 
+ * @example
+ * value(arguments[0]): hello,{1}
+ * arguments[1]: world
+ * return: hello,world
+ */
+export function stringFormat(value) {
+  let v = value
+  let i = arguments.length
+  while (i--) {
+    v = v.replace(new RegExp('\\{' + i + '\\}', 'g'), arguments[i])
+  }
+  return v;
 }

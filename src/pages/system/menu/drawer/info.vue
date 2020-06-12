@@ -136,7 +136,7 @@ export default {
             .post(this.$api.SYS_MENU, values)
             .then(() => {
               this.visible = false
-              this.$message.success(this.$i18n.t('message.save_success'))
+              this.$message.success(this.$t('message.save_success'))
               this.$emit('refresh')
             })
             .catch(err => {
@@ -149,8 +149,8 @@ export default {
     checkNumber(rule, value, callback) {
       if (!/(^[1-9]\d*$)/.test(value)) {
         callback(
-          this.$i18n.t('message.must_be_positive_integer', {
-            name: this.$i18n.t('common.weights')
+          this.$t('message.must_be_positive_integer', {
+            name: this.$t('common.weights')
           })
         )
         return

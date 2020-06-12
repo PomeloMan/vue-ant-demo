@@ -43,3 +43,17 @@
     background: #e6d8d8;
   }
 }
+
+// 超出换行
+.text-overflow-inline {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.text-overflow-vertical {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

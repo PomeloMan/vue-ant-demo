@@ -1,11 +1,6 @@
 <template>
   <div>
-    <app-header
-      :breadcrumbs="breadcrumbs"
-      :searchType="'advanced'"
-      :formItem="formItem"
-      @onAdvancedSearch="onAdvancedSearch"
-    >
+    <app-header :breadcrumbs="breadcrumbs">
       <div slot="action-group">
         <a-button type="link" @click="showInfoDrawer(0)">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
@@ -127,8 +122,8 @@
 </template>
 
 <script>
-import BaseComponent from '@/components/base.component'
-import EditableCell from '@/components/commons/editable-cell'
+import BaseTable from '@/components/mixins/base-table'
+import EditableCell from '@/components/plugins/editable-cell'
 import KeepAlive from '@/components/mixins/keep-alive'
 import InfoDrawer from './drawer/info'
 import AvatarModal from './modal/avatar'
@@ -136,7 +131,7 @@ import FormItem from './mixins/form-item'
 import TableColumn from './mixins/table-column'
 export default {
   name: 'sys_user_keepalive',
-  mixins: [BaseComponent, FormItem, TableColumn, KeepAlive],
+  mixins: [BaseTable, FormItem, TableColumn, KeepAlive],
   components: {
     EditableCell,
     InfoDrawer,
@@ -201,10 +196,8 @@ export default {
             }
             this.$refs['infoDrawer'].form.setFieldsValue(formData)
           })
-          .catch(err => {
+          .catch(() => {
             this.$refs['infoDrawer'].loading = false
-            console.log(err)
-            this.$message.error(err.message)
           })
       }
     },
@@ -218,7 +211,7 @@ export default {
       this.$http.get(this.$api.USER_PAGE).then(({ data }) => {
         this.data = data.content
         this.total = data.totalElements
-        this.$message.warning(this.$i18n.t('message.using_mock_data'))
+        this.$message.warning(this.$t('message.using_mock_data'))
       })
     }
   }

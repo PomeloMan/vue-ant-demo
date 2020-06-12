@@ -125,12 +125,12 @@
 </template>
 
 <script>
-import BaseComponent from '@/components/base.component'
+import BaseTable from '@/components/mixins/base-table'
 import KeepAlive from '@/components/mixins/keep-alive'
 import InfoDrawer from './drawer/info'
 export default {
   name: 'sys_role_keepalive',
-  mixins: [BaseComponent, KeepAlive],
+  mixins: [BaseTable, KeepAlive],
   components: { InfoDrawer },
   data() {
     return {
@@ -143,7 +143,7 @@ export default {
       get() {
         return [
           {
-            title: this.$i18n.t('common.number'),
+            title: this.$t('common.number'),
             width: 50,
             align: 'center',
             customRender: function(text, record, index) {
@@ -151,38 +151,38 @@ export default {
             }
           },
           {
-            title: this.$i18n.t('common.dict_code'),
+            title: this.$t('common.dict_code'),
             dataIndex: 'name',
             width: 100,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.role_name'),
+            title: this.$t('common.role_name'),
             dataIndex: 'displayName',
             width: 150,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.status'),
+            title: this.$t('common.status'),
             dataIndex: 'statusDesc',
             width: 100,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.modifier'),
+            title: this.$t('common.modifier'),
             dataIndex: 'modifier',
             width: 100,
             align: 'center'
           },
           {
-            title: this.$i18n.t('common.modify_date'),
+            title: this.$t('common.modify_date'),
             dataIndex: 'modifiedDate',
             width: 150,
             align: 'center',
             scopedSlots: { customRender: 'date' }
           },
           {
-            title: this.$i18n.t('common.operation'),
+            title: this.$t('common.operation'),
             width: 150,
             align: 'center',
             scopedSlots: { customRender: 'operation' }
@@ -234,10 +234,6 @@ export default {
             }
             this.$refs['infoDrawer'].form.setFieldsValue(formData)
           })
-          .catch(err => {
-            console.log(err)
-            this.$message.error(err.message)
-          })
       }
     },
     // ----- delete -----
@@ -245,7 +241,7 @@ export default {
       this.$http.get(this.$api.ROLE_PAGE).then(({ data }) => {
         this.data = data.content
         this.total = data.totalElements
-        this.$message.warning(this.$i18n.t('message.using_mock_data'))
+        this.$message.warning(this.$t('message.using_mock_data'))
       })
     }
   }

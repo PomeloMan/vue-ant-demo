@@ -1,0 +1,8 @@
+/* ant-select 样式 */
+.ant-select >>> .ant-select-selection {
+  width: 100%;
+}
+
+.ant-input-number >>> .ant-input-number-input-wrap {
+  width: 100%;
+}

@@ -33,5 +33,35 @@
     "code": "DICT_MENU_THREE",
     "value_zh": "三维模型",
     "value_en": "3D Model"
+  },
+  {
+    "code": "DICT_E_COMMERCE",
+    "value_zh": "电商管理",
+    "value_en": "E-Commerce Management"
+  },
+  {
+    "code": "DICT_EC_SHOP",
+    "value_zh": "店铺管理",
+    "value_en": "Shop Management"
+  },
+  {
+    "code": "DICT_EC_BRAND",
+    "value_zh": "品牌管理",
+    "value_en": "Brand Management"
+  },
+  {
+    "code": "DICT_EC_PRODUCT",
+    "value_zh": "商品管理",
+    "value_en": "Product Management"
+  },
+  {
+    "code": "DICT_EC_CATEGORY",
+    "value_zh": "商品分类管理",
+    "value_en": "Category Management"
+  },
+  {
+    "code": "DICT_EC_STANDARD",
+    "value_zh": "规格标准管理",
+    "value_en": "Standard Management"
   }
 ]

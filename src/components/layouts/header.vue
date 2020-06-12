@@ -90,6 +90,13 @@
         />
       </div>
     </template>
+    <template v-if="searchType === 'refresh'">
+      <div>
+        <a-button type="link" size="small" @click="$emit('refresh')">
+          <a-icon type="sync"></a-icon>
+        </a-button>
+      </div>
+    </template>
     <template v-else>
       <div>
         <!-- none -->
@@ -243,6 +250,9 @@ export default {
   }
   > *:nth-child(1) {
     text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   > *:nth-child(3) {
     text-align: right;

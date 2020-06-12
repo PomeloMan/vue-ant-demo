@@ -14,6 +14,9 @@ module.exports = {
   productionSourceMap: false, // 是否为生产环境构建生成 source map
   css: {
     loaderOptions: {
+      css: {
+        importLoaders: 1
+      },
       less: {
         modifyVars: {
           // 'primary-color': '#00C6C6',
@@ -39,7 +42,10 @@ module.exports = {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src')
     config.resolve.alias['@assets'] = path.resolve(__dirname, 'src/assets')
 
-    config.plugins.push(new BundleAnalyzerPlugin())
+    if (process.env.npm_config_analyzer === 'true') {
+      // npm run serve --analyzer
+      config.plugins.push(new BundleAnalyzerPlugin())
+    }
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...
       config.output.filename = `[name].${process.env.VUE_APP_VERSION}.${Timestamp}.js`

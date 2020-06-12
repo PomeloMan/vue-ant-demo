@@ -1,12 +1,15 @@
-<script>
 import PerfectScrollbar from 'perfect-scrollbar'
 export default {
   data() {
     return {
       elementId: '#scrollContainer',
       perfectScrollbar: '', // PerfectScrollbar 对象
-      scrollContainer: '' // PerfectScrollbar 元素
+      scrollContainer: '', // PerfectScrollbar 元素
+      scrollWrapper: () => document.getElementById('scrollContainer')
     }
+  },
+  mounted() {
+    this.initPerfectScrollbar()
   },
   destroyed() {
     if (this.perfectScrollbar) {
@@ -38,7 +41,6 @@ export default {
       })
     },
     // 滚动条到底部时触发
-    onScrollbarYReachEnd() {}
+    onScrollbarYReachEnd() { }
   }
 }
-</script>

@@ -1,4 +1,3 @@
-<script>
 // import qs from 'qs'
 
 const rowSelection = $this => {
@@ -52,42 +51,45 @@ export default {
   methods: {
     // -- table --
     // 重置 table 滚动高度
-    resize: function() {
+    resize: function () {
       setTimeout(() => {
-        const $el = document.querySelector('.table-content-wrapper')
-        if ($el) {
-          const $antTableEl = $el.querySelector('.ant-table-wrapper')
+        // const $el = document.querySelector('.table-content-wrapper')
+        const $els = document.querySelectorAll('.table-content-wrapper')
+        if ($els) {
+          $els.forEach($el => {
+            const $antTableEl = $el.querySelector('.ant-table-wrapper')
 
-          const $antTableHeaderEl = $antTableEl.querySelector(
-            '.ant-table-header'
-          )
-          const $antTableTheadEl = $antTableEl.querySelector(
-            '.ant-table-body .ant-table-thead'
-          )
-          this.tableScrollY =
-            $antTableEl.clientHeight -
-            ($antTableHeaderEl ? $antTableHeaderEl.clientHeight : 0) -
-            ($antTableTheadEl ? $antTableTheadEl.clientHeight : 0)
+            const $antTableHeaderEl = $antTableEl.querySelector(
+              '.ant-table-header'
+            )
+            const $antTableTheadEl = $antTableEl.querySelector(
+              '.ant-table-body .ant-table-thead'
+            )
+            this.tableScrollY =
+              $antTableEl.clientHeight -
+              ($antTableHeaderEl ? $antTableHeaderEl.clientHeight : 0) -
+              ($antTableTheadEl ? $antTableTheadEl.clientHeight : 0)
+          })
         } else {
           this.tableScrollY = ''
         }
       }, 0)
     },
     // -- 查询 --
-    onSimpleSearch: function(val) {
+    onSimpleSearch: function (val) {
       this.body.search = val
       this.page = 1
       this.getData()
     },
     // -- 分页 --
     // 当前页变化
-    onPageChange: function(page, pageSize) {
+    onPageChange: function (page, pageSize) {
       this.page = page
       this.pageSize = pageSize
       this.getData()
     },
     // 每页显示数目变化
-    onPageSizeChange: function(current, size) {
+    onPageSizeChange: function (current, size) {
       this.page = current
       this.pageSize = size
       this.getData()
@@ -100,12 +102,12 @@ export default {
     uploadChange(info) {
       if (info.file.status === 'done') {
         this.$message.success(
-          `${info.file.name}` + this.$i18n.t('common.file_upload_success')
+          `${info.file.name}` + this.$t('common.file_upload_success')
         )
         this.getData()
       } else if (info.file.status === 'error') {
         this.$message.error(
-          `${info.file.name}` + this.$i18n.t('common.file_upload_failure')
+          `${info.file.name}` + this.$t('common.file_upload_failure')
         )
       }
     },
@@ -143,7 +145,7 @@ export default {
         this.$http
           .put(url, target)
           .then(() => {
-            this.$message.success(this.$i18n.t('message.update_success'))
+            this.$message.success(this.$t('message.update_success'))
             this.data = data
           })
           .catch(err => {
@@ -177,7 +179,7 @@ export default {
         this.cacheData = data.map(item => ({ ...item }))
 
         return this.$http.put(url, record).then(() => {
-          this.$message.success(this.$i18n.t('message.save_success'))
+          this.$message.success(this.$t('message.save_success'))
         })
       }
     },
@@ -208,7 +210,7 @@ export default {
         .then(() => {
           this.getData()
           this.refreshDeleteStatus(record)
-          this.$message.success(this.$i18n.t('message.delete_success'))
+          this.$message.success(this.$t('message.delete_success'))
         })
         .catch(err => {
           console.error(err)
@@ -239,4 +241,3 @@ export default {
     // }
   }
 }
-</script>

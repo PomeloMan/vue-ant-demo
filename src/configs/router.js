@@ -95,7 +95,22 @@ const routes = [{
         breadcrumbs: BREADCRUMB['system-menu']
       },
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/menu/index.vue')
-    }
+    },
+
+    /// ********************** 电商模块 **********************
+    // 商户
+    { name: 'ec-shop', path: 'e-commerce/shop', meta: { breadcrumbs: BREADCRUMB['ec-shop'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/shop/tabs.vue') },
+    { name: 'ec-shop-info', path: 'e-commerce/shop/:id', meta: { breadcrumbs: BREADCRUMB['ec-shop-info'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/shop/info.vue') },
+    // 品牌
+    { name: 'ec-brand', path: 'e-commerce/brand', meta: { breadcrumbs: BREADCRUMB['ec-brand'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/brand/index.vue') },
+    // 分类
+    { name: 'ec-category', path: 'e-commerce/category', meta: { breadcrumbs: BREADCRUMB['ec-category'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/category/index.vue') },
+    // 规格标准
+    { name: 'ec-standard', path: 'e-commerce/standard', meta: { breadcrumbs: BREADCRUMB['ec-standard'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/standard/index.vue') },
+    // SKU/SPU
+    { name: 'ec-attribute', path: 'e-commerce/attribute/:standardId', meta: { breadcrumbs: BREADCRUMB['ec-attribute'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/attribute/tabs.vue') },
+    // 商品
+    { name: 'ec-product', path: 'e-commerce/product', meta: { breadcrumbs: BREADCRUMB['ec-product'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/product/index.vue') }
   ]
 }, {
   name: '404',

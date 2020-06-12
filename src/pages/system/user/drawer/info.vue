@@ -101,11 +101,6 @@ export default {
         .post(this.$api.SYS_ROLE_LIST)
         .then(({ data }) => {
           this.roles = data.map(item => ({ ...item }))
-          console.log(this.roles)
-        })
-        .catch(err => {
-          console.error(err)
-          this.$message.error(err.message)
         })
     },
     submitForm: _.debounce(
@@ -124,7 +119,7 @@ export default {
             })
               .then(() => {
                 this.visible = false
-                this.$message.success(this.$i18n.t('message.save_success'))
+                this.$message.success(this.$t('message.save_success'))
                 this.$emit('refresh')
               })
               .catch(err => {

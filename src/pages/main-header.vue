@@ -8,23 +8,21 @@
         <!-- <lottie-web></lottie-web> -->
       </li>
 
+      <!-- 语言 -->
       <a-dropdown class :trigger="['click']">
         <li class="ant-menu-item ant-dropdown-link" href="#">
           <span>{{$t('common.locale')}}</span>
           <a-icon type="down" />
         </li>
         <a-menu slot="overlay" class="i18n-menu">
-          <a-menu-item key="0" @click="i18n(zhCN)">
-            <svg-icon icon-class="locale_zh" class="icon"></svg-icon>
-            <span>{{$t('i18n.zh')}}</span>
-          </a-menu-item>
-          <a-menu-item key="1" @click="i18n(enUS)">
-            <svg-icon icon-class="locale_en" class="icon"></svg-icon>
-            <span>{{$t('i18n.en')}}</span>
+          <a-menu-item :key="item.code" @click="i18n(item.locale)" v-for="item in locales">
+            <svg-icon :icon-class="`locale_${item.code}`" class="icon"></svg-icon>
+            <span>{{item.name}}</span>
           </a-menu-item>
         </a-menu>
       </a-dropdown>
 
+      <!-- 账号 -->
       <a-dropdown class :trigger="['click']">
         <li class="user-info ant-menu-item ant-dropdown-link" href="javascript:;">
           <a-avatar class="user-avatar" icon="user" />
@@ -43,9 +41,6 @@
 import StoreComponent from '@/components/store.component'
 import { Menu, Dropdown } from 'ant-design-vue'
 import i18n from '@/constants/i18n'
-// 国际化
-import enUS from 'ant-design-vue/es/locale/en_US'
-import zhCN from 'ant-design-vue/es/locale/zh_CN'
 
 export default {
   name: 'main-header',
@@ -57,8 +52,6 @@ export default {
   },
   data() {
     return {
-      enUS,
-      zhCN,
       locales: i18n.locales
     }
   },

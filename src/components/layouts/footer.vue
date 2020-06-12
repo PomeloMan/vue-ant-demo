@@ -54,7 +54,7 @@ export default {
       this.$emit('onPageSizeChange', current, size)
     },
     showTotal(total, range) {
-      return this.$i18n.t('common.page_show_total', {
+      return this.$t('common.page_show_total', {
         from: range[0],
         to: range[1],
         total: total

@@ -1,0 +1,31 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "LA MER海蓝之谜官方旗舰店",
+      "platform": "0",
+      "desc": "<p></p>",
+      "logo": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+      "sequence": 1,
+      "star": 5,
+      "shopkeeper": "lamer海蓝之谜官方旗舰店",
+      "location": "上海",
+      "status": 3,
+      "verifiedDate": "2020-06-01T00:00:00.000Z",
+      "qualifications": ""
+    }
+  ],
+  "totalElements": 11,
+  "totalPages": 2,
+  "last": true,
+  "number": 0,
+  "size": 10,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "first": true,
+  "numberOfElements": 1,
+  "empty": false
+}

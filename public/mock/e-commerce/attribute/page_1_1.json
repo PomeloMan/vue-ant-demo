@@ -1,0 +1,47 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "品牌",
+      "standardId": "1",
+      "standardName": "美妆规格1",
+      "default": "海蓝之谜",
+      "sequence": 1,
+      "status": 1,
+      "createdDate": "2020-03-26T14:17:28.000+0000"
+    },
+    {
+      "id": 2,
+      "name": "产地",
+      "standardId": "1",
+      "standardName": "美妆规格1",
+      "default": "美国",
+      "sequence": 1,
+      "status": 1,
+      "createdDate": "2020-03-26T14:17:28.000+0000"
+    },
+    {
+      "id": 3,
+      "name": "化妆品净含量",
+      "standardId": "1",
+      "standardName": "美妆规格1",
+      "default": "60ml 30ml 15ml 100ml 100g",
+      "sequence": 1,
+      "status": 1,
+      "createdDate": "2020-03-26T14:17:28.000+0000"
+    }
+  ],
+  "totalElements": 1,
+  "totalPages": 1,
+  "last": true,
+  "number": 0,
+  "size": 10,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "first": true,
+  "numberOfElements": 1,
+  "empty": false
+}

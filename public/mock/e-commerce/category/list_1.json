@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1001,
+    "name": "护肤套装",
+    "level": 2,
+    "parentId": 1,
+    "thumbnail": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+    "sequence": 1,
+    "status": 1,
+    "tag": "护肤",
+    "createdDate": "2020-03-26T14:17:28.000+0000"
+  },
+  {
+    "id": 1002,
+    "name": "精华",
+    "level": 2,
+    "parentId": 1,
+    "thumbnail": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+    "sequence": 1,
+    "status": 1,
+    "tag": "护肤",
+    "createdDate": "2020-03-26T14:17:28.000+0000"
+  },
+  {
+    "id": 1003,
+    "name": "乳液面霜",
+    "level": 2,
+    "parentId": 1,
+    "thumbnail": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+    "sequence": 1,
+    "status": 1,
+    "tag": "护肤",
+    "createdDate": "2020-03-26T14:17:28.000+0000"
+  },
+  {
+    "id": 1004,
+    "name": "面膜",
+    "level": 2,
+    "parentId": 1,
+    "thumbnail": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+    "sequence": 1,
+    "status": 1,
+    "tag": "护肤",
+    "createdDate": "2020-03-26T14:17:28.000+0000"
+  },
+  {
+    "id": 1005,
+    "name": "眼霜",
+    "level": 2,
+    "parentId": 1,
+    "thumbnail": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+    "sequence": 1,
+    "status": 1,
+    "tag": "护肤",
+    "createdDate": "2020-03-26T14:17:28.000+0000"
+  },
+  {
+    "id": 1006,
+    "name": "洁面",
+    "level": 2,
+    "parentId": 1,
+    "thumbnail": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+    "sequence": 1,
+    "status": 1,
+    "tag": "护肤",
+    "createdDate": "2020-03-26T14:17:28.000+0000"
+  }
+]
