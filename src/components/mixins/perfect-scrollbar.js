@@ -10,6 +10,9 @@ export default {
   },
   mounted() {
     this.initPerfectScrollbar()
+    this.$nextTick(() => {
+      this.scrollWrapper().style.overflow = 'hidden'
+    })
   },
   destroyed() {
     if (this.perfectScrollbar) {

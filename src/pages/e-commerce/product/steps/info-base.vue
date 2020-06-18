@@ -157,11 +157,7 @@ export default {
       this.data.district
     ].filter(d => d) // 清空空值
   },
-  mounted() {
-    if (this.$parent.scrollContainer) {
-      this.$parent.scrollContainer.scrollTop = 0
-    }
-  },
+  mounted() {},
   methods: {
     next(activeKey) {
       return new Promise(resolve => {
