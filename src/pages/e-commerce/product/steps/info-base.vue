@@ -163,7 +163,7 @@ export default {
     }
   },
   methods: {
-    next() {
+    next(activeKey) {
       return new Promise(resolve => {
         this.form.validateFields((err, values) => {
           if (!err) {
@@ -174,7 +174,11 @@ export default {
             }
             if (this.needCalcCode) {
               this.calcCode(values).then(() => {
-                if (this.data.code && values.code !== this.data.code) {
+                if (
+                  this.data.code &&
+                  values.code !== this.data.code &&
+                  activeKey === 1
+                ) {
                   this.showCodeConfirmNotification(values.code)
                 }
                 this.$emit('dataChange', {

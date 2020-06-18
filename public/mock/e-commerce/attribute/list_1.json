@@ -11,7 +11,18 @@
     "createdDate": "2020-03-26T14:17:28.000+0000"
   },
   {
-    "id": 1,
+    "id": 2,
+    "type": 1,
+    "name": "尺寸",
+    "standardId": "1",
+    "standardName": "美妆规格1",
+    "default": "34码 35码 36码 37码 38码 39码 40码",
+    "sequence": 1,
+    "status": 1,
+    "createdDate": "2020-03-26T14:17:28.000+0000"
+  },
+  {
+    "id": 3,
     "type": 2,
     "name": "品牌",
     "standardId": "1",
@@ -22,7 +33,7 @@
     "createdDate": "2020-03-26T14:17:28.000+0000"
   },
   {
-    "id": 2,
+    "id": 4,
     "type": 2,
     "name": "产地",
     "standardId": "1",
@@ -33,7 +44,7 @@
     "createdDate": "2020-03-26T14:17:28.000+0000"
   },
   {
-    "id": 3,
+    "id": 5,
     "type": 2,
     "name": "化妆品净含量",
     "standardId": "1",

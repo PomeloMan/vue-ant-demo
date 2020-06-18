@@ -2,10 +2,7 @@
   <!-- 商品规格参数（SKU/SPU） -->
   <a-form :form="form" :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
     <!-- 商品编码 -->
-    <a-form-item
-      :label="$t('ecommerce.product.code')"
-      :extra="$t('ecommerce.product.code_extra')"
-    >
+    <a-form-item :label="$t('ecommerce.product.code')" :extra="$t('ecommerce.product.code_extra')">
       <a-input
         v-decorator="['code', {
         initialValue: data.code,
@@ -105,8 +102,7 @@
 import { mapState } from 'vuex'
 import SkuTable from '../components/sku-table'
 import debounce from 'lodash/debounce'
-import { combineAll } from '@/utils'
-import { v1 as uuidv1 } from 'uuid'
+import { combineAll, toString36 } from '@/utils'
 export default {
   components: { SkuTable },
   model: {
@@ -127,13 +123,15 @@ export default {
       this.spuArr = val
     },
     'data.standardId': function(val) {
-      this.handleStandardChange(val)
+      if (this.$parent.current !== 1) {
+        this.handleStandardChange(val)
+      }
     }
   },
   data() {
-    this.refreshSkuTable = debounce(this.refreshSkuTable, 800, {
-      leading: false,
-      trailing: true
+    this.refreshSkuTable = debounce(this.refreshSkuTable, 300, {
+      leading: true,
+      trailing: false
     })
     return {
       refName: 'standardStep',
@@ -182,7 +180,7 @@ export default {
     prev() {
       return new Promise(resolve => {
         const values = this.form.getFieldsValue()
-        this.$emit('dataChange', { ...this.data, ...values })
+        this.$emit('dataChange', { ...this.data, ...values, skus: this.skus })
         resolve(values)
       })
     },
@@ -272,17 +270,33 @@ export default {
     refreshSkuTable() {
       // 将选中SKU集合转成SKU组合
       let skuCombine = combineAll(
-        this.skuArr.filter(s => s.selected).map(s => s.selected)
+        this.skuArr
+          .filter(s => s.selected && s.selected.length > 0)
+          .map(s => s.selected)
       )
-      if (skuCombine.length === 1) {
+      if (skuCombine.length === 1 && skuCombine[0] instanceof Array) {
         skuCombine = skuCombine[0]
       }
-      this.skus = skuCombine.map(s => ({
-        id: uuidv1(), // SKU编号
-        sku: s, // SKU组合
-        price: 0, // 价格
-        stock: 0 // 库存
-      }))
+      const skus = skuCombine.map(s => {
+        // 计算SKU编码，SKU编码规则：商品编码+属性名(1位)+属性值(1位)+属性名(1位)+属性值(1位)+...
+        const code = this.data.code + this.calcSkuCode(s)
+        return {
+          id: code,
+          sku: s, // SKU组合
+          price: 0, // 价格
+          stock: 0 // 库存
+        }
+      })
+      // 合并已有数据
+      this.skus = skus.map(s => {
+        const origin = this.skus.find(o => o.sku === s.sku)
+        if (origin) {
+          // 存在返回原数据
+          return origin
+        } else {
+          return s
+        }
+      })
     },
     // 添加 SPU 属性
     addSpu() {
@@ -327,6 +341,16 @@ export default {
           return val.split(',')
         }
       }
+    },
+    // 通过sku组合值（红色*34码）计算SKU编码
+    calcSkuCode(sku) {
+      const sel = sku.split('*')
+      let code = ''
+      this.skuArr.forEach((s, i) => {
+        const index = s.selected.findIndex(sl => sl === sel[i])
+        code += toString36(s.id, 1) + toString36(index, 1)
+      })
+      return code
     }
   }
 }

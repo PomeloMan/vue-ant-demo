@@ -27,10 +27,10 @@
           <a-back-top :target="scrollWrapper" :visibilityHeight="100"></a-back-top>
         </div>
         <div class="steps-action">
-          <a-button v-if="current > 0 && current <= 2" @click="prev">{{$t('common.previous_step')}}</a-button>
+          <a-button v-if="current > 0 && current <= 2" @click="prev(current-1)">{{$t('common.previous_step')}}</a-button>
           <a-divider type="vertical"></a-divider>
-          <a-button v-if="current < 2" type="primary" @click="next">{{$t('common.next_step')}}</a-button>
-          <a-button v-if="current == 2" type="primary" @click="next">{{$t('common.complete')}}</a-button>
+          <a-button v-if="current < 2" type="primary" @click="next(current+1)">{{$t('common.next_step')}}</a-button>
+          <a-button v-if="current == 2" type="primary" @click="next(current+1)">{{$t('common.complete')}}</a-button>
           <a-button
             v-if="current == 3"
             type="primary"
@@ -92,17 +92,17 @@ export default {
     handleStepChange(activeKey) {
       this.current = this.last
       if (activeKey > this.current) {
-        this.next().then(() => {
+        this.next(activeKey).then(() => {
           this.last = this.current = activeKey
         })
       } else if (activeKey < this.current) {
-        this.prev().then(() => {
+        this.prev(activeKey).then(() => {
           this.last = this.current = activeKey
         })
       }
     },
-    next() {
-      return this.$refs[this.refs[this.current]].next().then(() => {
+    next(activeKey) {
+      return this.$refs[this.refs[this.current]].next(activeKey).then(() => {
         console.log(this.data)
         this.current++
         this.scrollContainer.scrollTop = 0
@@ -111,8 +111,8 @@ export default {
         }
       })
     },
-    prev() {
-      return this.$refs[this.refs[this.current]].prev().then(() => {
+    prev(activeKey) {
+      return this.$refs[this.refs[this.current]].prev(activeKey).then(() => {
         console.log(this.data)
         this.current--
         this.scrollContainer.scrollTop = 0

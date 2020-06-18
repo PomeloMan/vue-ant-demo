@@ -51,11 +51,7 @@ export default {
     this.form = this.$form.createForm(this)
   },
   created() {},
-  mounted() {
-    if (this.$parent.scrollContainer) {
-      this.$parent.scrollContainer.scrollTop = 0
-    }
-  },
+  mounted() {},
   methods: {
     next() {
       return new Promise((resolve, reject) => {

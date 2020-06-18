@@ -72,6 +72,7 @@ export default {
       this.$refs[this.refs[this.current]].next().then(() => {
         console.log(this.data)
         this.current++
+        this.scrollContainer.scrollTop = 0
         if (this.current === this.steps.length) {
           this.save()
         }
@@ -79,6 +80,7 @@ export default {
     },
     prev() {
       this.current--
+      this.scrollContainer.scrollTop = 0
     },
     save() {
       this.$message.success('提交成功')

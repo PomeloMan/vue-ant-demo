@@ -9,6 +9,16 @@
       "sequence": 1,
       "status": 1,
       "createdDate": "2020-03-26T14:17:28.000+0000"
+    },
+    {
+      "id": 2,
+      "name": "尺寸",
+      "standardId": "1",
+      "standardName": "美妆规格1",
+      "default": "34码 35码 36码 37码 38码 39码 40码",
+      "sequence": 1,
+      "status": 1,
+      "createdDate": "2020-03-26T14:17:28.000+0000"
     }
   ],
   "totalElements": 1,
