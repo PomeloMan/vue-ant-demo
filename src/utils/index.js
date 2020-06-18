@@ -83,7 +83,10 @@ export function extractFields(data, options) {
  * 
  * @example
  *  array: [['红色', '白色'], ['16G', '32G']]
- *  return: ['红色|16G', '红色|32G', '白色|16G', '白色|32G']
+ *  return: ['红色*16G', '红色*32G', '白色*16G', '白色*32G']
+ * 注：
+ *  array: [['红色', '白色']]
+ *  return: [['红色', '白色']]
  */
 export function combineAll(array) {
   let result = []
@@ -111,13 +114,13 @@ export function combineAll(array) {
  * @example
  *  array1: ['红色', '白色']
  *  array2: ['16G', '32G']
- *  return: ['红色|16G', '红色|32G', '白色|16G', '白色|32G']
+ *  return: ['红色*16G', '红色*32G', '白色*16G', '白色*32G']
  */
 export function combine(array1, array2) {
   const result = []
   array1.forEach(item1 => {
     array2.forEach(item2 => {
-      result.push(`${item1}|${item2}`)
+      result.push(`${item1}*${item2}`)
     })
   })
   return result
@@ -138,10 +141,33 @@ export function checkLandline(number) {
 
 /**
  * 检验正整数
- * @param {*} value 
+ * @param {*} value
+ * @param {*} type
+ *  0：匹配正整数
+ *  1：匹配负整数
+ *  2：匹配整数
+ *  3：匹配非负整数（正整数 + 0）
+ *  4：匹配非正整数（负整数 + 0）
+ *  5：匹配小数位不超过2位的小数
  */
-export function checkPositiveNumber(value) {
-  return /(^[1-9]\d*$)/.test(value);
+export function checkNumber(value, type = 0) {
+  switch (type) {
+    case 0:
+      return /(^[1-9]\d*$)/.test(value); // 正整数
+    case 1:
+      return /(^-[1-9]\d*$)/.test(value); // 负整数
+    case 2:
+      return /(^-?[1-9]\d*$)/.test(value); // 整数
+    case 3:
+      return /(^[1-9]\d*|0$)/.test(value); // 非负整数（正整数 + 0）
+    case 4:
+      return /(^-[1-9]\d*|0$)/.test(value); // 非正整数（负整数 + 0）
+    case 5:
+      return /(^-?\d+(\.\d{1,2})?$)/.test(value); // 小数位不超过2位
+    // return /(^\d{1,9}(\.\d{1,2})?$)/.test(value); // 整数位不超过9位，小数位不超过2位的非负数
+    default:
+      return false
+  }
 }
 
 /**
@@ -268,4 +294,25 @@ export function stringFormat(value) {
     v = v.replace(new RegExp('\\{' + i + '\\}', 'g'), arguments[i])
   }
   return v;
+}
+
+/**
+ * 将数字转成36位(0~9A~Z)字符串
+ * @param {*} num 十进制数字
+ * @param {*} len 返回字符串长度，长度不足用 0 补足
+ * 
+ * @example
+ * num: 10
+ * return: 00A
+ */
+export function toString36(num, len = 3) {
+  let _num = Number(num)
+  if (!isNaN(_num)) {
+    _num = _num.toString(36)
+    while (_num.length < len) {
+      _num = '0' + _num
+    }
+    return _num
+  }
+  return num
 }

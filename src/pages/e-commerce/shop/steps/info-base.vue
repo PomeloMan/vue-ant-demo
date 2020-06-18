@@ -1,12 +1,7 @@
 <template>
   <div>
-    <a-form :form="form">
-      <a-form-item
-        :label="$t('ecommerce.shop.logo')"
-        :label-col="{ span: 6 }"
-        :wrapper-col="{ span: 12 }"
-        :extra="$t('ecommerce.shop.logo_extra')"
-      >
+    <a-form :form="form" :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
+      <a-form-item :label="$t('ecommerce.shop.logo')" :extra="$t('ecommerce.shop.logo_extra')">
         <!-- <a-input
           hidden
           v-decorator="['logo', {
@@ -18,12 +13,7 @@
         <image-upload :multiple="false"></image-upload>
       </a-form-item>
       <!-- 店铺名称 -->
-      <a-form-item
-        :label="$t('ecommerce.shop.name')"
-        :label-col="{ span: 6 }"
-        :wrapper-col="{ span: 12 }"
-        :extra="$t('ecommerce.shop.name_extra')"
-      >
+      <a-form-item :label="$t('ecommerce.shop.name')" :extra="$t('ecommerce.shop.name_extra')">
         <a-input
           :placeholder="$t('ecommerce.shop.name')"
           v-decorator="['name', {
@@ -37,8 +27,6 @@
       <!-- 店铺所在平台 -->
       <a-form-item
         :label="$t('ecommerce.shop.platform')"
-        :label-col="{ span: 6 }"
-        :wrapper-col="{ span: 12 }"
         :extra="$t('ecommerce.shop.platform_extra')"
       >
         <a-select
@@ -61,8 +49,6 @@
       <!-- 店铺所在地 -->
       <a-form-item
         :label="$t('ecommerce.shop.location')"
-        :label-col="{ span: 6 }"
-        :wrapper-col="{ span: 12 }"
         :extra="$t('ecommerce.shop.location_extra')"
       >
         <a-cascader
@@ -80,16 +66,15 @@
       </a-form-item>
       <a-form-item
         :label="$t('common.weights')"
-        :label-col="{ span: 6 }"
-        :wrapper-col="{ span: 12 }"
-        :extra="$t('common.weights_extra')"
+        :extra="$t('common.weights_extra', {min: minValue , max: maxValue})"
       >
         <a-input-number
           :placeholder="$t('common.weights')"
           v-decorator="['sequence', {
             initialValue: data.sequence,
             rules: [
-              { required: true, message: $t('message.please_input', {content: $t('common.weights')}) }
+              { required: true, message: $t('message.please_input', {content: $t('common.weights')}) },
+              { validator: sequenceValidator }
             ]
           }]"
         ></a-input-number>
@@ -102,8 +87,9 @@
 import { mapState } from 'vuex'
 import ImageUpload from '@/components/plugins/image-upload'
 import Area from '@/components/mixins/area'
+import Validator from '@/components/mixins/validator'
 export default {
-  mixins: [Area],
+  mixins: [Area, Validator],
   components: {
     ImageUpload
   },
@@ -166,10 +152,8 @@ export default {
 .ant-form {
   width: 80%;
   margin: auto;
-}
-</style>
-<style scoped>
-.ant-form >>> .ant-form-item-children > div {
-  display: flex;
+  .image-upload {
+    display: flex;
+  }
 }
 </style>

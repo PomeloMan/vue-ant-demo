@@ -1,6 +1,7 @@
 export default {
   namespaced: true,
   state: {
+    shops: [],
     status: [],
     tabs: [
       { label: '待审核', value: 0, icon: 'file-sync' },
@@ -13,7 +14,13 @@ export default {
     ]
   },
   mutations: {
+    updateShops(state, shops) {
+      state.shops = shops
+    }
   },
   actions: {
+    updateShops(context, shops) {
+      context.commit('updateShops', shops)
+    }
   }
 }

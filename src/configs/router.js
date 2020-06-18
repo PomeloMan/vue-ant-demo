@@ -110,7 +110,8 @@ const routes = [{
     // SKU/SPU
     { name: 'ec-attribute', path: 'e-commerce/attribute/:standardId', meta: { breadcrumbs: BREADCRUMB['ec-attribute'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/attribute/tabs.vue') },
     // 商品
-    { name: 'ec-product', path: 'e-commerce/product', meta: { breadcrumbs: BREADCRUMB['ec-product'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/product/index.vue') }
+    { name: 'ec-product', path: 'e-commerce/product', meta: { breadcrumbs: BREADCRUMB['ec-product'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/product/tabs.vue') },
+    { name: 'ec-product-info', path: 'e-commerce/product/:id', meta: { breadcrumbs: BREADCRUMB['ec-product-info'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/product/info.vue') }
   ]
 }, {
   name: '404',

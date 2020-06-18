@@ -1,7 +1,7 @@
 <template>
   <!-- 店铺 -->
   <div>
-    <div class="table-content-wrapper">
+    <div class="table-content-wrapper no-footer">
       <a-table
         :columns="columns"
         :rowKey="record => record[key]"
@@ -32,7 +32,7 @@
             type="link"
             size="small"
             @click="$router.push({path: `/main/e-commerce/shop/${record.id}`})"
-          >{{$t('common.detail')}}</a-button>
+          >{{$t('common.edit')}}</a-button>
           <a-divider type="vertical"></a-divider>
           <a-popconfirm
             :title="$t('message.is_confirm_delete')"
@@ -76,9 +76,7 @@ export default {
       previewImage: ''
     }
   },
-  created() {
-    this.getData()
-  },
+  created() {},
   methods: {
     getData() {
       this.getMockData()

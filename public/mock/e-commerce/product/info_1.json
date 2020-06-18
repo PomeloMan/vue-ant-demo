@@ -1,0 +1,58 @@
+{
+  "id": 1,
+  "code": "LM100100120200617001",
+  "name": "【618狂欢】海蓝之谜精华面霜30/60ml 补水保湿 舒缓滋润肌肤",
+  "brandName": "LA MER/海蓝之谜",
+  "brandId": 1,
+  "shopName": "LA MER海蓝之谜官方旗舰店",
+  "shopId": 1,
+  "oprice": 760,
+  "cprice": 760,
+  "sequence": 1,
+  "categoryName": "美妆/护肤/乳液面霜",
+  "categoryId": [
+    1
+  ],
+  "pictures": [
+    "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+    "http://localhost:8000/mock/e-commerce/product/image/1541224697.jpg",
+    "http://localhost:8000/mock/e-commerce/product/image/1102877148.jpg",
+    "http://localhost:8000/mock/e-commerce/product/image/1254776095.jpg",
+    "http://localhost:8000/mock/e-commerce/product/image/1577172142.jpg"
+  ],
+  "standardId": 1,
+  "skus": [
+    {
+      "id": "LM100100120200617001",
+      "sku": "红色*23码",
+      "price": 1,
+      "stock": 1
+    }
+  ],
+  "skuAttrs": [
+    {
+      "id": 1,
+      "name": "颜色",
+      "type": 1,
+      "selected": [
+        "红色"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "尺寸",
+      "type": 1,
+      "selected": [
+        "23码"
+      ]
+    }
+  ],
+  "spuAttrs": [
+    {
+      "id": 1,
+      "name": "品牌",
+      "type": 2,
+      "default": "LA MER/海蓝之谜"
+    }
+  ]
+}

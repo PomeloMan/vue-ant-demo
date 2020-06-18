@@ -21,5 +21,6 @@ export default new VueI18n({
   locale: CONSTANTS.DEFAULT_LOCALE_NAME,
   fallbackLocale: CONSTANTS.DEFAULT_LOCALE_NAME,
   messages: loadLocaleMessages(),
-  silentTranslationWarn: true
+  silentTranslationWarn: true,
+  silentFallbackWarn: true,
 })

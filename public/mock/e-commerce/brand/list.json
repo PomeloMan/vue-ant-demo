@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "code": "LAM",
+    "name": "LA MER/海蓝之谜",
+    "logo": "http://localhost:8000/mock/e-commerce/product/image/1234229583.jpg",
+    "sequence": 1,
+    "status": 1,
+    "createdDate": "2020-03-26T14:17:28.000+0000"
+  }
+]

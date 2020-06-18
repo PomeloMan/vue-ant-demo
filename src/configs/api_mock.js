@@ -23,8 +23,16 @@ const API = {
 
   /// ********************** 电商模块 **********************
   ECOMMERCE_SHOP: '/mock/e-commerce/shop/page.json', // 店铺分页列表
+  ECOMMERCE_SHOP_LIST: '/mock/e-commerce/shop/list.json', // 店铺全量查询
   ECOMMERCE_PRODUCT: '/mock/e-commerce/product/page.json', // 商品分页列表
+  ECOMMERCE_PRODUCT_INFO: function (id) { // 商品详情
+    return `/mock/e-commerce/product/info_${id}.json`
+  },
+  ECOMMERCE_PRODUCT_CODE_NUMBER: function (code) { // 查询商品编号序号
+    return `/mock/e-commerce/product/code_num_${code}.json`
+  },
   ECOMMERCE_BRAND: '/mock/e-commerce/brand/page.json', // 品牌分页列表
+  ECOMMERCE_BRAND_LIST: '/mock/e-commerce/brand/list.json', // 品牌全量查询
   ECOMMERCE_CATEGORY: '/mock/e-commerce/category/page.json', // 分类分页列表
   ECOMMERCE_CATEGORY_LIST: '/mock/e-commerce/category/list.json', // 分类全量数据，属全局数据
   ECOMMERCE_CATEGORY_CHILDREN: function (id) {
@@ -34,6 +42,9 @@ const API = {
   ECOMMERCE_STANDARD_LIST: '/mock/e-commerce/standard/list.json', // 查询全量规格标准数据，属全局数据
   ECOMMERCE_ATTRIBUTE: function (standardId, i) { // standardId: 规格标准ID  商品SKU/SPU分页列表 i: 0->SKU / 1->SPU
     return `/mock/e-commerce/attribute/page_${standardId}_${i}.json`
+  },
+  ECOMMERCE_ATTRIBUTE_LIST: function (standardId) { // 获取指定标准的SKU及SPU信息
+    return `/mock/e-commerce/attribute/list_${standardId}.json`
   },
   ECOMMERCE_ATTRIBUTE_INFO: function (i, attributeId) { // i: 0->SKU / 1->SPU  attributeId: 属性ID
     return `/mock/e-commerce/attribute/info_${i}_${attributeId}.json`

@@ -6,3 +6,7 @@
 .ant-input-number >>> .ant-input-number-input-wrap {
   width: 100%;
 }
+
+.ant-tabs-content {
+  height: calc(100% - 60px);
+}

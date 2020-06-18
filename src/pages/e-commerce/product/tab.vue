@@ -1,26 +1,7 @@
 <template>
-  <!-- 电商商户 -->
+  <!-- 店铺 -->
   <div>
-    <app-header :breadcrumbs="breadcrumbs">
-      <div slot="action-group">
-        <a-button type="link" @click="showInfoDrawer(0)">{{ $t('common.new') }}</a-button>
-        <a-divider type="vertical" />
-        <template v-if="selectedRowKeys.length !== 0">
-          <a-popconfirm
-            :title="$t('message.is_confirm_delete')"
-            :okText="$t('common.ok')"
-            :cancelText="$t('common.cancel')"
-            @confirm="onDeleteConfirmOk($api.SYS_USER)"
-          >
-            <a-button type="link">{{ $t('common.delete') }}</a-button>
-          </a-popconfirm>
-        </template>
-        <template v-else>
-          <a-button type="link" :disabled="selectedRowKeys.length === 0">{{ $t('common.delete') }}</a-button>
-        </template>
-      </div>
-    </app-header>
-    <div class="table-content-wrapper">
+    <div class="table-content-wrapper no-footer">
       <a-table
         :columns="columns"
         :rowKey="record => record[key]"
@@ -36,12 +17,21 @@
         size="middle"
       >
         <!-- 商品图片 -->
-        <span slot="picture" slot-scope="text, record">
-          <img :src="record.pictures[0]" @click="showPreview(record.pictures)" />
+        <span slot="picture" slot-scope="val, record">
+          <a-avatar
+            :src="record.pictures[0]"
+            @click="showPreview(record.pictures)"
+            shape="square"
+            :size="56"
+          ></a-avatar>
         </span>
         <!-- 操作 -->
-        <span slot="operation" class="operation">
-          <a-button type="link" size="small">{{$t('common.detail')}}</a-button>
+        <span slot="operation" slot-scope="val, record" class="operation">
+          <a-button
+            type="link"
+            size="small"
+            @click="$router.push({path: `/main/e-commerce/product/${record.id}`})"
+          >{{$t('common.edit')}}</a-button>
           <a-divider type="vertical"></a-divider>
           <a-popconfirm
             :title="$t('message.is_confirm_delete')"
@@ -60,31 +50,28 @@
       @onPageChange="onPageChange"
       @onPageSizeChange="onPageSizeChange"
     ></app-footer>
+    <!-- 图片预览 -->
     <image-carousel-modal v-model="previewVisible" :images="previewImages"></image-carousel-modal>
   </div>
 </template>
 
 <script>
 import BaseTable from '@/components/mixins/base-table'
-import KeepAlive from '@/components/mixins/keep-alive'
 import TableColumn from './mixins/table-column'
 import ImageCarouselModal from '@/components/plugins/image-carousel-modal'
 import GlobalData from '../index'
 export default {
-  name: 'ec_shop_keepalive',
-  mixins: [BaseTable, KeepAlive, TableColumn, GlobalData],
+  name: 'ec_product_tab',
+  mixins: [BaseTable, TableColumn, GlobalData],
   components: { ImageCarouselModal },
   data() {
     return {
       key: 'id',
       previewVisible: false,
-      previewImages: []
+      previewImage: ''
     }
   },
   created() {
-    this.getData()
-  },
-  activated() {
     this.getData()
   },
   methods: {
@@ -108,9 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ant-table td img {
-  width: 64px;
-  height: 64px;
+.ant-avatar {
   cursor: pointer;
 }
 </style>

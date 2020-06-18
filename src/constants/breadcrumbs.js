@@ -75,5 +75,24 @@ export default {
     { 'name': 'breadcrumb.e-commerce' },
     { 'name': 'breadcrumb.ec-standard', 'url': '/main/e-commerce/standard' },
     { 'name': 'breadcrumb.ec-attribute', 'url': '/main/e-commerce/attribute' }
-  ]
+  ],
+  'ec-product': [ // 商品
+    { 'name': 'breadcrumb.home', 'url': '/' },
+    { 'name': 'breadcrumb.e-commerce' },
+    { 'name': 'breadcrumb.ec-product', 'url': '/main/e-commerce/product' }
+  ],
+  'ec-product-info': [ // 商户详情
+    { 'name': 'breadcrumb.home', 'url': '/' },
+    { 'name': 'breadcrumb.e-commerce' },
+    { 'name': 'breadcrumb.ec-product', 'url': '/main/e-commerce/product' },
+    {
+      'info': (isnew) => {
+        if (isnew) {
+          return 'breadcrumb.add'
+        } else {
+          return 'breadcrumb.detail'
+        }
+      }, 'url': '/main/e-commerce/product/{1}'
+    }
+  ],
 }

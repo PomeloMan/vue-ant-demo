@@ -15,7 +15,7 @@
           <a-icon :type="tab.icon" />
           {{tab.label}}
         </span>
-        <shop-tab :key="tab.value" :ref="`tab${tab.value}`"></shop-tab>
+        <shop-tab class="shop-tab" :key="tab.value" :ref="`tab${tab.value}`"></shop-tab>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -46,23 +46,26 @@ export default {
     this.breadcrumbs = this.$route.meta.breadcrumbs || []
   },
   mounted() {
-    this.$nextTick(() => {
-      this.handleTabChange(this.activeKey)
-    })
+    this.handleTabChange(this.activeKey)
   },
   activated() {},
   methods: {
     handleTabChange(activeKey) {
       this.activeKey = activeKey
-      const reference =
-        this.$refs[`tab${activeKey}`] && this.$refs[`tab${activeKey}`][0]
-      if (reference && reference.getData) {
-        reference.getData()
-      }
+      this.$nextTick(() => {
+        const reference =
+          this.$refs[`tab${activeKey}`] && this.$refs[`tab${activeKey}`][0]
+        if (reference && reference.getData) {
+          reference.getData()
+        }
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.shop-tab {
+  height: 100%;
+}
 </style>
