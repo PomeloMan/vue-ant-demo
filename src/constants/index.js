@@ -5,6 +5,8 @@ export default {
   STORAGE_USER: 'user',
 
   PAGE_LOGIN: 'login',
+  PAGE_403: '403',
+  PAGE_500: '500',
 
 
   DEFAULT_LOCALE: zhCN,

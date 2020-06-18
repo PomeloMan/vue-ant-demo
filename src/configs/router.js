@@ -32,6 +32,18 @@ const routes = [{
   },
   component: () => import(/* webpackChunkName: "group-main" */ '../pages/main'),
   children: [
+    // 403
+    {
+      name: '403',
+      path: '/forbidden',
+      component: () => import(/* webpackChunkName: "group-main" */ '../pages/error/403')
+    },
+    // 500
+    {
+      name: '500',
+      path: '/server-error',
+      component: () => import(/* webpackChunkName: "group-main" */ '../pages/error/500')
+    },
     // Three Module
     {
       name: 'three',

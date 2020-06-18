@@ -42,8 +42,17 @@ http.interceptors.request.use(config => {
 http.interceptors.response.use(response => {
   return response
 }, error => {
+  // token 过期或权限变更
   if (error.response && error.response.status === 401) {
     router.push({ name: CONSTS.PAGE_LOGIN })
+  }
+  // 权限
+  if (error.response && error.response.status === 403) {
+    router.push({ name: CONSTS.PAGE_403 })
+  }
+  // 服务器错误
+  if (error.response && error.response.status === 500) {
+    router.push({ name: CONSTS.PAGE_500 })
   }
   Vue.prototype.$message.error(error.message)
   return Promise.reject(error)

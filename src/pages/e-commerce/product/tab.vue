@@ -68,7 +68,7 @@ export default {
     return {
       key: 'id',
       previewVisible: false,
-      previewImage: ''
+      previewImages: []
     }
   },
   created() {
