@@ -74,7 +74,10 @@
           v-decorator="['areas', { initialValue: data.areas }]"
         />
       </a-form-item>
-      <a-form-item :label="$t('ecommerce.shop.logo')" :extra="$t('ecommerce.shop.logo_extra')">
+      <a-form-item
+        :label="$t('ecommerce.product.picture')"
+        :extra="$t('ecommerce.product.picture_extra', { width: 512, height: 512, size: 10, length: 8 })"
+      >
         <!-- <a-input
           hidden
           v-decorator="['logo', {
@@ -83,7 +86,7 @@
             ]
           }]"
         ></a-input>-->
-        <image-upload :multiple="false"></image-upload>
+        <image-upload :fileList="fileList" :multiple="true"></image-upload>
       </a-form-item>
       <!-- 权重 -->
       <a-form-item
@@ -112,6 +115,7 @@ import Area from '@/components/mixins/area'
 import Validator from '@/components/mixins/validator'
 import { extractFields, toString36 } from '@/utils'
 import { find } from '@/pipes'
+import { v1 as uuidv1 } from 'uuid'
 export default {
   mixins: [Area, Validator],
   components: {
@@ -127,10 +131,21 @@ export default {
       default: () => {}
     }
   },
+  watch: {
+    'data.pictures': function(val) {
+      this.fileList = val.map(v => ({
+        uid: uuidv1(),
+        status: 'done',
+        url: v,
+        thumbUrl: v
+      }))
+    }
+  },
   data() {
     return {
       refName: 'baseStep',
-      needCalcCode: true
+      needCalcCode: true,
+      fileList: []
     }
   },
   computed: {

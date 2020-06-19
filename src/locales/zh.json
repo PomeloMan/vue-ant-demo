@@ -223,6 +223,7 @@
       "name_extra": "为更好的用户体验，字数限制 {current}/{limit}",
       "original_price": "原价",
       "picture": "商品图片",
+      "picture_extra": "建议尺寸{width}x{height}，图片大小不超过{size}M，最多上传{length}张图片",
       "publisher": "发布人",
       "sequence": "商品权重",
       "shop": "所属店铺",

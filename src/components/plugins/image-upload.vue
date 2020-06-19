@@ -4,6 +4,7 @@
       :name="name"
       accept=".jpg, .jpeg, .png"
       listType="picture-card"
+      :fileList="fileList"
       :action="'https://www.mocky.io/v2/5cc8019d300000980a055e76'"
       :multiple="multiple"
       :showUploadList="multiple"
@@ -14,11 +15,19 @@
       @change="handleChange"
       :style="uploadStyle"
     >
-      <img v-if="imageUrl" :src="imageUrl" style="width:100%;" />
-      <div v-else>
-        <a-icon :type="uploading?'loading':'plus'" />
-        <div class="ant-upload-text">{{$t('common.upload')}}</div>
-      </div>
+      <template v-if="!multiple">
+        <img v-if="imageUrl" :src="imageUrl" style="width:100%;" />
+        <div v-else>
+          <a-icon :type="uploading?'loading':'plus'" />
+          <div class="ant-upload-text">{{$t('common.upload')}}</div>
+        </div>
+      </template>
+      <template v-else>
+        <div v-if="fileList.length < limit.length">
+          <a-icon type="plus" />
+          <div class="ant-upload-text">{{$t('common.upload')}}</div>
+        </div>
+      </template>
     </a-upload>
     <a-modal :visible="previewVisible" :footer="null" @cancel="previewVisible = false">
       <img style="width: 100%" :src="previewImageUrl" />
@@ -54,7 +63,7 @@ export default {
     },
     fileList: {
       type: Array,
-      default: undefined
+      default: () => []
     },
     headers: Object,
     // 自定义属性
@@ -63,7 +72,8 @@ export default {
       default: () => ({
         width: 1024, // 1024px
         height: 1024, // 1024px
-        size: 10 // 1M
+        size: 10, // 10M
+        length: 8
       })
     },
     width: [Number, String],
