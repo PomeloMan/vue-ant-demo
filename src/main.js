@@ -59,7 +59,7 @@ import LottieWeb from '@/components/plugins/lottie-web'
 Vue.component('lottie-web', LottieWeb)
 
 // event Bus 用于无关系组件间的通信
-// 使用方式 this.$bus.$on(event_name, function(args){}); this.$bus.emit(event_name, args)
+// 使用方式 this.$bus.$on(event_name, function(args){}); this.$bus.$emit(event_name, args)
 Vue.prototype.$bus = new Vue()
 
 // 挂载全局
