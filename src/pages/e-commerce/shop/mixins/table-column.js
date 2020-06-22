@@ -24,7 +24,18 @@ export default {
             title: this.$t('ecommerce.shop.name'),
             dataIndex: 'name',
             width: 150,
-            align: 'center'
+            align: 'center',
+            scopedSlots: {
+              filterDropdown: 'filterDropdown',
+              filterIcon: 'filterIcon'
+            },
+            onFilterDropdownVisibleChange: visible => {
+              if (visible) {
+                setTimeout(() => {
+                  this.searchInput.focus()
+                })
+              }
+            }
           },
           {
             title: this.$t('ecommerce.shop.type'),
@@ -49,6 +60,7 @@ export default {
             dataIndex: 'verifiedDate',
             width: 150,
             align: 'center',
+            sorter: true,
             customRender: function (val) {
               return date(val)
             }

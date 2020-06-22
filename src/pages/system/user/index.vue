@@ -1,6 +1,11 @@
 <template>
   <div>
-    <app-header :breadcrumbs="breadcrumbs">
+    <app-header
+      :breadcrumbs="breadcrumbs"
+      :searchType="'advanced'"
+      :formItems="formItems"
+      @onAdvancedSearch="onAdvancedSearch"
+    >
       <div slot="action-group">
         <a-button type="link" @click="showInfoDrawer(0)">{{ $t('common.new') }}</a-button>
         <a-divider type="vertical" />
@@ -212,6 +217,11 @@ export default {
         this.data = data.content
         this.total = data.totalElements
         this.$message.warning(this.$t('message.using_mock_data'))
+
+        this.data.forEach(el => {
+          el.avatar =
+            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592798218601&di=4f86bd5e84c931a79d5c6ae34a76a55c&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fa044ad345982b2b76cbfbd2133adcbef76099b37.jpg'
+        })
       })
     }
   }

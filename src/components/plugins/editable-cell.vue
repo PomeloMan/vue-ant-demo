@@ -49,58 +49,36 @@ export default {
 <style lang="scss" scoped>
 .editable-cell {
   position: relative;
-  &.center {
-    .editable-cell-input-wrapper,
-    .editable-cell-text-wrapper {
-      justify-content: center;
-    }
-  }
-  &.end {
-    .editable-cell-input-wrapper,
-    .editable-cell-text-wrapper {
-      justify-content: flex-end;
-    }
-  }
 }
-
-.editable-cell-input-wrapper,
-.editable-cell-text-wrapper {
+// 编辑框样式
+.editable-cell-input-wrapper {
   padding-right: 24px;
-  display: flex;
-  align-items: center;
-  min-height: 31px;
 }
-
+// 文本显示样式
 .editable-cell-text-wrapper {
   padding: 5px 24px 5px 5px;
 }
-
+// 图标样式
 .editable-cell-icon,
 .editable-cell-icon-check {
   position: absolute;
-  right: 0;
   width: 20px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
   cursor: pointer;
 }
-
 .editable-cell-icon {
-  line-height: 18px;
   display: none;
 }
-
-.editable-cell-icon-check {
-  line-height: 28px;
-}
-
 .editable-cell:hover .editable-cell-icon {
   display: inline-block;
 }
-
 .editable-cell-icon:hover,
 .editable-cell-icon-check:hover {
   color: #108ee9;
 }
-
 .editable-add-btn {
   margin-bottom: 8px;
 }

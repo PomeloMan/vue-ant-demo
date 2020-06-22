@@ -54,6 +54,10 @@ http.interceptors.response.use(response => {
   if (error.response && error.response.status === 500) {
     router.push({ name: CONSTS.PAGE_500 })
   }
+  // 404错误不全局处理
+  if (error.response && error.response.status === 404) {
+    return Promise.reject(error)
+  }
   Vue.prototype.$message.error(error.message)
   return Promise.reject(error)
 })

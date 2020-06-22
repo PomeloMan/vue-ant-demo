@@ -226,6 +226,9 @@ export default {
         .then(({ data }) => {
           values.code = code + data.codeNumber
         })
+        .catch(() => {
+          values.code = code + '001'
+        })
     },
     // 计算商品编号与原商品编号不符则通知是否覆盖原编号
     showCodeConfirmNotification(code) {

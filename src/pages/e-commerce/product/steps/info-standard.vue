@@ -347,8 +347,10 @@ export default {
       const sel = sku.split('*')
       let code = ''
       this.skuArr.forEach((s, i) => {
-        const index = s.selected.findIndex(sl => sl === sel[i])
-        code += toString36(s.id, 1) + toString36(index, 1)
+        const index = s.default.findIndex(sl => sl === sel[i])
+        if (index > -1) {
+          code += toString36(s.id, 1) + toString36(index, 1)
+        }
       })
       return code
     }

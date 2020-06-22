@@ -3,6 +3,7 @@
   <div>
     <div class="table-content-wrapper no-footer">
       <a-table
+        size="middle"
         :columns="columns"
         :rowKey="record => record[key]"
         :rowSelection="{
@@ -14,8 +15,41 @@
         :pagination="false"
         :loading="loading"
         :scroll="{ y: tableScrollY }"
-        size="middle"
+        @change="handleTableChange"
       >
+        <!-- 表头查询 -->
+        <div
+          slot="filterDropdown"
+          slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
+          style="padding: 8px"
+        >
+          <a-input
+            v-ant-ref="c => (searchInput = c)"
+            :placeholder="$t('message.please_input', {content: $t('common.search_content')})"
+            :value="selectedKeys[0]"
+            style="width: 188px; margin-bottom: 8px; display: block;"
+            @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
+            @pressEnter="() => handleSearch(selectedKeys, confirm, column.dataIndex)"
+          />
+          <a-button
+            type="primary"
+            icon="search"
+            size="small"
+            style="width: 90px; margin-right: 8px"
+            @click="() => confirm()"
+          >{{$t('common.search')}}</a-button>
+          <a-button
+            size="small"
+            style="width: 90px"
+            @click="() => clearFilters()"
+          >{{$t('common.reset')}}</a-button>
+        </div>
+        <a-icon
+          slot="filterIcon"
+          slot-scope="filtered"
+          type="search"
+          :style="{ color: filtered ? '#108ee9' : undefined }"
+        />
         <!-- 店铺LOGO -->
         <span slot="logo" slot-scope="val">
           <a-avatar
@@ -87,11 +121,22 @@ export default {
     },
     // ----- mock -----
     getMockData() {
-      this.$http.get(this.$api.ECOMMERCE_SHOP).then(({ data }) => {
-        this.data = data.content
-        this.total = data.totalElements
-        this.$message.warning(this.$t('message.using_mock_data'))
-      })
+      this.loading = true
+      this.$http
+        .get(this.$api.ECOMMERCE_SHOP, {
+          params: {
+            ...this.body
+          }
+        })
+        .then(({ data }) => {
+          this.loading = false
+          this.data = data.content
+          this.total = data.totalElements
+          this.$message.warning(this.$t('message.using_mock_data'))
+        })
+        .catch(() => {
+          this.loading = false
+        })
     }
   }
 }

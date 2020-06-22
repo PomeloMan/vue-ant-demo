@@ -32,7 +32,8 @@ export default {
       tableScrollY: '', // 表格高度
       body: {}, // 查询条件
       breadcrumbs: [], // 面包屑导航
-      rowSelection: rowSelection(this)
+      rowSelection: rowSelection(this),
+      searchInput: null
     }
   },
   created() {
@@ -92,6 +93,17 @@ export default {
     onPageSizeChange: function (current, size) {
       this.page = current
       this.pageSize = size
+      this.getData()
+    },
+    // 表格表头查询
+    handleTableChange(pagination, filters, sorter) {
+      Object.keys(filters).forEach(k => {
+        this.body[k] = filters[k][0]
+      })
+      if (sorter) {
+        this.body['order'] = sorter.field // 排序字段
+        this.body['dir'] = sorter.order // 顺序/倒序
+      }
       this.getData()
     },
     // 选择行

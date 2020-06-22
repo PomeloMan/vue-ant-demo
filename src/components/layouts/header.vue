@@ -20,7 +20,7 @@
       <div>
         <a-button class="advanced-btn fs-13" type="link" @click="toggole">
           {{ $t('common.advance_search') }}
-          <a-icon data-rotation="180" :type="'up'" style="transform: rotate(180deg)" />
+          <a-icon data-rotatex="180" :type="'up'" style="transform: rotateX(180deg)" />
         </a-button>
       </div>
 
@@ -31,7 +31,7 @@
       >
         <a-form id="advancedForm" :layout="'inline'" :form="advancedForm">
           <a-row :gutter="24" type="flex">
-            <a-col :span="24 / column" :key="index" v-for="(item, index) in formItem">
+            <a-col :span="24 / column" :key="index" v-for="(item, index) in formItems">
               <a-form-item :label="item.label" :labelCol="{ span: 4 }" :wrapperCol="{ span: 20 }">
                 <!-- input -->
                 <template v-if="item.type === 'input'">
@@ -136,7 +136,7 @@ export default {
         return 'none'
       }
     },
-    formItem: {
+    formItems: {
       type: Array,
       default: function() {
         return []
@@ -185,12 +185,12 @@ export default {
         const el = document.querySelector('.advanced-btn .anticon')
         if (el && el.dataset) {
           this.toUpTween = new TWEEN.Tween(el.dataset)
-            .to({ rotation: 0 }, 300)
+            .to({ rotatex: 0 }, 300)
             .onUpdate(function(object) {
               $this.updateBox(el, object)
             })
           this.toDownTween = new TWEEN.Tween(el.dataset)
-            .to({ rotation: 180 }, 300)
+            .to({ rotatex: 180 }, 300)
             .onUpdate(function(object) {
               $this.updateBox(el, object)
             })
@@ -215,7 +215,7 @@ export default {
     },
     updateBox(box, params) {
       var s = box.style,
-        transform = 'rotate(' + Math.floor(params.rotation) + 'deg)'
+        transform = 'rotateX(' + Math.floor(params.rotatex) + 'deg)'
       s.webkitTransform = transform
       s.mozTransform = transform
       s.transform = transform

@@ -29,28 +29,24 @@ export default {
           {
             title: this.$t('common.account'),
             dataIndex: 'username',
-            width: 120,
-            align: 'center'
+            width: 120
           },
           {
             title: this.$t('common.nick_name'),
             dataIndex: 'displayName',
-            width: 120,
-            align: 'center',
+            width: 150,
             scopedSlots: { customRender: 'displayName' }
           },
           {
             title: this.$t('common.role_name'),
             dataIndex: 'roles',
             width: 120,
-            align: 'center',
             scopedSlots: { customRender: 'role' }
           },
           {
             title: this.$t('common.email'),
             dataIndex: 'email',
-            width: 180,
-            align: 'center',
+            width: 200,
             scopedSlots: { customRender: 'email' }
           },
           {
