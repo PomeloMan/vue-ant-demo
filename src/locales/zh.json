@@ -7,6 +7,7 @@
     "avatar_upload_failure": "头像上传失败!",
     "avatar_upload_success": "头像上传成功!",
     "delete_success": "删除成功!",
+    "delete_failure": "删除失败!",
     "error_404": "抱歉，您访问的页面不存在或已过期。",
     "error_403": "抱歉，您没有权限访问此页面。",
     "error_500": "抱歉，服务器发生错误。",
@@ -35,6 +36,7 @@
     "please_upload": "请上传{content}",
     "must_be_positive_integer": "{name}必须是正整数",
     "must_not_be_empty": "{name}不能为空",
+    "a_must_less_than_b": "{a}必须小于{b}",
     "using_mock_data": "正在使用模拟数据",
     "drag_area_title": "单击或将文件拖到该区域",
     "drag_area_hint": "建议使用jpg或png格式文件",
@@ -94,6 +96,7 @@
     "overview": "总览",
     "password": "密码",
     "page_show_total": "{from} ~ {to} 总共 {total} 条",
+    "personal_center": "个人中心",
     "picture": "图片",
     "previous_step": "上一步",
     "price": "价格",
@@ -115,10 +118,12 @@
     "step_four": "第四步",
     "stock": "库存",
     "submit": "提交",
+    "todo": "待办",
     "total_number": "共 {num} 项",
     "upload": "上传",
     "upload_avatar": "上传头像",
     "url": "链接地址",
+    "view_all": "查看全部",
     "weights": "权重",
     "weights_extra": "此值影响最终呈现顺序，值越低越靠前，请填写{min}~{max}间的整数"
   },
@@ -134,17 +139,41 @@
     "role": "角色管理",
     "auth": "权限管理",
     "menu": "菜单管理",
+    "personal": "个人中心",
     "e-commerce": "电商管理",
     "ec-shop": "店铺管理",
     "ec-brand": "品牌管理",
     "ec-category": "商品分类",
     "ec-product": "商品管理",
     "ec-standard": "规格标准管理",
-    "ec-attribute": "SKU/SPU设置"
+    "ec-attribute": "SKU/SPU管理"
   },
   "project": {
     "name": "项目名称",
     "description": "项目描述"
+  },
+  "personal": {
+    "_": "个人中心",
+    "todo": {
+      "title": "标题",
+      "title_extra": "标题不超过{total}字({current}/{total})",
+      "content": "内容",
+      "content_extra": "内容不超过{total}字({current}/{total})",
+      "start_date": "开始时间",
+      "end_date": "结束时间",
+      "priority_low": "低",
+      "priority_normal": "普通",
+      "priority_high": "高",
+      "priority_urgent": "紧急",
+      "priority_immediate": "非常紧急",
+      "status_init": "待办",
+      "status_processing": "进行中",
+      "status_pending": "待定",
+      "status_completed": "已完成",
+      "status_rejected": "已拒绝",
+      "status_overtime": "超时",
+      "status_uncompleted": "未完成(待办&进行中)"
+    }
   },
   "ecommerce": {
     "shop": {

@@ -1,3 +1,48 @@
-$app-header-height: '40px';
-$app-footer-height: '48px';
-$deep: '>>>';
+// 页签
+$app-header-height: "40px";
+// 页脚
+$app-footer-height: "48px";
+
+/// Ant Design色彩
+// Dust Red / 薄暮
+// 斗志、奔放
+$red: (
+  50: #fff1f0,
+  100: #ffccc7,
+  200: #ffa39e,
+  300: #ff7875,
+  400: #ff4d4f,
+  500: #f5222d,
+  600: #cf1322,
+  700: #a8071a,
+  800: #820014,
+  900: #5c0011,
+);
+// Volcano / 火山
+// 醒目、澎湃
+$volcano: (
+  50: #fff2e8,
+  100: #ffd8bf,
+  200: #ffbb96,
+  300: #ff9c6e,
+  400: #ff7a45,
+  500: #fa541c,
+  600: #d4380d,
+  700: #ad2102,
+  800: #871400,
+  900: #610b00,
+);
+// Sunset Orange / 日暮
+// 温暖、欢快
+$orange: (
+  50: #fff7e6,
+  100: #ffe7ba,
+  200: #ffd591,
+  300: #ffc069,
+  400: #ffa940,
+  500: #fa8c16,
+  600: #d46b08,
+  700: #ad4e00,
+  800: #873800,
+  900: #612500,
+);

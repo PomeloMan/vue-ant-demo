@@ -1,4 +1,5 @@
 'use strict'
+require('./color');
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -21,7 +22,7 @@ module.exports = {
         modifyVars: {
           // 'primary-color': '#00C6C6',
           // 'heading-color': '#303133',
-          'text-color': '#333333'
+          // 'text-color': '#333333'
           // 'link-color': '#1DA57A',
           // 'border-radius-base': '2px',
         },

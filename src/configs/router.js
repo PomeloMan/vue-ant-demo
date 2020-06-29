@@ -109,6 +109,8 @@ const routes = [{
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/menu/index.vue')
     },
 
+    /// ********************** 个人中心 **********************
+    { name: 'personal', path: 'personal', meta: { breadcrumbs: BREADCRUMB['personal'] }, component: () => import(/* webpackChunkName: "personal" */ '../pages/personal/index.vue') },
     /// ********************** 电商模块 **********************
     // 商户
     { name: 'ec-shop', path: 'e-commerce/shop', meta: { breadcrumbs: BREADCRUMB['ec-shop'] }, component: () => import(/* webpackChunkName: "e-commerce" */ '../pages/e-commerce/shop/tabs.vue') },

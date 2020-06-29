@@ -35,6 +35,10 @@ export default {
     { 'name': 'breadcrumb.system', 'url': '/main/system' },
     { 'name': 'breadcrumb.menu' }
   ],
+  /// ********************** 个人中心 **********************
+  'personal': [
+    { 'name': 'breadcrumb.personal', 'url': '/main/personal' }
+  ],
   /// ********************** 电商模块 **********************
   'ec-shop': [ // 商户
     { 'name': 'breadcrumb.home', 'url': '/' },

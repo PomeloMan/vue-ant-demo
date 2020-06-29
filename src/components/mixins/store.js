@@ -1,4 +1,3 @@
-<script>
 import { mapState } from 'vuex'
 // 全局变量存储状态
 export default {
@@ -23,6 +22,15 @@ export default {
         this.$store.dispatch('common/updateCollapsed', val)
       }
     },
+    // 设置面板是否显示
+    settingDrawerVisible: {
+      get() {
+        return this.$store.state.common.settingDrawerVisible
+      },
+      set(val) {
+        this.$store.dispatch('common/updateSettingDrawerVisible', val)
+      }
+    },
     // 字典表集合
     dicts: {
       get() {
@@ -38,4 +46,3 @@ export default {
     }
   }
 }
-</script>

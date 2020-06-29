@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "avatar": "",
+    "from": "Support Team",
+    "content": "Why not contact us?",
+    "createdDate": "2020-06-26T14:17:28.000+0000"
+  },
+  {
+    "id": 2,
+    "avatar": "",
+    "from": "Develop Team",
+    "content": "Why not contact us?",
+    "createdDate": "2020-06-26T14:17:28.000+0000"
+  },
+  {
+    "id": 3,
+    "avatar": "",
+    "from": "Design Team",
+    "content": "Why not contact us?",
+    "createdDate": "2020-06-26T14:17:28.000+0000"
+  },
+  {
+    "id": 4,
+    "avatar": "",
+    "from": "Reviewers",
+    "content": "Why not contact us?",
+    "createdDate": "2020-06-26T14:17:28.000+0000"
+  },
+  {
+    "id": 5,
+    "avatar": "",
+    "from": "Sales Department",
+    "content": "Why not contact us?",
+    "createdDate": "2020-06-26T14:17:28.000+0000"
+  }
+]

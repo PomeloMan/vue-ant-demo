@@ -316,3 +316,25 @@ export function toString36(num, len = 3) {
   }
   return num
 }
+
+/**
+ * 获取2日期间的所有日期集合
+ * @param {*} start 
+ * @param {*} end 
+ * 
+ * @example
+ * start: moment('2020-06-01')
+ * end: moment('2020-06-05')
+ * 
+ * return ['20200601', '20200602', '20200603', '20200604', '20200605']
+ */
+export function getDateBetween(start, end, format = 'YYYYMMDD') {
+  const dates = []
+  let _start = Number(start.format(format))
+  let _end = Number(end.format(format))
+  while (_start <= _end) {
+    dates.push(_start.toString())
+    _start++
+  }
+  return dates
+}

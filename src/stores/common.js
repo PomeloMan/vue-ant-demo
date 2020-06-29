@@ -9,6 +9,7 @@ export default {
   state: {
     locale: CONSTANTS.DEFAULT_LOCALE, // 国际化
     collapsed: false, // 侧边栏展开/收缩
+    settingDrawerVisible: false, // 右边设置面板是否显示
     dicts: [], // 字典数据
     mapOfDict: {}, // 字典数据
     oauthToken: new OAuthToken(), // OAuth Token
@@ -22,6 +23,9 @@ export default {
     },
     updateCollapsed(state, collapsed) {
       state.collapsed = collapsed
+    },
+    updateSettingDrawerVisible(state, settingDrawerVisible) {
+      state.settingDrawerVisible = settingDrawerVisible
     },
     updateDicts(state, { dicts, locale }) {
       state.dicts = dicts
@@ -51,6 +55,9 @@ export default {
     },
     updateCollapsed(context, collapsed) {
       context.commit('updateCollapsed', collapsed)
+    },
+    updateSettingDrawerVisible(context, settingDrawerVisible) {
+      context.commit('updateSettingDrawerVisible', settingDrawerVisible)
     },
     updateDicts(context, { val, locale }) {
       context.commit('updateDicts', { dicts: val, locale })

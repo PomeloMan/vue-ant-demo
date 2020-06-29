@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import StoreComponent from '@/components/store.component'
+import Store from '@/components/mixins/store.js'
 import { Menu } from 'ant-design-vue'
 
 export default {
   name: 'main-sider',
-  mixins: [StoreComponent],
+  mixins: [Store],
   components: {
     AMenu: Menu,
     AMenuItem: Menu.Item,

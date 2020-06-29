@@ -48,7 +48,7 @@ import './pipes'
 // 注册全局组件
 import './components/layouts'
 
-// 动画库
+// 动画库（可取消）
 import Ani from './animations/ani'
 Vue.component('ani', Ani)
 import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
@@ -74,7 +74,6 @@ Vue.prototype.$constants = constants
 
 Vue.config.productionTip = false
 
-console.log(process.env.NODE_ENV)
 Vue.prototype.$env = process.env.VUE_APP_CURRENT_MODE
 
 new Vue({

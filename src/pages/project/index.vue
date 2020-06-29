@@ -13,7 +13,7 @@
     <div class="scroll-wrapper no-footer" style="padding: 0;">
       <a-spin :spinning="loadingData" wrapperClassName="grid-spin">
         <div id="scrollContainer" style="padding: 16px 16px 24px;">
-          <a-row :gutter="24" style="height: calc(100% + 1px);">
+          <a-row :gutter="24" style="min-height: calc(100% + 1px);">
             <a-col :span="10" :key="item.id" v-for="item in data">
               <a-card
                 class="project-card"

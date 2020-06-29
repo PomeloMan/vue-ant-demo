@@ -6,6 +6,8 @@ import ecshop from '../stores/ecommerce/shop'
 import eccategory from '../stores/ecommerce/category'
 import ecstandard from '../stores/ecommerce/standard'
 import ecbrand from '../stores/ecommerce/brand'
+import pnotification from '../stores/personal/notification'
+import ptodo from '../stores/personal/todo'
 
 Vue.use(Vuex)
 
@@ -15,6 +17,8 @@ export default new Vuex.Store({
     ecshop,
     eccategory,
     ecstandard,
-    ecbrand
+    ecbrand,
+    pnotification,
+    ptodo
   }
 })

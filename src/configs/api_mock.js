@@ -20,7 +20,14 @@ const API = {
   PROJECT_PAGE: '/mock/project/page.json',
 
 
-
+  /// ********************** 个人中心 **********************
+  PERSONAL_OVERVIEW: '/mock/personal/overview.json', // 个人中心-总览数据
+  PERSONAL_MONTH_EVENTS: function (month) { // 个人中心-月度待办/事件
+    return `/mock/personal/month_events_${month}.json`
+  },
+  PERSONAL_MESSAGES: '/mock/personal/top_messages.json', // 个人前5项消息
+  PERSONAL_NOTIFICATIONS: '/mock/personal/top_notifications.json', // 个人前5项通知
+  PERSONAL_TASKS: '/mock/personal/top_tasks.json', // 个人前5项待办/任务
   /// ********************** 电商模块 **********************
   ECOMMERCE_SHOP: '/mock/e-commerce/shop/page.json', // 店铺分页列表
   ECOMMERCE_SHOP_LIST: '/mock/e-commerce/shop/list.json', // 店铺全量查询

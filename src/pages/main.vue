@@ -36,13 +36,21 @@
             <router-view class="container"></router-view>
           </keep-alive>
         </transition>
+        <a-drawer
+          placement="right"
+          :closable="false"
+          :visible="settingDrawerVisible"
+          :get-container="false"
+          :wrap-style="{ position: 'absolute' }"
+          @close="settingDrawerVisible = false"
+        ></a-drawer>
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
 <script>
-import StoreComponent from '@/components/store.component'
+import Store from '@/components/mixins/store.js'
 import MainSider from './main-sider'
 import MainHeader from './main-header'
 import { Layout } from 'ant-design-vue'
@@ -52,7 +60,7 @@ import { User } from '@/models/user'
 
 export default {
   name: 'home',
-  mixins: [StoreComponent],
+  mixins: [Store],
   components: {
     ALayout: Layout,
     ALayoutHeader: Layout.Header,
@@ -97,10 +105,11 @@ export default {
 .ant-layout-header {
   background: rgb(255, 255, 255);
   padding: 0px;
-  line-height: 56px;
-  height: 56px;
+  line-height: 48px;
+  height: 48px;
 }
 .layout-content {
+  position: relative;
   overflow: hidden;
 }
 

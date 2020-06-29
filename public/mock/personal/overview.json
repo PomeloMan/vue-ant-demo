@@ -1,0 +1,55 @@
+[
+  {
+    "index": 1,
+    "items": [
+      {
+        "index": 0,
+        "icon": "audit",
+        "title": "personal.todo.status_uncompleted",
+        "count": 12,
+        "color": [
+          "#69c0ff",
+          "#1890ff",
+          "#096dd9"
+        ]
+      },
+      {
+        "index": 1,
+        "icon": "file-done",
+        "title": "personal.todo.status_completed",
+        "count": 2,
+        "color": [
+          "#95de64",
+          "#52c41a",
+          "#389e0d"
+        ]
+      },
+      {
+        "index": 2,
+        "icon": "exception",
+        "title": "personal.todo.status_rejected",
+        "count": 4,
+        "color": [
+          "#ff7875",
+          "#f5222d",
+          "#cf1322"
+        ]
+      },
+      {
+        "index": 3,
+        "icon": "file-sync",
+        "title": "personal.todo.status_pending",
+        "count": 5,
+        "color": [
+          "#fff566",
+          "#fadb14",
+          "#d4b106"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "items": []
+  }
+]
