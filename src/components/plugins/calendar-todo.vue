@@ -491,18 +491,4 @@ export default {
     }
   }
 }
-
-.drawer-footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  border-top: 1px solid #e9e9e9;
-  padding: 10px 16px;
-  background: #fff;
-  text-align: right;
-  .ant-btn:not(:last-child) {
-    margin-right: 8px;
-  }
-}
 </style>

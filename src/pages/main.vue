@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="layout-wrapper">
+  <a-layout class="layout-wrapper" :class="`theme-${theme}`">
     <a-layout-sider :trigger="null" collapsible v-model="collapsed">
       <main-sider></main-sider>
     </a-layout-sider>
@@ -36,14 +36,8 @@
             <router-view class="container"></router-view>
           </keep-alive>
         </transition>
-        <a-drawer
-          placement="right"
-          :closable="false"
-          :visible="settingDrawerVisible"
-          :get-container="false"
-          :wrap-style="{ position: 'absolute' }"
-          @close="settingDrawerVisible = false"
-        ></a-drawer>
+        <!-- 右侧设置面板 -->
+        <main-setting></main-setting>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -53,8 +47,10 @@
 import Store from '@/components/mixins/store.js'
 import MainSider from './main-sider'
 import MainHeader from './main-header'
+import MainSetting from './main-setting'
 import { Layout } from 'ant-design-vue'
 import { mapState } from 'vuex'
+// import { find } from '@/pipes'
 
 import { User } from '@/models/user'
 
@@ -67,12 +63,14 @@ export default {
     ALayoutSider: Layout.Sider,
     ALayoutContent: Layout.Content,
     MainSider,
-    MainHeader
+    MainHeader,
+    MainSetting
   },
   computed: {
     ...mapState({
       user: state => new User(state.common.user),
-      keepAliveList: state => state.common.keepAliveList
+      keepAliveList: state => state.common.keepAliveList,
+      theme: state => state.common.theme
     })
   },
   data() {
@@ -103,7 +101,6 @@ export default {
   height: 100%;
 }
 .ant-layout-header {
-  background: rgb(255, 255, 255);
   padding: 0px;
   line-height: 48px;
   height: 48px;

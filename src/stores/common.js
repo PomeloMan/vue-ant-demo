@@ -14,7 +14,15 @@ export default {
     mapOfDict: {}, // 字典数据
     oauthToken: new OAuthToken(), // OAuth Token
     user: new User(),
-    keepAliveList: []
+    keepAliveList: [],
+    color: storage.getModuleItem(
+      CONSTANTS.STORAGE_SETTINGS,
+      CONSTANTS.STORAGE_SETTINGS_COLOR
+    ) || {}, // 当前颜色
+    theme: storage.getModuleItem(
+      CONSTANTS.STORAGE_SETTINGS,
+      CONSTANTS.STORAGE_SETTINGS_THEME
+    ) || 'light' // 当前主题 'light','dark'
   },
   mutations: {
     updateLocale(state, locale) {
@@ -39,7 +47,7 @@ export default {
     updateOauthToken(state, oauthToken) {
       state.oauthToken = oauthToken
       storage.setItem(CONSTS.STORAGE_OAUTH2_TOKEN_INFO, oauthToken)
-      storage.setItem(CONSTS.OAUTH2_ACCESS_TOKEN, oauthToken.access_token)
+      storage.setItem(CONSTS.STORAGE_OAUTH2_ACCESS_TOKEN, oauthToken.access_token)
     },
     updateUser(state, user) {
       state.user = user
@@ -47,6 +55,22 @@ export default {
     },
     updateKeepAliveList(state, keepAliveList) {
       state.keepAliveList = keepAliveList
+    },
+    updateColor(state, color) {
+      state.color = color
+      storage.setModuleItem(
+        CONSTANTS.STORAGE_SETTINGS,
+        CONSTANTS.STORAGE_SETTINGS_COLOR,
+        color
+      )
+    },
+    updateTheme(state, theme) {
+      state.theme = theme
+      storage.setModuleItem(
+        CONSTANTS.STORAGE_SETTINGS,
+        CONSTANTS.STORAGE_SETTINGS_THEME,
+        theme
+      )
     }
   },
   actions: {
@@ -70,6 +94,12 @@ export default {
     },
     updateKeepAliveList(context, keepAliveList) {
       context.commit('updateKeepAliveList', keepAliveList)
+    },
+    updateColor(context, color) {
+      context.commit('updateColor', color)
+    },
+    updateTheme(context, theme) {
+      context.commit('updateTheme', theme)
     }
   }
 }

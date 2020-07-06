@@ -1,0 +1,109 @@
+@import './vars.less';
+// 此文件配置了浅色与深色主题样式，用于主题样式或色值变换时覆盖 ant-design-vue 写死在组件上的样式
+.theme-light {
+  // 布局头部样式
+  .ant-layout {
+    .ant-layout-header {
+      background-color: @component-background;
+      .ant-menu-item:active {
+        background-color: @primary-1;
+      }
+    }
+  }
+}
+.theme-dark {
+  // 用 antd 样式覆盖 ant-design-vue 写死的样式 @reference ant-design-vue/dist/antd.less
+  /// ---------- Table ----------
+  .ant-table {
+    .ant-table-header {
+      color: @table-header-bg;
+      background: @table-header-bg;
+    }
+    &.ant-table-fixed-header > .ant-table-content > .ant-table-scroll > .ant-table-body,
+    &.ant-table-fixed-header > .ant-table-content > .ant-table-scroll > .ant-table-body .ant-table-tbody {
+      background-color: @table-bg;
+    }
+    // tr:hover
+    .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+      background: @table-row-hover-bg;
+    }
+    // 表头排序样式
+    .ant-table-thead > tr > th {
+      &.ant-table-column-sort,
+      &.ant-table-column-sort .ant-table-header-column .ant-table-column-sorters::before {
+        background: @table-header-sort-active-bg;
+      }
+      .ant-table-header-column .ant-table-column-sorters {
+        &::before {
+          background: @table-header-bg;
+        }
+        &:hover::before {
+          background: @table-header-sort-bg;
+        }
+      }
+    }
+    // 选中行排序列样式
+    .ant-table-thead > tr.ant-table-row-selected > td.ant-table-column-sort,
+    .ant-table-tbody > tr.ant-table-row-selected > td.ant-table-column-sort {
+      background: @table-header-bg;
+    }
+    // 表头筛选样式
+    .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-filters {
+      &:hover .anticon-filter:hover,
+      &:hover .ant-table-filter-icon:hover {
+        color: @heading-color;
+        background: @table-header-sort-bg;
+      }
+      .anticon-filter.ant-table-filter-open,
+      .ant-table-filter-icon.ant-table-filter-open {
+        color: @heading-color;
+        background: @table-header-filter-active-bg;
+      }
+    }
+  }
+
+  /// ---------- Tabs ----------
+  .ant-tabs-nav {
+    .ant-tabs-tab:hover {
+      color: @primary-5;
+    }
+    .ant-tabs-tab-active {
+      color: @primary-color;
+    }
+    .ant-tabs-tab:active {
+      color: @primary-7;
+    }
+  }
+}
+
+// -------------------- 通用样式 --------------------
+// 自定义主内容样式
+.container {
+  .scroll-wrapper .content-wrapper,
+  .steps-wrapper .content-wrapper,
+  .ant-tabs.ant-tabs-line,
+  .table-content-wrapper {
+    background-color: @component-background;
+  }
+}
+.app-header {
+  &.app-header-bordered {
+    background: @component-background;
+    border-top-color: @border-color-base;
+    border-bottom-color: @border-color-base;
+    box-shadow: 1px 2px 4px fade(@border-color-base, 20%);
+  }
+}
+.app-footer {
+  border-top-color: @normal-color;
+  background-color: @component-background;
+}
+// Drawer
+.drawer-footer {
+  border-top-color: @border-color-base;
+  background-color: @component-background;
+}
+// Select
+.ant-select-selection {
+  background-color: transparent;
+}

@@ -71,8 +71,11 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  border-top: 1px solid #e8e8e8;
-  background-color: white;
+  border-top-width: 1px;
+  border-top-style: solid;
+  // 组件颜色统一配置 @assets/theme.scss
+  // border-top: 1px solid #e8e8e8;
+  // background-color: white;
   position: absolute;
   bottom: 0;
   width: 100%;

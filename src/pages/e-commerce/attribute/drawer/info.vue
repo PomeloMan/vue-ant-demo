@@ -184,14 +184,4 @@ export default {
     margin-bottom: 16px;
   }
 }
-.drawer-footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  border-top: 1px solid #e9e9e9;
-  padding: 10px 16px;
-  background: #fff;
-  text-align: right;
-}
 </style>

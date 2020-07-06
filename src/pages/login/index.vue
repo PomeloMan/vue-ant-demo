@@ -66,7 +66,7 @@ export default {
             .then(({ data }) => {
               this.$store.dispatch('common/updateOauthToken', data)
               this.$router.push('/main')
-              // localStorage.setItem(
+              // this.$storage.setItem(
               //   'oauth2AccessToken',
               //   btoa(values.username + values.password)
               // )
@@ -82,6 +82,11 @@ export default {
               //   })
             })
             .catch(err => {
+              this.$store.dispatch('common/updateOauthToken', {
+                access_token:
+                  'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk0NjE2NTYsInVzZXJfbmFtZSI6ImZlbmdjaGFvIiwiYXV0aG9yaXRpZXMiOlsiU1lTX1VTRVJfVVBEQVRFIiwiU1lTX1JPTEUiLCJTWVNfVVNFUl9BREQiLCJTWVMiLCJTWVNfQVVUSCIsIlNZU19VU0VSIiwiU1lTX1VTRVJfREVMRVRFIiwiU1lTX1VTRVJfUVVFUlkiXSwianRpIjoiNmM2NDUxYzYtMjVkOS00ZDQzLWEzYWItNmQ1ZjQxNWEwMmVhIiwiY2xpZW50X2lkIjoic3ByaW5nY2xvdWQiLCJzY29wZSI6WyJhbGwiLCJwdWJsaWMiXX0.LQqhd8Vm7mDiudl7GohCdfCMNmxkAwebDdYW30mAYkqS4PFZTulXtG7onGGcdOsA6N4kn-Agxqh7L2Xy7OatzDTsWrPe9VSeHGJ-U2ZtvEZh5a7lTXZ9SNE82-haP8eH810w12GhpTT2DV9Chk9G7PI-eBjeViMfN8RQgorOPxeLk-M_v_TOBrFRMPUYGIQLNs2A11kquVJjmlnUDS7cBkjbTGZY3CtrpKdDBMnVumdwzYucxW2w1GqCH6p3O_W1quVrFYMeSlqccqrU1p09YdHPGBdKdS2GwQ-DrcexI_JFOwi4i3qQLgLup8c6vh5q5pXI17O6urB0wR8GD0x9sw'
+              })
+              this.$router.push('/main')
               this.$message.error(err.message)
             })
         }

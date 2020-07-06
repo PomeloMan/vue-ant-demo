@@ -238,10 +238,11 @@ export default {
   height: 40px;
 
   &.app-header-bordered {
-    background: #fff;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    box-shadow: 1px 2px 4px rgba($color: #eee, $alpha: 0.6);
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    // box-shadow: 1px 2px 4px rgba($color: #eee, $alpha: 0.6);
   }
 
   > *:nth-child(1),

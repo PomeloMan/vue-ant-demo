@@ -27,7 +27,32 @@ export class Storage {
       val = JSON.parse(val)
       return val
     }
-    return {}
+    return undefined
+  }
+
+  setModuleItem(module, key, val, withBase64 = false) {
+    let _module = this.storage.getItem(module)
+    if (!_module) {
+      _module = {}
+    } else {
+      _module = JSON.parse(_module)
+    }
+    _module[key] = val
+    if (withBase64) {
+      _module = btoa(encodeURI(_module))
+    }
+    this.storage.setItem(module, JSON.stringify(_module))
+  }
+  getModuleItem(module, key, withBase64 = false) {
+    let val = this.storage.getItem(module)
+    if (val) {
+      if (withBase64) {
+        val = decodeURI(atob(val))
+      }
+      val = JSON.parse(val)
+      return val[key]
+    }
+    return undefined
   }
 }
 

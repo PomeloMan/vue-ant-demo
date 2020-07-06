@@ -3,6 +3,14 @@
     "title": "标题",
     "subtitle": "副标题"
   },
+  "settings": {
+    "color": "颜色",
+    "primary-color": "主色",
+    "primary-color-extra": "影响按钮、输入框、选择框等组件的色值",
+    "theme": "主题",
+    "light-theme": "浅色主题",
+    "dark-theme": "暗黑主题"
+  },
   "message": {
     "avatar_upload_failure": "头像上传失败!",
     "avatar_upload_success": "头像上传成功!",

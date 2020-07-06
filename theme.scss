@@ -1,0 +1,37 @@
+// /**
+//  * 使用 scss 替换 less 作为 Ant Design 样式语言，使用插件 antd-scss-theme-plugin
+//  * 注意：此插件无法动态切换主题或更改颜色
+//  * 具体配置 vue.config.js
+//  * configureWebpack: config => { config.plugins.push(new AntdScssThemePlugin('./theme.scss')) }
+//  * chainWebpack(config) {
+//  *   const oneOfs = ['vue-modules', 'vue', 'normal-modules', 'normal']
+//  *   oneOfs.forEach(oneOf => {
+//  *     config.module.rule('less').oneOf(oneOf)
+//  *       .use('less-loader')
+//  *       .loader(AntdScssThemePlugin.themify('less-loader').loader)
+//  *       .options({
+//  *         sourceMap: !isProduction,
+//  *         javascriptEnabled: true
+//  *       })
+//  *     config.module.rule('sass').oneOf(oneOf)
+//  *       .use('sass-loader')
+//  *       .loader(AntdScssThemePlugin.themify('sass-loader').loader)
+//  *       .options({
+//  *         sourceMap: !isProduction,
+//  *         sassOptions: {
+//  *           indentedSyntax: true
+//  *         }
+//  *       })
+//  *     config.module.rule('scss').oneOf(oneOf)
+//  *       .use('sass-loader')
+//  *       .loader(AntdScssThemePlugin.themify('sass-loader').loader)
+//  *       .options({
+//  *         sourceMap: !isProduction,
+//  *         sassOptions: {
+//  *           indentedSyntax: true
+//  *         }
+//  *       })
+//  *   });
+//  * }
+//  */
+$primary-color: #fe8019;

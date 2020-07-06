@@ -1,19 +1,22 @@
 'use strict'
-require('./color');
+require('./color'); // antd-theme-generator
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
+// const AntdScssThemePlugin = require('antd-scss-theme-plugin');
 
+const isProduction = process.env.NODE_ENV === 'production';
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 const Timestamp = new Date().getTime();
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? './' : '/', // 部署应用包时的基本 URL
+  publicPath: isProduction ? './' : '/', // 部署应用包时的基本 URL
   outputDir: 'dist', // 当运行 vue-cli-service build 时生成的生产环境构建文件的目录
   assetsDir: './', // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录
   productionSourceMap: false, // 是否为生产环境构建生成 source map
   css: {
+    sourceMap: !isProduction,
     loaderOptions: {
       css: {
         importLoaders: 1
@@ -43,11 +46,12 @@ module.exports = {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src')
     config.resolve.alias['@assets'] = path.resolve(__dirname, 'src/assets')
 
+    // config.plugins.push(new AntdScssThemePlugin('./theme.scss'))
     if (process.env.npm_config_analyzer === 'true') {
       // npm run serve --analyzer
       config.plugins.push(new BundleAnalyzerPlugin())
     }
-    if (process.env.NODE_ENV === 'production') {
+    if (isProduction) {
       // 为生产环境修改配置...
       config.output.filename = `[name].${process.env.VUE_APP_VERSION}.${Timestamp}.js`
       config.output.chunkFilename = `[name].${process.env.VUE_APP_VERSION}.${Timestamp}.js`
@@ -125,6 +129,37 @@ module.exports = {
         symbolId: 'icon-[name]'
       })
       .end()
+
+    // vue inspect > output.js    查看webpack具体配置项
+    // antd-scss-theme-plugin 配置，less -> scss，scss使用less变量
+    // const oneOfs = ['vue-modules', 'vue', 'normal-modules', 'normal']
+    // oneOfs.forEach(oneOf => {
+    //   config.module.rule('less').oneOf(oneOf)
+    //     .use('less-loader')
+    //     .loader(AntdScssThemePlugin.themify('less-loader').loader)
+    //     .options({
+    //       sourceMap: !isProduction,
+    //       javascriptEnabled: true
+    //     })
+    //   config.module.rule('sass').oneOf(oneOf)
+    //     .use('sass-loader')
+    //     .loader(AntdScssThemePlugin.themify('sass-loader').loader)
+    //     .options({
+    //       sourceMap: !isProduction,
+    //       sassOptions: {
+    //         indentedSyntax: true
+    //       }
+    //     })
+    //   config.module.rule('scss').oneOf(oneOf)
+    //     .use('sass-loader')
+    //     .loader(AntdScssThemePlugin.themify('sass-loader').loader)
+    //     .options({
+    //       sourceMap: !isProduction,
+    //       sassOptions: {
+    //         indentedSyntax: true
+    //       }
+    //     })
+    // });
   },
 
   pluginOptions: {

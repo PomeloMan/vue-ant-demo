@@ -1,7 +1,15 @@
 <template>
   <div class="main-header">
     <div class="left-wrapper">
-      <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="collapse" />
+      <li class="ant-menu-item" @click="collapse">
+        <a-icon
+          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+          :style="{
+            margin: 0,
+            fontSize: '18px'
+          }"
+        />
+      </li>
     </div>
     <div class="right-wrapper">
       <li class="ant-menu-item">
@@ -160,7 +168,11 @@
       </a-dropdown>
 
       <!-- 设置 -->
-      <li class="ant-menu-item ant-dropdown-link" href="#" @click="settingDrawerVisible = !settingDrawerVisible">
+      <li
+        class="ant-menu-item ant-dropdown-link"
+        href="#"
+        @click="settingDrawerVisible = !settingDrawerVisible"
+      >
         <a-icon type="setting" style="margin:0" />
       </li>
     </div>
@@ -221,10 +233,6 @@ export default {
     // 左边菜单栏收缩
     collapse() {
       this.collapsed = !this.collapsed
-
-      window.less.modifyVars({
-        '@primary-color': '#820014'
-      })
     },
     // 国际化
     i18n(locale) {
@@ -234,8 +242,8 @@ export default {
     },
     // 登出
     logout() {
-      localStorage.removeItem('oauth2AccessToken')
-      localStorage.removeItem('user')
+      this.$storage.removeItem('oauth2AccessToken')
+      this.$storage.removeItem('user')
       this.$router.push('/login')
     },
     // 获取消息列表
@@ -305,20 +313,9 @@ export default {
     padding: 0 24px;
     display: flex;
     align-items: center;
-  }
-  .ant-menu-item {
-    padding: 0 10px;
-  }
-}
-.trigger {
-  font-size: 18px;
-  line-height: inherit;
-  padding: 0 24px;
-  cursor: pointer;
-  transition: color 0.3s;
-
-  &:hover {
-    color: #1890ff;
+    .ant-menu-item {
+      padding: 0 10px;
+    }
   }
 }
 .user-info {

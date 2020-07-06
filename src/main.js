@@ -37,6 +37,7 @@ Vue.use(Antd)
 
 // global style
 import './assets/style.scss'
+import './styles/theme.less'
 import 'perfect-scrollbar/css/perfect-scrollbar.css' // 引入 perfect-scrollbar CSS库
 import 'cropperjs/dist/cropper.min.css'
 // i18n

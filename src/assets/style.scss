@@ -42,7 +42,7 @@ p {
 
     .content-wrapper {
       min-height: 100%;
-      background-color: white;
+      // background-color: white;
     }
   }
 
@@ -53,7 +53,7 @@ p {
     padding: 0 16px 24px;
     .content-wrapper {
       height: 100%;
-      background-color: white;
+      // background-color: white;
     }
   }
 
@@ -61,7 +61,7 @@ p {
   .ant-tabs.ant-tabs-line,
   .table-content-wrapper {
     margin: 0 16px;
-    background-color: white;
+    // background-color: white;
   }
   .ant-tabs.ant-tabs-line {
     .table-content-wrapper {
@@ -101,5 +101,20 @@ p {
 .grid-spin {
   .ant-spin-spinning {
     bottom: 0;
+  }
+}
+
+// Drawer
+.drawer-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-top-width: 1px;
+  border-top-style: solid;
+  padding: 10px 16px;
+  text-align: right;
+  .ant-btn:not(:last-child) {
+    margin-right: 8px;
   }
 }

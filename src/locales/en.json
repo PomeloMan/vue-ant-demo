@@ -3,6 +3,14 @@
     "title": "Title",
     "subtitle": "Subtitle"
   },
+  "settings": {
+    "color": "Color",
+    "primary-color": "Main Color",
+    "primary-color-extra": "Affect the color value of components such as buttons, input boxes, selection boxes, etc.",
+    "theme": "Theme",
+    "light-theme": "Light theme",
+    "dark-theme": "Dark theme"
+  },
   "message": {
     "avatar_upload_failure": "upload avatar failed!",
     "avatar_upload_success": "upload avatar successfully!",
