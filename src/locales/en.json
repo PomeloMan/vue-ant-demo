@@ -14,6 +14,7 @@
   "message": {
     "avatar_upload_failure": "upload avatar failed!",
     "avatar_upload_success": "upload avatar successfully!",
+    "browser_not_supported": "Browser is not supported!",
     "delete_success": "Delete successfully!",
     "delete_failure": "Delete failed!",
     "error_404": "Sorry, the page you visited does not exist.",

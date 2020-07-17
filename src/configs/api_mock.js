@@ -19,7 +19,8 @@ const API = {
   // -- PROJECT --
   PROJECT_PAGE: '/mock/project/page.json',
 
-
+  // -- Dashboard --
+  DASHBOARD_ANTV_G2: '/mock/dashboard/antv-g2.json',
   /// ********************** 个人中心 **********************
   PERSONAL_OVERVIEW: '/mock/personal/overview.json', // 个人中心-总览数据
   PERSONAL_MONTH_EVENTS: function (month) { // 个人中心-月度待办/事件

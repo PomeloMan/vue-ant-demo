@@ -98,7 +98,8 @@ export default {
         keyStr: 'mode',
         returnKeyStr: 'vars'
       })
-      window.less
+      // window.less
+      this.$less
         .modifyVars({ ...themeVars, ...vars })
         .then(() => {
           this.$store.dispatch('common/updateColor', { ...this.color, ...vars })
@@ -117,7 +118,8 @@ export default {
         keyStr: 'mode',
         returnKeyStr: 'vars'
       })
-      window.less
+      // window.less
+      this.$less
         .modifyVars({ ...themeVars, ...this.color })
         .then(() => {
           this.$store.dispatch('common/updateTheme', themeMode)

@@ -50,6 +50,12 @@ const routes = [{
       path: 'three',
       component: () => import(/* webpackChunkName: "group-three" */ '../pages/three')
     },
+    // Workflow
+    {
+      name: 'workflow',
+      path: 'workflow',
+      component: () => import(/* webpackChunkName: "group-three" */ '../pages/workflow')
+    },
     // Dashboard Module
     {
       name: 'dashboard',

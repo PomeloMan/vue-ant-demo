@@ -5,6 +5,9 @@ import router from './configs/router'
 import store from './configs/store'
 import http from './configs/http'
 
+import less from 'less'
+Vue.prototype.$less = less
+
 import API from '@/configs/api'
 Vue.prototype.$api = API;
 
