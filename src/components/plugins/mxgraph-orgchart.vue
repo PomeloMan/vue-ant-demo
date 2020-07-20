@@ -20,7 +20,10 @@ import {
   mxPoint,
   mxVertexHandler,
   mxEdgeHandler,
-  graph
+  mxConnectionConstraint,
+  mxCellState,
+  mxRubberband,
+  mxKeyHandler
 } from '../mxgraph/index'
 export default {
   data() {
@@ -34,20 +37,9 @@ export default {
     }
   },
   created() {
-    // 点击图形编辑状态下显示的各个点
-    mxVertexHandler.prototype.handleImage = graph.mainHandle
-    mxVertexHandler.prototype.secondaryHandleImage = graph.secondaryHandle
-    mxEdgeHandler.prototype.handleImage = graph.mainHandle
-    mxEdgeHandler.prototype.terminalHandleImage = graph.terminalHandle
-    mxEdgeHandler.prototype.fixedHandleImage = graph.fixedHandle
-    mxEdgeHandler.prototype.labelHandleImage = graph.secondaryHandle
-    mxOutline.prototype.sizerImage = graph.mainHandle
-    // 图形是否可以旋转，默认false
-    mxVertexHandler.prototype.rotationEnabled = true
-    // 图形较小时是否隐藏显示部分图形大小调整器
-    mxVertexHandler.prototype.manageSizers = true
-    // 是否实时修改图形大小，默认false
-    mxVertexHandler.prototype.livePreview = true
+    mxVertexHandler.prototype.rotationEnabled = true // 图形是否可以旋转，默认false
+    mxVertexHandler.prototype.manageSizers = true // 图形较小时是否隐藏显示部分图形大小调整器
+    mxVertexHandler.prototype.livePreview = true // 是否实时修改图形大小，默认false
   },
   mounted() {
     // Checks if browser is supported
@@ -64,19 +56,50 @@ export default {
       const graph = new mxGraph(this.container)
       graph.setCellsMovable(true) // 模型可移动
       graph.setAutoSizeCells(true) // 自动更新模型大小
-      // graph.setConnectable(true)
+      graph.setConnectable(true) // 图形可连接
       graph.setPanning(true) // 画布可移动
+      // 开启区域选择，鼠标框选
+      new mxRubberband(graph)
 
-      var style = graph.getStylesheet().getDefaultVertexStyle()
-      style[mxConstants.STYLE_ROUNDED] = true
-      style[mxConstants.STYLE_FILLCOLOR] = '#ffffff' // 填充颜色色
-      style[mxConstants.STYLE_STROKECOLOR] = '#000000' // 边框颜色
-      style[mxConstants.STYLE_STROKEWIDTH] = '1' // 边框宽
-      style[mxConstants.STYLE_FONTCOLOR] = '#000000' // 文字颜色
-      style[mxConstants.STYLE_FONTSIZE] = '12'
-      style[mxConstants.VALID_COLOR] = '#000000' // 有效的连接线
-      style[mxConstants.INVALID_COLOR] = '#f5222d' // 无效的连接线
-      graph.getStylesheet().putDefaultVertexStyle(style)
+      // 图形默认样式
+      const vertexStyle = graph.getStylesheet().getDefaultVertexStyle()
+      vertexStyle[mxConstants.STYLE_ROUNDED] = true
+      vertexStyle[mxConstants.STYLE_FILLCOLOR] = '#ffffff' // 填充颜色色
+      vertexStyle[mxConstants.STYLE_STROKECOLOR] = '#000000' // 边框颜色
+      vertexStyle[mxConstants.STYLE_STROKEWIDTH] = '1' // 边框宽
+      vertexStyle[mxConstants.STYLE_FONTCOLOR] = '#000000' // 文字颜色
+      vertexStyle[mxConstants.STYLE_FONTSIZE] = '12'
+      graph.getStylesheet().putDefaultVertexStyle(vertexStyle)
+      // 连接线默认样式
+      const edgeStyle = graph.getStylesheet().getDefaultEdgeStyle()
+      edgeStyle[mxConstants.STYLE_EDGE] = 'orthogonalEdgeStyle'
+      graph.getStylesheet().putDefaultEdgeStyle(edgeStyle)
+
+      // 禁用浮动连接（仅在不使用连接映像的情况下使用）
+      if (graph.connectionHandler.connectImage == null) {
+        graph.connectionHandler.isConnectableCell = function(cell) {
+          return false
+        }
+        mxEdgeHandler.prototype.isConnectableCell = function(cell) {
+          return graph.connectionHandler.isConnectableCell(cell)
+        }
+      }
+      // 为默认边缘样式启用连接预览
+      graph.connectionHandler.createEdgeState = function(me) {
+        var edge = graph.createEdge(
+          null,
+          null,
+          null,
+          null,
+          null,
+          'strokeColor=#000000'
+        )
+        return new mxCellState(
+          this.graph.view,
+          edge,
+          this.graph.getCellStyle(edge)
+        )
+      }
 
       // 总览窗口
       this.outline = new mxOutline(graph, this.outlineContainer)
@@ -90,18 +113,34 @@ export default {
       const parent = graph.getDefaultParent()
       graph.getModel().beginUpdate()
       try {
-        var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30)
-        var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30)
+        var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 200, 100)
+        var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 200, 100)
         // eslint-disable-next-line
-        var e1 = graph.insertEdge(parent, null, '', v1, v2, 'strokeColor=#000000')
+        var e1 = graph.insertEdge(
+          parent,
+          null,
+          '',
+          v1,
+          v2,
+          'strokeColor=#000000'
+        )
       } finally {
         graph.getModel().endUpdate()
       }
 
+      this.initActions(graph)
       this.graph = graph
     }
   },
-  methods: {}
+  methods: {
+    initActions(graph) {
+      // 快捷键
+      const keyHandler = new mxKeyHandler(graph)
+      keyHandler.bindControlKey(90, function() {
+        debugger
+      }) // Ctrl+Z
+    }
+  }
 }
 </script>
 
