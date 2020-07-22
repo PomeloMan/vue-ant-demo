@@ -174,6 +174,8 @@
 import * as G2 from '@antv/g2'
 import * as screenfull from 'screenfull'
 import Tag from '@/components/plugins/tag'
+import elementResizeDetectorMaker from 'element-resize-detector'
+import debounce from 'lodash/debounce'
 export default {
   components: { Tag },
   computed: {
@@ -190,8 +192,13 @@ export default {
     }
   },
   data() {
+    this.handleEleResize = debounce(this.handleEleResize, 500, {
+      leading: false,
+      trailing: true
+    })
     return {
       screenfull,
+      erd: elementResizeDetectorMaker(),
       data: null,
       calendarDate: null,
       interval: null,
@@ -245,13 +252,26 @@ export default {
   created() {},
   mounted() {
     this.render()
+    this.$nextTick(() => {
+      setTimeout(() => {
+        // 添加元素监听
+        this.erd.listenTo(this.$refs.page, this.handleEleResize)
+      }, 300)
+    })
   },
   destroyed() {
+    // 删除元素监听
+    this.erd.uninstall(this.$refs.page)
     if (this.interval) {
       clearInterval(this.interval)
     }
   },
   methods: {
+    handleEleResize(element) {
+      var width = element.offsetWidth
+      var height = element.offsetHeight
+      console.log('Size: ' + width + 'x' + height)
+    },
     render() {
       this.$nextTick(() => {
         // 先销毁原图再渲染

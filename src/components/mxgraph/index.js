@@ -151,6 +151,8 @@ export const {
   mxEditorCodec
 } = mxgraph
 
+mxConstants.CONNECT_TARGET_COLOR = '#1890ff';
+mxConstants.DROP_TARGET_COLOR = '#1890ff';
 mxConstants.DEFAULT_VALID_COLOR = '#1890ff';
 mxConstants.DEFAULT_INVALID_COLOR = '#f5222d';
 mxConstants.VALID_COLOR = '#000000'; // 有效的连接线
@@ -165,6 +167,46 @@ export function createSvgImage(w, h, data, coordWidth, coordHeight) {
       <svg xmlns="${mxConstants.NS_SVG}" xmlns:xlink="${mxConstants.NS_XLINK}" width="${w}px" height="${h}px" ${((coordWidth != null && coordHeight != null) ? 'viewBox="0 0 ' + coordWidth + ' ' + coordHeight + '" ' : '')} version="1.1">${data}</svg>
     `));
   return new mxImage('data:image/svg+xml;base64,' + ((window.btoa) ? btoa(tmp) : Base64.encode(tmp, true)), w, h)
+}
+export function createCurrentEdgeStyle(currentEdgeStyle) {
+  var style = 'edgeStyle=' + (currentEdgeStyle['edgeStyle'] || 'none') + ';';
+  if (currentEdgeStyle['shape'] != null) {
+    style += 'shape=' + currentEdgeStyle['shape'] + ';';
+  }
+  if (currentEdgeStyle['curved'] != null) {
+    style += 'curved=' + currentEdgeStyle['curved'] + ';';
+  }
+  if (currentEdgeStyle['rounded'] != null) {
+    style += 'rounded=' + currentEdgeStyle['rounded'] + ';';
+  }
+  if (currentEdgeStyle['comic'] != null) {
+    style += 'comic=' + currentEdgeStyle['comic'] + ';';
+  }
+  if (currentEdgeStyle['jumpStyle'] != null) {
+    style += 'jumpStyle=' + currentEdgeStyle['jumpStyle'] + ';';
+  }
+  if (currentEdgeStyle['jumpSize'] != null) {
+    style += 'jumpSize=' + currentEdgeStyle['jumpSize'] + ';';
+  }
+  // Overrides the global default to match the default edge style
+  if (currentEdgeStyle['orthogonalLoop'] != null) {
+    style += 'orthogonalLoop=' + currentEdgeStyle['orthogonalLoop'] + ';';
+  }
+  // Overrides the global default to match the default edge style
+  if (currentEdgeStyle['jettySize'] != null) {
+    style += 'jettySize=' + currentEdgeStyle['jettySize'] + ';';
+  }
+  // Special logic for custom property of elbowEdgeStyle
+  if (currentEdgeStyle['edgeStyle'] == 'elbowEdgeStyle' && currentEdgeStyle['elbow'] != null) {
+    style += 'elbow=' + currentEdgeStyle['elbow'] + ';';
+  }
+  if (currentEdgeStyle['html'] != null) {
+    style += 'html=' + currentEdgeStyle['html'] + ';';
+  }
+  else {
+    style += 'html=1;';
+  }
+  return style;
 }
 // 定义每个形状的连接点(覆盖原方法)
 mxGraph.prototype.getAllConnectionConstraints = function (terminal) {
@@ -208,11 +250,25 @@ mxConstraintHandler.prototype.createHighlightShape = function () {
   hl.opacity = mxConstants.HIGHLIGHT_OPACITY;
   return hl;
 };
-// 连接线更新时样式(覆盖原方法，默认线条加粗)
-mxConnectionHandler.prototype.updatePreview = function () { };
 // 使用固定的连接点将边线连接到顶点(覆盖原方法)
 mxConstraintHandler.prototype.intersects = function (icon, point, source, existingEdge) {
   return (!source || existingEdge) || mxUtils.intersects(icon.bounds, point);
+};
+// 连接线更新时样式(覆盖原方法，默认线条加粗)
+mxConnectionHandler.prototype.updatePreview = function () { };
+mxConnectionHandler.prototype.livePreview = true;
+mxConnectionHandler.prototype.cursor = 'crosshair';
+// 为默认边缘样式启用连接预览
+mxConnectionHandler.prototype.createEdgeState = function (me) {
+  const currentEdgeStyle = mxUtils.clone(this.graph.getStylesheet().getDefaultEdgeStyle());
+  // const currentVertexStyle = mxUtils.clone(this.graph.getStylesheet().defaultVertexStyle());
+  var style = createCurrentEdgeStyle(currentEdgeStyle);
+  var edge = this.graph.createEdge(null, null, null, null, null, style);
+  var state = new mxCellState(this.graph.view, edge, this.graph.getCellStyle(edge));
+  for (var key in this.graph.currentEdgeStyle) {
+    state.style[key] = this.graph.currentEdgeStyle[key];
+  }
+  return state;
 };
 // 更新连接线状态，编辑连接线时触发更新(覆盖原方法)
 mxConnectionHandler.prototype.updateEdgeState = function (current, constraint) {
@@ -272,6 +328,5 @@ mxEdgeHandler.prototype.fixedHandleImage = fixedHandleImage
 mxEdgeHandler.prototype.labelHandleImage = secondaryHandleImage
 mxOutline.prototype.sizerImage = mainHandleImage
 /******************** ^连接线^ ********************/
-
 
 export default mxgraph
