@@ -151,8 +151,10 @@ export const {
   mxEditorCodec
 } = mxgraph
 
+/******************** v默认属性值v ********************/
 mxConstants.CONNECT_TARGET_COLOR = '#1890ff';
-mxConstants.DROP_TARGET_COLOR = '#1890ff';
+mxConstants.DROP_TARGET_COLOR = '#1890ff'; // 拖拽高亮边框颜色
+mxConstants.GUIDE_COLOR = '#1890ff'; // 对齐辅助线颜色
 mxConstants.DEFAULT_VALID_COLOR = '#1890ff';
 mxConstants.DEFAULT_INVALID_COLOR = '#f5222d';
 mxConstants.VALID_COLOR = '#000000'; // 有效的连接线
@@ -160,6 +162,13 @@ mxConstants.INVALID_COLOR = '#f5222d'; // 无效的连接线
 mxConstants.VERTEX_SELECTION_COLOR = '#1890ff'; // 图形选中边框虚线颜色
 mxConstants.EDGE_SELECTION_COLOR = '#1890ff'; // 连接线选中虚线颜色
 
+mxGraphHandler.prototype.maxLivePreview = 16; // 最大实时图形预览，默认0不启用实时预览
+mxGraphHandler.prototype.guidesEnabled = true; // 启用对齐辅助线；指定是否应使用其他单元格对齐当前所选内容的右侧，中央或左侧。
+mxVertexHandler.prototype.rotationEnabled = true; // 图形是否可以旋转，默认false
+mxVertexHandler.prototype.manageSizers = true; // 图形较小时是否隐藏显示部分图形大小调整器
+mxVertexHandler.prototype.livePreview = true; // 是否实时修改图形大小，默认false
+mxConnectionHandler.prototype.livePreview = true;
+/******************** ^默认属性值^ ********************/
 /******************** v连接线v ********************/
 export function createSvgImage(w, h, data, coordWidth, coordHeight) {
   var tmp = unescape(encodeURIComponent(

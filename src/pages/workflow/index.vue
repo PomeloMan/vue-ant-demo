@@ -3,7 +3,7 @@
     <app-header type="bordered" :breadcrumbs="$route.meta.breadcrumbs || []"></app-header>
     <div class="scroll-wrapper no-footer" style="padding: 0;">
       <div id="scrollContainer">
-        <mx-graph-orgchart></mx-graph-orgchart>
+        <mx-graph-workflow></mx-graph-workflow>
       </div>
     </div>
   </div>
@@ -11,11 +11,11 @@
 
 <script>
 import PerfectScrollbar from '@/components/mixins/perfect-scrollbar'
-import MxGraphOrgchart from '@/components/plugins/mxgraph-orgchart'
+import MxGraphWorkflow from '@/components/plugins/mxgraph-workflow'
 export default {
   mixins: [PerfectScrollbar],
   components: {
-    MxGraphOrgchart
+    MxGraphWorkflow
   },
   data() {
     return {

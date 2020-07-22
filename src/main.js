@@ -11,6 +11,9 @@ Vue.prototype.$less = less
 import API from '@/configs/api'
 Vue.prototype.$api = API;
 
+// 解决v-html不能加载js的问题（npm i vue-append）
+// import VueAppend from 'vue-append'
+// Vue.use(VueAppend)
 // 添加全局时间处理工具 momentjs
 import moment from 'moment'
 import 'moment/locale/zh-cn'

@@ -163,12 +163,7 @@ export default {
       undoManager: null
     }
   },
-  created() {
-    mxVertexHandler.prototype.rotationEnabled = true // 图形是否可以旋转，默认false
-    mxVertexHandler.prototype.manageSizers = true // 图形较小时是否隐藏显示部分图形大小调整器
-    mxVertexHandler.prototype.livePreview = true // 是否实时修改图形大小，默认false
-    mxConnectionHandler.prototype.livePreview = true
-  },
+  created() { },
   mounted() {
     const $this = this
     // Checks if browser is supported
@@ -199,7 +194,7 @@ export default {
       graph.getStylesheet().putDefaultVertexStyle(vertexStyle)
       // 连接线默认样式
       const edgeStyle = graph.getStylesheet().getDefaultEdgeStyle()
-      edgeStyle[mxConstants.STYLE_EDGE] = 'orthogonalEdgeStyle'
+      edgeStyle[mxConstants.STYLE_EDGE] = mxConstants.EDGESTYLE_ORTHOGONAL // 连接线样式
       edgeStyle[mxConstants.STYLE_FONTCOLOR] = '#000000'
       edgeStyle[mxConstants.STYLE_STROKECOLOR] = '#000000'
       graph.getStylesheet().putDefaultEdgeStyle(edgeStyle)
@@ -227,12 +222,12 @@ export default {
       const parent = graph.getDefaultParent()
       graph.getModel().beginUpdate()
       try {
-        var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 200, 100)
-        var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 200, 100)
-        var v3 = graph.insertVertex(parent, null, 'mxGraph', 200, 300, 100, 100, 'shape=triangle;perimeter=trianglePerimeter')
-        var v4 = graph.insertVertex(parent, null, 'mxGraph', 400, 300, 100, 100, 'shape=ellipse;perimeter=ellipsePerimeter')
+        var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 120, 60)
+        var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 120, 60)
+        var v3 = graph.insertVertex(parent, null, 'Triangle', 200, 300, 80, 80, 'shape=triangle;perimeter=trianglePerimeter')
+        var v4 = graph.insertVertex(parent, null, 'Ellipse', 400, 300, 120, 80, 'shape=ellipse;perimeter=ellipsePerimeter')
         // eslint-disable-next-line
-        var e1 = graph.insertEdge(
+        graph.insertEdge(
           parent,
           null,
           '',
@@ -268,11 +263,11 @@ export default {
         160,
         'shape=swimlane;startSize=20;'
       )
-      addVertex(`${url}mxgraph/images/rectangle.gif`, 100, 40, '')
-      addVertex(`${url}mxgraph/images/rounded.gif`, 100, 40, 'rounded=1')
-      addVertex(`${url}mxgraph/images/ellipse.gif`, 40, 40, 'shape=ellipse;perimeter=ellipsePerimeter;')
-      addVertex(`${url}mxgraph/images/rhombus.gif`, 40, 40, 'shape=rhombus;perimeter=rhombusPerimeter;')
-      addVertex(`${url}mxgraph/images/triangle.gif`, 40, 40, 'shape=triangle;perimeter=trianglePerimeter;')
+      addVertex(`${url}mxgraph/images/rectangle.gif`, 120, 60, '')
+      addVertex(`${url}mxgraph/images/rounded.gif`, 120, 60, 'rounded=1')
+      addVertex(`${url}mxgraph/images/ellipse.gif`, 120, 80, 'shape=ellipse;perimeter=ellipsePerimeter;')
+      addVertex(`${url}mxgraph/images/rhombus.gif`, 80, 80, 'shape=rhombus;perimeter=rhombusPerimeter;')
+      addVertex(`${url}mxgraph/images/triangle.gif`, 80, 80, 'shape=triangle;perimeter=trianglePerimeter;')
       this.sidebar = sidebar
 
       this.initActions(graph)

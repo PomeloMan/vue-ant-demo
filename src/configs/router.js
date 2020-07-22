@@ -54,7 +54,13 @@ const routes = [{
     {
       name: 'workflow',
       path: 'workflow',
-      component: () => import(/* webpackChunkName: "group-three" */ '../pages/workflow')
+      component: () => import(/* webpackChunkName: "group-mxgraph" */ '../pages/workflow')
+    },
+    // MXGraph
+    {
+      name: 'mxgraph-editor',
+      path: 'mxgraph-editor',
+      component: () => import(/* webpackChunkName: "group-mxgraph" */ '../pages/mxgraph/editor.vue')
     },
     // Dashboard Module
     {
