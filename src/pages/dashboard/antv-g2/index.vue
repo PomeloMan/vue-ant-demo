@@ -406,17 +406,19 @@ export default {
       })
       chart.coord('theta', {
         radius: 0.6, // 半径
-        innerRadius: 0.5 // 空心圆的半径
+        innerRadius: 0.5, // 空心圆的半径
+        startAngle: -Math.PI / 2 - Math.PI / 4,
+        endAngle: (-Math.PI / 2 - Math.PI / 4) + Math.PI * 2
       })
       chart.source([
-        { item: '原包材（RPM）车辆', count: 40, percent: 0.4 },
-        { item: '成品车辆', count: 21, percent: 0.21 },
-        { item: '废弃物车辆', count: 17, percent: 0.17 },
-        { item: '工程车辆', count: 13, percent: 0.13 },
-        { item: '爱索尔车辆', count: 9, percent: 0.09 },
-        { item: '内仓转运车辆', count: 9, percent: 0.09 },
-        { item: '其他', count: 9, percent: 0.09 },
-        { item: '半成品车辆', count: 9, percent: 0.09 }
+        { item: '原包材（RPM）车辆', count: 20, percent: 0.2 },
+        { item: '成品车辆', count: 2, percent: 0.02 },
+        { item: '废弃物车辆', count: 8, percent: 0.08 },
+        { item: '工程车辆', count: 15, percent: 0.15 },
+        { item: '爱索尔车辆', count: 10, percent: 0.1 },
+        { item: '内仓转运车辆', count: 10, percent: 0.1 },
+        { item: '其他', count: 5, percent: 0.05 },
+        { item: '半成品车辆', count: 30, percent: 0.3 }
       ])
       chart.tooltip({
         showTitle: false
@@ -430,11 +432,16 @@ export default {
         hoverable: false
       })
 
+      // eslint-disable-next-line
       const interval = chart
         .intervalStack()
         .position('count')
         .color('item')
-      interval.label('item')
+      // interval.label('item', {
+      //   textStyle: {
+      //     fontSize: 12
+      //   }
+      // })
       chart.render()
 
       // const canvas = chart.get('canvas')
@@ -455,8 +462,231 @@ export default {
           this.selectedType = null
         }
       })
-
       this.ringChart = chart
+
+      this.drawRingLabel(chart)
+    },
+    drawRingLabel(chart) {
+      // draw label
+      const OFFSET = 20
+      const APPEND_OFFSET = 10
+      const LINEHEIGHT = 0
+      const coord = chart.get('coord') // 获取坐标系对象
+      const center = coord.center // 极坐标圆心坐标
+      const r = coord.radius // 极坐标半径
+      const canvas = chart.get('canvas')
+      const canvasWidth = chart.get('width')
+      const canvasHeight = chart.get('height')
+      const labelGroup = canvas.addGroup()
+      addPieLabel(chart)
+      canvas.draw()
+      // main
+      function addPieLabel() {
+        const halves = [[], []]
+        const data = chart.get('data')
+        let angle = -Math.PI / 2 - Math.PI / 4;
+
+        for (let i = 0; i < data.length; i++) {
+          const percent = data[i].percent
+          const targetAngle = angle + Math.PI * 2 * percent
+          const middleAngle = angle + (targetAngle - angle) / 2
+          angle = targetAngle
+          const edgePoint = getEndPoint(center, middleAngle, r)
+          const routerPoint = getEndPoint(center, middleAngle, r + OFFSET)
+          // label
+          const label = {
+            _anchor: edgePoint,
+            _router: routerPoint,
+            _data: data[i],
+            x: routerPoint.x,
+            y: routerPoint.y,
+            r: r + OFFSET,
+            fill: '#bfbfbf'
+          }
+          // 判断文本的方向
+          if (edgePoint.x < center.x) {
+            label._side = 'left'
+            halves[0].push(label)
+          } else {
+            label._side = 'right'
+            halves[1].push(label)
+          }
+        } // end of for
+
+        const maxCountForOneSide = parseInt(canvasHeight / LINEHEIGHT, 10)
+        halves.forEach(function(half, index) {
+          // step 2: reduce labels
+          if (half.length > maxCountForOneSide) {
+            half.sort(function(a, b) {
+              return b._percent - a._percent
+            })
+            half.splice(maxCountForOneSide, half.length - maxCountForOneSide)
+          }
+
+          // step 3: distribute position (x and y)
+          half.sort(function(a, b) {
+            return a.y - b.y
+          })
+          antiCollision(half, index)
+        })
+      }
+
+      function getEndPoint(center, angle, r) {
+        return {
+          x: center.x + r * Math.cos(angle),
+          y: center.y + r * Math.sin(angle)
+        }
+      }
+
+      function drawLabel(label) {
+        const _anchor = label._anchor,
+          _router = label._router,
+          fill = label.fill,
+          y = label.y
+
+        const labelAttrs = {
+          y,
+          fontSize: 12, // 字体大小
+          fill: '#808080',
+          text: label._data.item + '\n' + label._data.count,
+          textBaseline: 'bottom'
+        }
+        const lastPoint = {
+          y
+        }
+
+        if (label._side === 'left') {
+          // 具体文本的位置
+          lastPoint.x = APPEND_OFFSET
+          labelAttrs.x = APPEND_OFFSET // 左侧文本左对齐并贴着画布最左侧边缘
+          labelAttrs.textAlign = 'left'
+        } else {
+          lastPoint.x = canvasWidth - APPEND_OFFSET
+          labelAttrs.x = canvasWidth - APPEND_OFFSET // 右侧文本右对齐并贴着画布最右侧边缘
+          labelAttrs.textAlign = 'right'
+        }
+
+        // 绘制文本
+        labelGroup.addShape('Text', {
+          attrs: labelAttrs
+        })
+        // 绘制连接线
+        let points = void 0
+        if (_router.y !== y) {
+          // 文本位置做过调整
+          points = [
+            [_anchor.x, _anchor.y],
+            [_router.x, y],
+            [lastPoint.x, lastPoint.y]
+          ]
+        } else {
+          points = [
+            [_anchor.x, _anchor.y],
+            [_router.x, _router.y],
+            [lastPoint.x, lastPoint.y]
+          ]
+        }
+
+        labelGroup.addShape('polyline', {
+          attrs: {
+            points,
+            lineWidth: 1,
+            stroke: fill
+          }
+        })
+      }
+
+      function antiCollision(half, isRight) {
+        const startY = center.y - r - OFFSET - LINEHEIGHT
+        let overlapping = true
+        let totalH = canvasHeight
+        let i = void 0
+
+        let maxY = 0
+        let minY = Number.MIN_VALUE
+        const boxes = half.map(function(label) {
+          const labelY = label.y
+          if (labelY > maxY) {
+            maxY = labelY
+          }
+          if (labelY < minY) {
+            minY = labelY
+          }
+          return {
+            size: LINEHEIGHT,
+            targets: [labelY - startY]
+          }
+        })
+        if (maxY - startY > totalH) {
+          totalH = maxY - startY
+        }
+
+        while (overlapping) {
+          // eslint-disable-next-line no-loop-func
+          boxes.forEach(box => {
+            const target =
+              (Math.min.apply(minY, box.targets) +
+                Math.max.apply(minY, box.targets)) /
+              2
+            box.pos = Math.min(
+              Math.max(minY, target - box.size / 2),
+              totalH - box.size
+            )
+          })
+
+          // detect overlapping and join boxes
+          overlapping = false
+          i = boxes.length
+          while (i--) {
+            if (i > 0) {
+              const previousBox = boxes[i - 1]
+              const box = boxes[i]
+              if (previousBox.pos + previousBox.size > box.pos) {
+                // overlapping
+                previousBox.size += box.size
+                previousBox.targets = previousBox.targets.concat(box.targets)
+
+                // overflow, shift up
+                if (previousBox.pos + previousBox.size > totalH) {
+                  previousBox.pos = totalH - previousBox.size
+                }
+                boxes.splice(i, 1) // removing box
+                overlapping = true
+              }
+            }
+          }
+        }
+
+        // step 4: normalize y and adjust x
+        i = 0
+        boxes.forEach(function(b) {
+          let posInCompositeBox = startY // middle of the label
+          b.targets.forEach(function() {
+            half[i].y = b.pos + posInCompositeBox + LINEHEIGHT / 2
+            posInCompositeBox += LINEHEIGHT
+            i++
+          })
+        })
+
+        // (x - cx)^2 + (y - cy)^2 = totalR^2
+        half.forEach(function(label) {
+          const rPow2 = label.r * label.r
+          const dyPow2 = Math.pow(Math.abs(label.y - center.y), 2)
+          if (rPow2 < dyPow2) {
+            label.x = center.x
+          } else {
+            const dx = Math.sqrt(rPow2 - dyPow2)
+            if (!isRight) {
+              // left
+              label.x = center.x - dx
+            } else {
+              // right
+              label.x = center.x + dx
+            }
+          }
+          drawLabel(label)
+        })
+      }
     },
     renderLine1() {
       const data = [
