@@ -63,5 +63,20 @@
     "code": "DICT_EC_STANDARD",
     "value_zh": "规格标准管理",
     "value_en": "Standard Management"
+  },
+  {
+    "code": "DICT_MXGRAPH",
+    "value_zh": "流程图管理",
+    "value_en": "MXGRAPH"
+  },
+  {
+    "code": "DICT_MXGRAPH_EDITOR",
+    "value_zh": "编辑器",
+    "value_en": "MXGraph Editor"
+  },
+  {
+    "code": "DICT_MXGRAPH_WORKFLOW",
+    "value_zh": "工作流",
+    "value_en": "MXGraph Workflow"
   }
 ]

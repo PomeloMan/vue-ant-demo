@@ -8,6 +8,7 @@
             <span>数据台账</span>
             <a-range-picker
               :disabled-date="disabledDate"
+              :getCalendarContainer="triggerNode => triggerNode.parentNode"
               format="YYYY-MM-DD"
               @calendarChange="handleCalendarChange"
             >

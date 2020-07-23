@@ -23,7 +23,7 @@
     "@tinymce/tinymce-vue": "^3.2.2",
     "@tweenjs/tween.js": "^18.5.0",
     "accounting": "^0.4.1",
-    "ant-design-vue": "^1.6.2",
+    "ant-design-vue": "^1.6.4",
     "antd": "^4.4.0",
     "antd-theme-generator": "^1.2.4",
     "axios": "^0.19.2",

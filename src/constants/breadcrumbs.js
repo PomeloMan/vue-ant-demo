@@ -99,4 +99,15 @@ export default {
       }, 'url': '/main/e-commerce/product/{1}'
     }
   ],
+  /// ********************** MXGraph **********************
+  'mxgraph-editor': [
+    { 'name': 'breadcrumb.home', 'url': '/' },
+    { 'name': 'breadcrumb.mxgraph' },
+    { 'name': 'breadcrumb.mxgraph-editor', 'url': '/main/mxgraph/editor' },
+  ],
+  'mxgraph-workflow': [
+    { 'name': 'breadcrumb.home', 'url': '/' },
+    { 'name': 'breadcrumb.mxgraph' },
+    { 'name': 'breadcrumb.mxgraph-workflow', 'url': '/main/mxgraph/workflow' },
+  ]
 }

@@ -155,7 +155,10 @@
     "ec-category": "商品分类",
     "ec-product": "商品管理",
     "ec-standard": "规格标准管理",
-    "ec-attribute": "SKU/SPU管理"
+    "ec-attribute": "SKU/SPU管理",
+    "mxgraph": "流程图管理",
+    "mxgraph-editor": "编辑器",
+    "mxgraph-workflow": "工作流"
   },
   "project": {
     "name": "项目名称",

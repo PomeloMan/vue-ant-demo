@@ -182,5 +182,37 @@
         "status": "Valid"
       }
     ]
+  },
+  {
+    "id": 600,
+    "pid": 0,
+    "type": 0,
+    "name": "DICT_MXGRAPH",
+    "icon": "apartment",
+    "modifier": "admin",
+    "modifiedDate": "1990-01-01T00:00:00.000Z",
+    "status": "Valid",
+    "children": [
+      {
+        "id": 610,
+        "pid": 600,
+        "type": 0,
+        "url": "/main/mxgraph/editor",
+        "name": "DICT_MXGRAPH_EDITOR",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
+      },
+      {
+        "id": 620,
+        "pid": 600,
+        "type": 0,
+        "url": "/main/mxgraph/workflow",
+        "name": "DICT_MXGRAPH_WORKFLOW",
+        "modifier": "admin",
+        "modifiedDate": "1990-01-01T00:00:00.000Z",
+        "status": "Valid"
+      }
+    ]
   }
 ]

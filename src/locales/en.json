@@ -153,7 +153,10 @@
     "ec-category": "Category Management",
     "ec-product": "Product Management",
     "ec-standard": "Standard Management",
-    "ec-attribute": "SKU/SPU Management"
+    "ec-attribute": "SKU/SPU Management",
+    "mxgraph": "MXGraph",
+    "mxgraph-editor": "MXGraph Editor",
+    "mxgraph-workflow": "MXGraph Workflow"
   },
   "project": {
     "name": "Project name",

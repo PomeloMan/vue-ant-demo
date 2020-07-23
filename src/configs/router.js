@@ -32,6 +32,7 @@ const routes = [{
   },
   component: () => import(/* webpackChunkName: "group-main" */ '../pages/main'),
   children: [
+    /// Error Page
     // 403
     {
       name: '403',
@@ -44,80 +45,69 @@ const routes = [{
       path: '/server-error',
       component: () => import(/* webpackChunkName: "group-main" */ '../pages/error/500')
     },
-    // Three Module
+    /// Three Module
     {
       name: 'three',
       path: 'three',
       component: () => import(/* webpackChunkName: "group-three" */ '../pages/three')
     },
-    // Workflow
+    /// MXGraph Module
+    // MXGraph-Workflow
     {
-      name: 'workflow',
-      path: 'workflow',
-      component: () => import(/* webpackChunkName: "group-mxgraph" */ '../pages/workflow')
+      name: 'mxgraph-workflow',
+      path: 'mxgraph/workflow',
+      meta: { breadcrumbs: BREADCRUMB['mxgraph-workflow'] },
+      component: () => import(/* webpackChunkName: "group-mxgraph" */ '../pages/mxgraph/workflow')
     },
-    // MXGraph
+    // MXGraph-Editor
     {
       name: 'mxgraph-editor',
-      path: 'mxgraph-editor',
-      component: () => import(/* webpackChunkName: "group-mxgraph" */ '../pages/mxgraph/editor.vue')
+      path: 'mxgraph/editor',
+      meta: { breadcrumbs: BREADCRUMB['mxgraph-editor'] },
+      component: () => import(/* webpackChunkName: "group-mxgraph" */ '../pages/mxgraph/editor')
     },
-    // Dashboard Module
+    /// Dashboard Module
     {
       name: 'dashboard',
       path: 'dashboard',
-      meta: {
-        breadcrumbs: BREADCRUMB['dashboard']
-      },
+      meta: { breadcrumbs: BREADCRUMB['dashboard'] },
       component: () => import(/* webpackChunkName: "group-dashboard" */ '../pages/dashboard/dashboard')
     }, {
       name: 'dashboard-antv-g2',
       path: 'dashboard/antv-g2',
-      meta: {
-        breadcrumbs: BREADCRUMB['dashboard-antv-g2']
-      },
+      meta: { breadcrumbs: BREADCRUMB['dashboard-antv-g2'] },
       component: () => import(/* webpackChunkName: "group-dashboard" */ '../pages/dashboard/antv-g2')
     }, {
       name: 'dashboard-echarts',
       path: 'dashboard/echarts',
-      meta: {
-        breadcrumbs: BREADCRUMB['dashboard-echarts']
-      },
+      meta: { breadcrumbs: BREADCRUMB['dashboard-echarts'] },
       component: () => import(/* webpackChunkName: "group-dashboard" */ '../pages/dashboard/echarts')
     },
-    // Project Module
+    /// Project Module
     {
       name: 'project',
       path: 'project',
-      meta: {
-        breadcrumbs: BREADCRUMB['project']
-      },
+      meta: { breadcrumbs: BREADCRUMB['project'] },
       component: () => import(/* webpackChunkName: "group-project" */ '../pages/project')
     },
-    // System Module
+    /// System Module
     {
       path: 'system',
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/dashboard/dashboard')
     }, {
       name: 'system-user',
       path: 'system/user',
-      meta: {
-        breadcrumbs: BREADCRUMB['system-user']
-      },
+      meta: { breadcrumbs: BREADCRUMB['system-user'] },
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/user/index.vue')
     }, {
       name: 'system-role',
       path: 'system/role',
-      meta: {
-        breadcrumbs: BREADCRUMB['system-role']
-      },
+      meta: { breadcrumbs: BREADCRUMB['system-role'] },
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/role/index.vue')
     }, {
       name: 'system-menu',
       path: 'system/menu',
-      meta: {
-        breadcrumbs: BREADCRUMB['system-menu']
-      },
+      meta: { breadcrumbs: BREADCRUMB['system-menu'] },
       component: () => import(/* webpackChunkName: "group-system" */ '../pages/system/menu/index.vue')
     },
 
