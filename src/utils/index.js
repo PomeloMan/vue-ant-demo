@@ -165,6 +165,7 @@ export function checkNumber(value, type = 0) {
     case 5:
       return /(^-?\d+(\.\d{1,2})?$)/.test(value); // 小数位不超过2位
     // return /(^\d{1,9}(\.\d{1,2})?$)/.test(value); // 整数位不超过9位，小数位不超过2位的非负数
+    // return /(^\d{1,9}?$)/ 9位非负整数
     default:
       return false
   }
